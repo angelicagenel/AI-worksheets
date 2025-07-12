@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frida and the Verb SER - Spanish Learning Edge LLC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-top: 4px solid #ef7c8e;
+        }
+        
+        .header h1 {
+            color: #ef7c8e;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            color: #373f45;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b8d94;
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .section h3 {
+            color: #373f45;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .cultural-section {
+            border-left: 4px solid #6b8d94;
+        }
+        
+        .exercise {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #ffe8e3;
+            border-radius: 8px;
+        }
+        
+        .question {
+            color: #373f45;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .context {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .option-btn {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            background: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+        
+        .option-btn:hover {
+            background: #f0f0f0;
+            border-color: #ef7c8e;
+        }
+        
+        .option-btn.correct {
+            background: #dcfce7;
+            border-color: #16a34a;
+            color: #15803d;
+        }
+        
+        .option-btn.incorrect {
+            background: #fef2f2;
+            border-color: #dc2626;
+            color: #dc2626;
+        }
+        
+        .option-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .feedback {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        
+        .feedback.correct {
+            color: #16a34a;
+        }
+        
+        .feedback.incorrect {
+            color: #dc2626;
+        }
+        
+        .attempts {
+            font-size: 0.8rem;
+            color: #666;
+            margin-left: 8px;
+        }
+        
+        .explanation {
+            margin-top: 10px;
+            padding: 15px;
+            background: #eff6ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .explanation strong {
+            color: #1e40af;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ef7c8e;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            background: #ef7c8e;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #db6565;
+        }
+        
+        .btn-secondary {
+            background: #6b8d94;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a7980;
+        }
+        
+        .answer-key {
+            display: none;
+        }
+        
+        .answer-key.show {
+            display: block;
+        }
+        
+        .answer-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .doctor-helper {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .doctor-helper h4 {
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+        
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .doctor-item {
+            color: #0369a1;
+        }
+        
+        @media (max-width: 768px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .doctor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Spanish Learning Edge LLC</h1>
+            <h2>Frida and the Verb SER</h2>
+            <p>ACTFL Level: Novice Mid</p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="section">
+            <h3>Instructions</h3>
+            <p>Read about Frida Kahlo and complete the sentences using the correct form of the verb SER. Remember the DOCTOR rule to help you know when to use SER!</p>
+        </div>
+
+        <!-- DOCTOR Helper -->
+        <div class="section">
+            <div class="doctor-helper">
+                <h4>🩺 DOCTOR - When to use SER:</h4>
+                <div class="doctor-grid">
+                    <div class="doctor-item"><strong>D</strong>escription (Ella es alta)</div>
+                    <div class="doctor-item"><strong>O</strong>ccupation (Soy profesora)</div>
+                    <div class="doctor-item"><strong>C</strong>haracteristic (Es inteligente)</div>
+                    <div class="doctor-item"><strong>T</strong>ime (Son las tres)</div>
+                    <div class="doctor-item"><strong>O</strong>rigin (Soy de México)</div>
+                    <div class="doctor-item"><strong>R</strong>elationship (Es mi hermana)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cultural Content -->
+        <div class="section cultural-section">
+            <h3>Cultural Information</h3>
+            <p>Frida Kahlo (1907-1954) was one of Mexico's most famous artists. She was born in Coyoacán, Mexico City, during the Mexican Revolution. Frida was known for her powerful self-portraits that showed her emotions and Mexican identity. She was married to Diego Rivera, another famous Mexican artist. Frida's art included traditional Mexican symbols, bright colors, and indigenous elements. She often wore traditional Tehuana dresses to show pride in her Mexican heritage. Today, Frida is an icon of Mexican culture and strength worldwide.</p>
+        </div>
+
+        <!-- Exercises -->
+        <div class="section">
+            <h3>Practice Exercises</h3>
+            
+            <div class="exercise" data-question="0">
+                <div class="question">1. Frida _____ artista.</div>
+                <div class="context">(What was Frida's job?)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="selectAnswer(0, 'es')" data-option="es">es</button>
+                    <button class="option-btn" onclick="selectAnswer(0, 'está')" data-option="está">está</button>
+                    <button class="option-btn" onclick="selectAnswer(0, 'son')" data-option="son">son</button>
+                    <button class="option-btn" onclick="selectAnswer(0, 'somos')" data-option="somos">somos</button>
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="1">
+                <div class="question">2. Ella _____ de México.</div>
+                <div class="context">(Where is Frida from?)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="selectAnswer(1, 'es')" data-option="es">es</button>
+                    <button class="option-btn" onclick="selectAnswer(1, 'está')" data-option="está">está</button>
+                    <button class="option-btn" onclick="selectAnswer(1, 'eres')" data-option="eres">eres</button>
+                    <button class="option-btn" onclick="selectAnswer(1, 'soy')" data-option="soy">soy</button>
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="2">
+                <div class="question">3. Frida _____ muy talentosa.</div>
+                <div class="context">(Describing Frida's ability)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="selectAnswer(2, 'es')" data-option="es">es</button>
+                    <button class="option-btn" onclick="selectAnswer(2, 'está')" data-option="está">está</button>
+                    <button class="option-btn" onclick="selectAnswer(2, 'son')" data-option="son">son</button>
+                    <button class="option-btn" onclick="selectAnswer(2, 'estamos')" data-option="estamos">estamos</button>
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="3">
+                <div class="question">4. Diego Rivera _____ su esposo.</div>
+                <div class="context">(What is Diego's relationship to Frida?)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="selectAnswer(3, 'es')" data-option="es">es</button>
+                    <button class="option-btn" onclick="selectAnswer(3, 'está')" data-option="está">está</button>
+                    <button class="option-btn" onclick="selectAnswer(3, 'soy')" data-option="soy">soy</button>
+                    <button class="option-btn" onclick="selectAnswer(3, 'eres')" data-option="eres">eres</button>
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="section results" id="results" style="display: none;">
+            <h3>Results</h3>
+            <div class="score" id="score">0/4</div>
+            <p id="feedback-message">Complete all questions to see your results!</p>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="section" style="text-align: center;">
+            <button class="btn btn-secondary" onclick="toggleAnswers()" id="toggle-answers" style="display: none;">
+                👁️ Show All Answers
+            </button>
+            <button class="btn" onclick="resetQuiz()">
+                🔄 Try Again
+            </button>
+        </div>
+
+        <!-- Answer Key -->
+        <div class="section answer-key" id="answer-key">
+            <h3>Answer Key</h3>
+            <div class="answer-item">
+                <div class="question"><strong>1. Frida es artista.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: es</div>
+                <div style="color: #666; font-size: 0.9rem;">DOCTOR: Occupation - We use SER for jobs and professions.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>2. Ella es de México.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: es</div>
+                <div style="color: #666; font-size: 0.9rem;">DOCTOR: Origin - We use SER to say where someone is from.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>3. Frida es muy talentosa.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: es</div>
+                <div style="color: #666; font-size: 0.9rem;">DOCTOR: Characteristic - We use SER for permanent qualities and characteristics.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>4. Diego Rivera es su esposo.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: es</div>
+                <div style="color: #666; font-size: 0.9rem;">DOCTOR: Relationship - We use SER to show family relationships and connections.</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Spanish Learning Edge LLC - Mexican Cultural Worksheets
+        </div>
+    </div>
+
+    <script>
+        const exercises = [
+            {
+                question: "Frida _____ artista.",
+                context: "(What was Frida's job?)",
+                options: ["es", "está", "son", "somos"],
+                correct: "es",
+                explanation: "DOCTOR: Occupation - We use SER for jobs and professions."
+            },
+            {
+                question: "Ella _____ de México.",
+                context: "(Where is Frida from?)",
+                options: ["es", "está", "eres", "soy"],
+                correct: "es",
+                explanation: "DOCTOR: Origin - We use SER to say where someone is from."
+            },
+            {
+                question: "Frida _____ muy talentosa.",
+                context: "(Describing Frida's ability)",
+                options: ["es", "está", "son", "estamos"],
+                correct: "es",
+                explanation: "DOCTOR: Characteristic - We use SER for permanent qualities and characteristics."
+            },
+            {
+                question: "Diego Rivera _____ su esposo.",
+                context: "(What is Diego's relationship to Frida?)",
+                options: ["es", "está", "soy", "eres"],
+                correct: "es",
+                explanation: "DOCTOR: Relationship - We use SER to show family relationships and connections."
+            }
+        ];
+        
+        let answers = {};
+        let attempts = {};
+        
+        function selectAnswer(questionIndex, selectedOption) {
+            const exercise = exercises[questionIndex];
+            const currentAttempts = attempts[questionIndex] || 0;
+            
+            if (currentAttempts >= 3) return;
+            
+            answers[questionIndex] = selectedOption;
+            attempts[questionIndex] = currentAttempts + 1;
+            
+            // Update UI
+            const questionDiv = document.querySelector(`[data-question="${questionIndex}"]`);
+            const buttons = questionDiv.querySelectorAll('.option-btn');
+            const feedbackContainer = questionDiv.querySelector('.feedback-container');
+            const explanationContainer = questionDiv.querySelector('.explanation-container');
+            
+            // Update button states
+            buttons.forEach(btn => {
+                if (btn.dataset.option === selectedOption) {
+                    if (selectedOption === exercise.correct) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                }
+                if (attempts[questionIndex] >= 3) {
+                    btn.disabled = true;
+                }
+            });
+            
+            // Show feedback
+            const isCorrect = selectedOption === exercise.correct;
+            feedbackContainer.innerHTML = `
+                <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                    ${isCorrect ? '✅' : '❌'} ${isCorrect ? '¡Correcto!' : 'Try again!'}
+                    <span class="attempts">(${attempts[questionIndex]}/3 attempts)</span>
+                </div>
+            `;
+            
+            // Show explanation if incorrect and no attempts left
+            if (!isCorrect && attempts[questionIndex] >= 3) {
+                explanationContainer.innerHTML = `
+                    <div class="explanation">
+                        <strong>Correct answer:</strong> ${exercise.correct}<br>
+                        ${exercise.explanation}
+                    </div>
+                `;
+            }
+            
+            // Check if all questions answered
+            if (Object.keys(answers).length === exercises.length) {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            let correctCount = 0;
+            exercises.forEach((exercise, index) => {
+                if (answers[index] === exercise.correct) {
+                    correctCount++;
+                }
+            });
+            
+            const resultsDiv = document.getElementById('results');
+            const scoreDiv = document.getElementById('score');
+            const feedbackDiv = document.getElementById('feedback-message');
+            const toggleBtn = document.getElementById('toggle-answers');
+            
+            scoreDiv.textContent = `${correctCount}/${exercises.length}`;
+            
+            let message = '';
+            if (correctCount === exercises.length) {
+                message = 'Excellent work! You understand when to use SER!';
+            } else if (correctCount >= exercises.length * 0.75) {
+                message = 'Good job! Keep practicing the DOCTOR rule!';
+            } else {
+                message = 'Keep practicing! Remember DOCTOR to help you use SER correctly.';
+            }
+            
+            feedbackDiv.textContent = message;
+            resultsDiv.style.display = 'block';
+            toggleBtn.style.display = 'inline-flex';
+        }
+        
+        function toggleAnswers() {
+            const answerKey = document.getElementById('answer-key');
+            const toggleBtn = document.getElementById('toggle-answers');
+            
+            if (answerKey.classList.contains('show')) {
+                answerKey.classList.remove('show');
+                toggleBtn.innerHTML = '👁️ Show All Answers';
+            } else {
+                answerKey.classList.add('show');
+                toggleBtn.innerHTML = '🙈 Hide Answers';
+            }
+        }
+        
+        function resetQuiz() {
+            answers = {};
+            attempts = {};
+            
+            // Reset all buttons and feedback
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('correct', 'incorrect');
+                btn.disabled = false;
+            });
+            
+            document.querySelectorAll('.feedback-container').forEach(container => {
+                container.innerHTML = '';
+            });
+            
+            document.querySelectorAll('.explanation-container').forEach(container => {
+                container.innerHTML = '';
+            });
+            
+            // Hide results and answers
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('toggle-answers').style.display = 'none';
+            document.getElementById('answer-key').classList.remove('show');
+        }
+    </script>
+</body>
+</html>
