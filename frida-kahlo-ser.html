@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frida and the Verb SER - Spanish Learning Edge LLC</title>
+    <title>Frida's Paintings and the Verb SER - Spanish Learning Edge LLC</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
@@ -223,7 +223,7 @@
             font-size: 0.9rem;
         }
         
-        .doctor-helper {
+        .ser-uses {
             background: #f0f9ff;
             border: 2px solid #0ea5e9;
             border-radius: 8px;
@@ -231,20 +231,29 @@
             margin-bottom: 20px;
         }
         
-        .doctor-helper h4 {
+        .ser-uses h4 {
             color: #0369a1;
             margin-bottom: 10px;
         }
         
-        .doctor-grid {
+        .uses-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 10px;
             font-size: 0.9rem;
         }
         
-        .doctor-item {
+        .use-item {
             color: #0369a1;
+            padding: 8px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 4px;
+        }
+        
+        .painting-title {
+            font-style: italic;
+            color: #8b5cf6;
+            font-weight: 600;
         }
         
         @media (max-width: 768px) {
@@ -260,7 +269,7 @@
                 font-size: 1.4rem;
             }
             
-            .doctor-grid {
+            .uses-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -271,27 +280,27 @@
         <!-- Header -->
         <div class="header">
             <h1>Spanish Learning Edge LLC</h1>
-            <h2>Frida and the Verb SER</h2>
-            <p>ACTFL Level: Novice Mid</p>
+            <h2>Frida's Paintings and the Verb SER</h2>
+            <p>ACTFL Level: Novice High</p>
         </div>
 
         <!-- Instructions -->
         <div class="section">
             <h3>Instructions</h3>
-            <p>Read about Frida Kahlo and complete the sentences using the correct form of the verb SER. Remember the DOCTOR rule to help you know when to use SER!</p>
+            <p>Read about Frida Kahlo's famous paintings and complete the sentences using the correct form of SER. Each painting teaches us different ways to use this important verb! Choose the best option for each sentence.</p>
         </div>
 
-        <!-- DOCTOR Helper -->
+        <!-- SER Uses Guide -->
         <div class="section">
-            <div class="doctor-helper">
-                <h4>🩺 DOCTOR - When to use SER:</h4>
-                <div class="doctor-grid">
-                    <div class="doctor-item"><strong>D</strong>escription (Ella es alta)</div>
-                    <div class="doctor-item"><strong>O</strong>ccupation (Soy profesora)</div>
-                    <div class="doctor-item"><strong>C</strong>haracteristic (Es inteligente)</div>
-                    <div class="doctor-item"><strong>T</strong>ime (Son las tres)</div>
-                    <div class="doctor-item"><strong>O</strong>rigin (Soy de México)</div>
-                    <div class="doctor-item"><strong>R</strong>elationship (Es mi hermana)</div>
+            <div class="ser-uses">
+                <h4>🎨 Uses of SER in Art Context:</h4>
+                <div class="uses-grid">
+                    <div class="use-item"><strong>Identity:</strong> Ella es Frida</div>
+                    <div class="use-item"><strong>Origin:</strong> Es de México</div>
+                    <div class="use-item"><strong>Profession:</strong> Es artista</div>
+                    <div class="use-item"><strong>Characteristics:</strong> Es talentosa</div>
+                    <div class="use-item"><strong>Ownership:</strong> Es mi cuadro</div>
+                    <div class="use-item"><strong>Material:</strong> Es óleo sobre lienzo</div>
                 </div>
             </div>
         </div>
@@ -299,7 +308,7 @@
         <!-- Cultural Content -->
         <div class="section cultural-section">
             <h3>Cultural Information</h3>
-            <p>Frida Kahlo (1907-1954) was one of Mexico's most famous artists. She was born in Coyoacán, Mexico City, during the Mexican Revolution. Frida was known for her powerful self-portraits that showed her emotions and Mexican identity. She was married to Diego Rivera, another famous Mexican artist. Frida's art included traditional Mexican symbols, bright colors, and indigenous elements. She often wore traditional Tehuana dresses to show pride in her Mexican heritage. Today, Frida is an icon of Mexican culture and strength worldwide.</p>
+            <p>Frida Kahlo created approximately 200 paintings during her artistic career, with about 55 being self-portraits. Her most famous works include "The Two Fridas" (1939), "Self-Portrait with Thorn Necklace and Hummingbird" (1940), and "What the Water Gave Me" (1938). Each painting tells a story about her life, emotions, and Mexican identity. Frida used vibrant colors typical of Mexican folk art and incorporated indigenous symbols from pre-Columbian cultures. Her paintings are displayed in museums worldwide, with the Frida Kahlo Museum in Mexico City (Casa Azul) being the most important collection of her work.</p>
         </div>
 
         <!-- Exercises -->
@@ -307,52 +316,104 @@
             <h3>Practice Exercises</h3>
             
             <div class="exercise" data-question="0">
-                <div class="question">1. Frida _____ artista.</div>
-                <div class="context">(What was Frida's job?)</div>
+                <div class="question">1. <span class="painting-title">"Las Dos Fridas"</span> _____ su obra más famosa.</div>
+                <div class="context">(Talking about which painting is the most famous)</div>
                 <div class="options">
+                    <button class="option-btn" onclick="selectAnswer(0, 'están')" data-option="están">están</button>
                     <button class="option-btn" onclick="selectAnswer(0, 'es')" data-option="es">es</button>
-                    <button class="option-btn" onclick="selectAnswer(0, 'está')" data-option="está">está</button>
                     <button class="option-btn" onclick="selectAnswer(0, 'son')" data-option="son">son</button>
-                    <button class="option-btn" onclick="selectAnswer(0, 'somos')" data-option="somos">somos</button>
+                    <button class="option-btn" onclick="selectAnswer(0, 'está')" data-option="está">está</button>
                 </div>
                 <div class="feedback-container"></div>
                 <div class="explanation-container"></div>
             </div>
 
             <div class="exercise" data-question="1">
-                <div class="question">2. Ella _____ de México.</div>
-                <div class="context">(Where is Frida from?)</div>
+                <div class="question">2. El cuadro <span class="painting-title">"Autorretrato con Collar de Espinas"</span> _____ muy simbólico.</div>
+                <div class="context">(Describing the characteristic of this painting)</div>
                 <div class="options">
-                    <button class="option-btn" onclick="selectAnswer(1, 'es')" data-option="es">es</button>
                     <button class="option-btn" onclick="selectAnswer(1, 'está')" data-option="está">está</button>
-                    <button class="option-btn" onclick="selectAnswer(1, 'eres')" data-option="eres">eres</button>
-                    <button class="option-btn" onclick="selectAnswer(1, 'soy')" data-option="soy">soy</button>
+                    <button class="option-btn" onclick="selectAnswer(1, 'somos')" data-option="somos">somos</button>
+                    <button class="option-btn" onclick="selectAnswer(1, 'es')" data-option="es">es</button>
+                    <button class="option-btn" onclick="selectAnswer(1, 'son')" data-option="son">son</button>
                 </div>
                 <div class="feedback-container"></div>
                 <div class="explanation-container"></div>
             </div>
 
             <div class="exercise" data-question="2">
-                <div class="question">3. Frida _____ muy talentosa.</div>
-                <div class="context">(Describing Frida's ability)</div>
+                <div class="question">3. Los colores en sus pinturas _____ muy vibrantes y tradicionales.</div>
+                <div class="context">(Describing the characteristic colors of her paintings)</div>
                 <div class="options">
-                    <button class="option-btn" onclick="selectAnswer(2, 'es')" data-option="es">es</button>
-                    <button class="option-btn" onclick="selectAnswer(2, 'está')" data-option="está">está</button>
                     <button class="option-btn" onclick="selectAnswer(2, 'son')" data-option="son">son</button>
-                    <button class="option-btn" onclick="selectAnswer(2, 'estamos')" data-option="estamos">estamos</button>
+                    <button class="option-btn" onclick="selectAnswer(2, 'está')" data-option="está">está</button>
+                    <button class="option-btn" onclick="selectAnswer(2, 'están')" data-option="están">están</button>
+                    <button class="option-btn" onclick="selectAnswer(2, 'es')" data-option="es">es</button>
                 </div>
                 <div class="feedback-container"></div>
                 <div class="explanation-container"></div>
             </div>
 
             <div class="exercise" data-question="3">
-                <div class="question">4. Diego Rivera _____ su esposo.</div>
-                <div class="context">(What is Diego's relationship to Frida?)</div>
+                <div class="question">4. Muchas de sus obras _____ óleos sobre lienzo.</div>
+                <div class="context">(What material/technique did she use?)</div>
                 <div class="options">
                     <button class="option-btn" onclick="selectAnswer(3, 'es')" data-option="es">es</button>
-                    <button class="option-btn" onclick="selectAnswer(3, 'está')" data-option="está">está</button>
+                    <button class="option-btn" onclick="selectAnswer(3, 'están')" data-option="están">están</button>
                     <button class="option-btn" onclick="selectAnswer(3, 'soy')" data-option="soy">soy</button>
-                    <button class="option-btn" onclick="selectAnswer(3, 'eres')" data-option="eres">eres</button>
+                    <button class="option-btn" onclick="selectAnswer(3, 'son')" data-option="son">son</button>
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="4">
+                <div class="question">5. Yo _____ estudiante de arte y admiro mucho a Frida.</div>
+                <div class="context">(Talking about yourself as an art student)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="selectAnswer(4, 'es')" data-option="es">es</button>
+                    <button class="option-btn" onclick="selectAnswer(4, 'soy')" data-option="soy">soy</button>
+                    <button class="option-btn" onclick="selectAnswer(4, 'estoy')" data-option="estoy">estoy</button>
+                    <button class="option-btn" onclick="selectAnswer(4, 'son')" data-option="son">son</button>
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="5">
+                <div class="question">6. Nosotros _____ admiradores de la cultura mexicana.</div>
+                <div class="context">(Talking about a group of people who admire Mexican culture)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="selectAnswer(5, 'es')" data-option="es">es</button>
+                    <button class="option-btn" onclick="selectAnswer(5, 'estamos')" data-option="estamos">estamos</button>
+                    <button class="option-btn" onclick="selectAnswer(5, 'son')" data-option="son">son</button>
+                    <button class="option-btn" onclick="selectAnswer(5, 'somos')" data-option="somos">somos</button>
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="6">
+                <div class="question">7. Tú _____ muy creativo, como Frida Kahlo.</div>
+                <div class="context">(Complimenting someone's creativity)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="selectAnswer(6, 'estás')" data-option="estás">estás</button>
+                    <button class="option-btn" onclick="selectAnswer(6, 'es')" data-option="es">es</button>
+                    <button class="option-btn" onclick="selectAnswer(6, 'eres')" data-option="eres">eres</button>
+                    <button class="option-btn" onclick="selectAnswer(6, 'soy')" data-option="soy">soy</button>
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="7">
+                <div class="question">8. Las pinturas de Frida _____ en museos importantes del mundo.</div>
+                <div class="context">(Where are her paintings located?)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="selectAnswer(7, 'somos')" data-option="somos">somos</button>
+                    <button class="option-btn" onclick="selectAnswer(7, 'están')" data-option="están">están</button>
+                    <button class="option-btn" onclick="selectAnswer(7, 'son')" data-option="son">son</button>
+                    <button class="option-btn" onclick="selectAnswer(7, 'es')" data-option="es">es</button>
                 </div>
                 <div class="feedback-container"></div>
                 <div class="explanation-container"></div>
@@ -362,7 +423,7 @@
         <!-- Results -->
         <div class="section results" id="results" style="display: none;">
             <h3>Results</h3>
-            <div class="score" id="score">0/4</div>
+            <div class="score" id="score">0/8</div>
             <p id="feedback-message">Complete all questions to see your results!</p>
         </div>
 
@@ -380,24 +441,44 @@
         <div class="section answer-key" id="answer-key">
             <h3>Answer Key</h3>
             <div class="answer-item">
-                <div class="question"><strong>1. Frida es artista.</strong></div>
+                <div class="question"><strong>1. "Las Dos Fridas" es su obra más famosa.</strong></div>
                 <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: es</div>
-                <div style="color: #666; font-size: 0.9rem;">DOCTOR: Occupation - We use SER for jobs and professions.</div>
+                <div style="color: #666; font-size: 0.9rem;">SER for identity/classification - we use SER to say what something IS.</div>
             </div>
             <div class="answer-item">
-                <div class="question"><strong>2. Ella es de México.</strong></div>
+                <div class="question"><strong>2. El cuadro "Autorretrato con Collar de Espinas" es muy simbólico.</strong></div>
                 <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: es</div>
-                <div style="color: #666; font-size: 0.9rem;">DOCTOR: Origin - We use SER to say where someone is from.</div>
+                <div style="color: #666; font-size: 0.9rem;">SER for characteristics - we use SER to describe what something IS like (permanent qualities).</div>
             </div>
             <div class="answer-item">
-                <div class="question"><strong>3. Frida es muy talentosa.</strong></div>
-                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: es</div>
-                <div style="color: #666; font-size: 0.9rem;">DOCTOR: Characteristic - We use SER for permanent qualities and characteristics.</div>
+                <div class="question"><strong>3. Los colores en sus pinturas son muy vibrantes y tradicionales.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: son</div>
+                <div style="color: #666; font-size: 0.9rem;">SER for characteristics - we use SER to describe inherent qualities and characteristics.</div>
             </div>
             <div class="answer-item">
-                <div class="question"><strong>4. Diego Rivera es su esposo.</strong></div>
-                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: es</div>
-                <div style="color: #666; font-size: 0.9rem;">DOCTOR: Relationship - We use SER to show family relationships and connections.</div>
+                <div class="question"><strong>4. Muchas de sus obras son óleos sobre lienzo.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: son</div>
+                <div style="color: #666; font-size: 0.9rem;">SER for material/composition - we use SER to say what something is made of.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>5. Yo soy estudiante de arte y admiro mucho a Frida.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: soy</div>
+                <div style="color: #666; font-size: 0.9rem;">SER for profession/identity - we use SER to say what someone's profession or identity is.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>6. Nosotros somos admiradores de la cultura mexicana.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: somos</div>
+                <div style="color: #666; font-size: 0.9rem;">SER for identity/characteristics - we use SER to say what we ARE (our identity or role).</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>7. Tú eres muy creativo, como Frida Kahlo.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: eres</div>
+                <div style="color: #666; font-size: 0.9rem;">SER for characteristics - we use SER to describe permanent personality traits and qualities.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>8. Las pinturas de Frida están en museos importantes del mundo.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: están</div>
+                <div style="color: #666; font-size: 0.9rem;">ESTAR for location - we use ESTAR to say WHERE something is located or positioned.</div>
             </div>
         </div>
 
@@ -410,32 +491,60 @@
     <script>
         const exercises = [
             {
-                question: "Frida _____ artista.",
-                context: "(What was Frida's job?)",
-                options: ["es", "está", "son", "somos"],
+                question: '"Las Dos Fridas" _____ su obra más famosa.',
+                context: "(Talking about which painting is the most famous)",
+                options: ["están", "es", "son", "está"],
                 correct: "es",
-                explanation: "DOCTOR: Occupation - We use SER for jobs and professions."
+                explanation: "SER for identity/classification - we use SER to say what something IS."
             },
             {
-                question: "Ella _____ de México.",
-                context: "(Where is Frida from?)",
-                options: ["es", "está", "eres", "soy"],
+                question: 'El cuadro "Autorretrato con Collar de Espinas" _____ muy simbólico.',
+                context: "(Describing the characteristic of this painting)",
+                options: ["está", "somos", "es", "son"],
                 correct: "es",
-                explanation: "DOCTOR: Origin - We use SER to say where someone is from."
+                explanation: "SER for characteristics - we use SER to describe what something IS like (permanent qualities)."
             },
             {
-                question: "Frida _____ muy talentosa.",
-                context: "(Describing Frida's ability)",
-                options: ["es", "está", "son", "estamos"],
-                correct: "es",
-                explanation: "DOCTOR: Characteristic - We use SER for permanent qualities and characteristics."
+                question: "Los colores en sus pinturas _____ muy vibrantes y tradicionales.",
+                context: "(Describing the characteristic colors of her paintings)",
+                options: ["son", "está", "están", "es"],
+                correct: "son",
+                explanation: "SER for characteristics - we use SER to describe inherent qualities and characteristics."
             },
             {
-                question: "Diego Rivera _____ su esposo.",
-                context: "(What is Diego's relationship to Frida?)",
-                options: ["es", "está", "soy", "eres"],
-                correct: "es",
-                explanation: "DOCTOR: Relationship - We use SER to show family relationships and connections."
+                question: "Muchas de sus obras _____ óleos sobre lienzo.",
+                context: "(What material/technique did she use?)",
+                options: ["es", "están", "soy", "son"],
+                correct: "son",
+                explanation: "SER for material/composition - we use SER to say what something is made of."
+            },
+            {
+                question: "Yo _____ estudiante de arte y admiro mucho a Frida.",
+                context: "(Talking about yourself as an art student)",
+                options: ["es", "soy", "estoy", "son"],
+                correct: "soy",
+                explanation: "SER for profession/identity - we use SER to say what someone's profession or identity is."
+            },
+            {
+                question: "Nosotros _____ admiradores de la cultura mexicana.",
+                context: "(Talking about a group of people who admire Mexican culture)",
+                options: ["es", "estamos", "son", "somos"],
+                correct: "somos",
+                explanation: "SER for identity/characteristics - we use SER to say what we ARE (our identity or role)."
+            },
+            {
+                question: "Tú _____ muy creativo, como Frida Kahlo.",
+                context: "(Complimenting someone's creativity)",
+                options: ["estás", "es", "eres", "soy"],
+                correct: "eres",
+                explanation: "SER for characteristics - we use SER to describe permanent personality traits and qualities."
+            },
+            {
+                question: "Las pinturas de Frida _____ en museos importantes del mundo.",
+                context: "(Where are her paintings located?)",
+                options: ["somos", "están", "son", "es"],
+                correct: "están",
+                explanation: "ESTAR for location - we use ESTAR to say WHERE something is located or positioned."
             }
         ];
         
@@ -513,11 +622,11 @@
             
             let message = '';
             if (correctCount === exercises.length) {
-                message = 'Excellent work! You understand when to use SER!';
+                message = 'Excellent work! You understand the different uses of SER perfectly!';
             } else if (correctCount >= exercises.length * 0.75) {
-                message = 'Good job! Keep practicing the DOCTOR rule!';
+                message = 'Good job! Keep practicing the uses of SER in art contexts!';
             } else {
-                message = 'Keep practicing! Remember DOCTOR to help you use SER correctly.';
+                message = 'Keep practicing! Art is a great way to learn SER vs ESTAR.';
             }
             
             feedbackDiv.textContent = message;
