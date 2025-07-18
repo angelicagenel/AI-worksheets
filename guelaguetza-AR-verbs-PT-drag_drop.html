@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Guelaguetza - Drag and Drop -AR Verbs - Spanish Learning Edge LLC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-top: 4px solid #ef7c8e;
+        }
+        
+        .header h1 {
+            color: #ef7c8e;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            color: #373f45;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b8d94;
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .section h3 {
+            color: #373f45;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .cultural-section {
+            border-left: 4px solid #6b8d94;
+        }
+        
+        .exercise {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #ffe8e3;
+            border-radius: 8px;
+        }
+        
+        .question {
+            color: #373f45;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .sentence {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            border-left: 4px solid #ef7c8e;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .drop-zone {
+            background: #fef3c7;
+            border: 2px dashed #d97706;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin: 0 5px;
+            min-width: 80px;
+            min-height: 35px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-weight: bold;
+            color: #92400e;
+        }
+        
+        .drop-zone.drag-over {
+            background: #fde68a;
+            border-color: #f59e0b;
+            transform: scale(1.05);
+        }
+        
+        .drop-zone.filled {
+            background: #dcfce7;
+            border-color: #16a34a;
+            color: #15803d;
+        }
+        
+        .drop-zone.wrong {
+            background: #fef2f2;
+            border-color: #dc2626;
+            color: #dc2626;
+        }
+        
+        .verb-bank {
+            background: #f1f5f9;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .verb-bank h4 {
+            color: #475569;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .verbs-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .draggable-verb {
+            background: #ef7c8e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: grab;
+            user-select: none;
+            transition: all 0.2s;
+            font-weight: 600;
+            border: 2px solid #db6565;
+        }
+        
+        .draggable-verb:hover {
+            background: #db6565;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(239, 124, 142, 0.3);
+        }
+        
+        .draggable-verb.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+        }
+        
+        .draggable-verb.used {
+            background: #6b8d94;
+            border-color: #5a7980;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .context {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .check-btn {
+            background: #ef7c8e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+        
+        .check-btn:hover {
+            background: #db6565;
+        }
+        
+        .check-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .feedback {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .feedback.correct {
+            color: #16a34a;
+        }
+        
+        .feedback.incorrect {
+            color: #dc2626;
+        }
+        
+        .attempts {
+            font-size: 0.8rem;
+            color: #666;
+            margin-left: 8px;
+        }
+        
+        .explanation {
+            margin-top: 10px;
+            padding: 15px;
+            background: #eff6ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ef7c8e;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            background: #ef7c8e;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #db6565;
+        }
+        
+        .btn-secondary {
+            background: #6b8d94;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a7980;
+        }
+        
+        .answer-key {
+            display: none;
+        }
+        
+        .answer-key.show {
+            display: block;
+        }
+        
+        .answer-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .ar-verbs-guide {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .ar-verbs-guide h4 {
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+        
+        .verbs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .verb-item {
+            color: #0369a1;
+            padding: 8px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .cultural-insight {
+            background: #fef7ff;
+            border: 2px solid #d946ef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .cultural-insight h4 {
+            color: #a21caf;
+            margin-bottom: 10px;
+        }
+        
+        .guelaguetza-highlight {
+            font-style: italic;
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .verbs-container {
+                justify-content: center;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .verbs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .draggable-verb {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Spanish Learning Edge LLC</h1>
+            <h2>La Guelaguetza - Drag and Drop -AR Verbs</h2>
+            <p>ACTFL Level: Novice High</p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="section">
+            <h3>Instructions</h3>
+            <p>Drag the correct -AR verb conjugations from the blue boxes below and drop them into the yellow spaces in each sentence. Complete all sentences about La Guelaguetza festival, then click "Check Answer" for each one!</p>
+        </div>
+
+        <!-- -AR Verbs Guide -->
+        <div class="section">
+            <div class="ar-verbs-guide">
+                <h4>🎭 Regular -AR Verbs - Present Tense Endings:</h4>
+                <div class="verbs-grid">
+                    <div class="verb-item"><strong>yo</strong><br>-o<br>(bailo)</div>
+                    <div class="verb-item"><strong>tú</strong><br>-as<br>(bailas)</div>
+                    <div class="verb-item"><strong>él/ella</strong><br>-a<br>(baila)</div>
+                    <div class="verb-item"><strong>nosotros</strong><br>-amos<br>(bailamos)</div>
+                    <div class="verb-item"><strong>ustedes</strong><br>-an<br>(bailan)</div>
+                    <div class="verb-item"><strong>ellos/ellas</strong><br>-an<br>(bailan)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cultural Insight -->
+        <div class="section">
+            <div class="cultural-insight">
+                <h4>🌟 Cultural Understanding: Movement and Music in Harmony</h4>
+                <p>In Guelaguetza, every movement tells a story and every rhythm carries ancestral memory. When dancers "step," musicians "play," and communities "gather," they're creating a living dialogue between past and present. This interactive cultural exchange demonstrates how traditional knowledge moves through bodies, voices, and shared experiences across generations.</p>
+            </div>
+        </div>
+
+        <!-- Cultural Content -->
+        <div class="section cultural-section">
+            <h3>Cultural Information</h3>
+            <p>During Guelaguetza, participants don't just perform—they actively engage in cultural transmission. Dancers practice traditional steps, musicians tune ancient instruments, families prepare regional specialties, and visitors observe respectfully. This festival creates a dynamic space where culture lives, breathes, and evolves, showing how traditions stay alive through active participation and community engagement.</p>
+        </div>
+
+        <!-- Exercises -->
+        <div class="section">
+            <h3>Practice Exercises</h3>
+            
+            <div class="exercise" data-question="0">
+                <div class="question">1. Complete the sentence:</div>
+                <div class="sentence">
+                    Los bailarines <div class="drop-zone" data-answer="bailan"></div> en el escenario principal.
+                </div>
+                <div class="context">(The dancers _____ on the main stage)</div>
+                <div class="verb-bank">
+                    <h4>🎯 Drag one of these verbs:</h4>
+                    <div class="verbs-container">
+                        <div class="draggable-verb" draggable="true">bailan</div>
+                        <div class="draggable-verb" draggable="true">baila</div>
+                        <div class="draggable-verb" draggable="true">bailamos</div>
+                        <div class="draggable-verb" draggable="true">bailas</div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(0)">Check Answer</button>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="1">
+                <div class="question">2. Complete the sentence:</div>
+                <div class="sentence">
+                    Nosotros <div class="drop-zone" data-answer="tocamos"></div> instrumentos tradicionales.
+                </div>
+                <div class="context">(We _____ traditional instruments)</div>
+                <div class="verb-bank">
+                    <h4>🎯 Drag one of these verbs:</h4>
+                    <div class="verbs-container">
+                        <div class="draggable-verb" draggable="true">tocamos</div>
+                        <div class="draggable-verb" draggable="true">tocan</div>
+                        <div class="draggable-verb" draggable="true">toca</div>
+                        <div class="draggable-verb" draggable="true">tocas</div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(1)">Check Answer</button>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="2">
+                <div class="question">3. Complete the sentence:</div>
+                <div class="sentence">
+                    Tú <div class="drop-zone" data-answer="cantas"></div> canciones oaxaqueñas muy bien.
+                </div>
+                <div class="context">(You _____ Oaxacan songs very well)</div>
+                <div class="verb-bank">
+                    <h4>🎯 Drag one of these verbs:</h4>
+                    <div class="verbs-container">
+                        <div class="draggable-verb" draggable="true">cantas</div>
+                        <div class="draggable-verb" draggable="true">canta</div>
+                        <div class="draggable-verb" draggable="true">cantan</div>
+                        <div class="draggable-verb" draggable="true">cantamos</div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(2)">Check Answer</button>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="3">
+                <div class="question">4. Complete the sentence:</div>
+                <div class="sentence">
+                    Las familias <div class="drop-zone" data-answer="celebran"></div> sus tradiciones ancestrales.
+                </div>
+                <div class="context">(Families _____ their ancestral traditions)</div>
+                <div class="verb-bank">
+                    <h4>🎯 Drag one of these verbs:</h4>
+                    <div class="verbs-container">
+                        <div class="draggable-verb" draggable="true">celebran</div>
+                        <div class="draggable-verb" draggable="true">celebra</div>
+                        <div class="draggable-verb" draggable="true">celebramos</div>
+                        <div class="draggable-verb" draggable="true">celebras</div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(3)">Check Answer</button>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="4">
+                <div class="question">5. Complete the sentence:</div>
+                <div class="sentence">
+                    Yo <div class="drop-zone" data-answer="miro"></div> las danzas con mucha atención.
+                </div>
+                <div class="context">(I _____ the dances with great attention)</div>
+                <div class="verb-bank">
+                    <h4>🎯 Drag one of these verbs:</h4>
+                    <div class="verbs-container">
+                        <div class="draggable-verb" draggable="true">miro</div>
+                        <div class="draggable-verb" draggable="true">mira</div>
+                        <div class="draggable-verb" draggable="true">miran</div>
+                        <div class="draggable-verb" draggable="true">miramos</div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(4)">Check Answer</button>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="5">
+                <div class="question">6. Complete the sentence:</div>
+                <div class="sentence">
+                    La señora <div class="drop-zone" data-answer="prepara"></div> mole para el festival.
+                </div>
+                <div class="context">(The lady _____ mole for the festival)</div>
+                <div class="verb-bank">
+                    <h4>🎯 Drag one of these verbs:</h4>
+                    <div class="verbs-container">
+                        <div class="draggable-verb" draggable="true">prepara</div>
+                        <div class="draggable-verb" draggable="true">preparan</div>
+                        <div class="draggable-verb" draggable="true">preparamos</div>
+                        <div class="draggable-verb" draggable="true">preparas</div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(5)">Check Answer</button>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="6">
+                <div class="question">7. Complete the sentence:</div>
+                <div class="sentence">
+                    Nosotros <div class="drop-zone" data-answer="visitamos"></div> Oaxaca en julio.
+                </div>
+                <div class="context">(We _____ Oaxaca in July)</div>
+                <div class="verb-bank">
+                    <h4>🎯 Drag one of these verbs:</h4>
+                    <div class="verbs-container">
+                        <div class="draggable-verb" draggable="true">visitamos</div>
+                        <div class="draggable-verb" draggable="true">visitan</div>
+                        <div class="draggable-verb" draggable="true">visita</div>
+                        <div class="draggable-verb" draggable="true">visitas</div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(6)">Check Answer</button>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="7">
+                <div class="question">8. Complete the sentence:</div>
+                <div class="sentence">
+                    Los turistas <div class="drop-zone" data-answer="compran"></div> artesanías hermosas.
+                </div>
+                <div class="context">(Tourists _____ beautiful crafts)</div>
+                <div class="verb-bank">
+                    <h4>🎯 Drag one of these verbs:</h4>
+                    <div class="verbs-container">
+                        <div class="draggable-verb" draggable="true">compran</div>
+                        <div class="draggable-verb" draggable="true">compra</div>
+                        <div class="draggable-verb" draggable="true">compramos</div>
+                        <div class="draggable-verb" draggable="true">compras</div>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(7)">Check Answer</button>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="section results" id="results" style="display: none;">
+            <h3>Results</h3>
+            <div class="score" id="score">0/8</div>
+            <p id="feedback-message">Complete all questions to see your results!</p>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="section" style="text-align: center;">
+            <button class="btn btn-secondary" onclick="toggleAnswers()" id="toggle-answers" style="display: none;">
+                👁️ Show All Answers
+            </button>
+            <button class="btn" onclick="resetQuiz()">
+                🔄 Try Again
+            </button>
+        </div>
+
+        <!-- Answer Key -->
+        <div class="section answer-key" id="answer-key">
+            <h3>Answer Key</h3>
+            <div class="answer-item">
+                <div class="question"><strong>1. Los bailarines bailan en el escenario principal.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: bailan</div>
+                <div style="color: #666; font-size: 0.9rem;">"Bailar" with "los bailarines" (ellos) = bailan (-an ending)</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>2. Nosotros tocamos instrumentos tradicionales.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: tocamos</div>
+                <div style="color: #666; font-size: 0.9rem;">"Tocar" with "nosotros" = tocamos (-amos ending)</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>3. Tú cantas canciones oaxaqueñas muy bien.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: cantas</div>
+                <div style="color: #666; font-size: 0.9rem;">"Cantar" with "tú" = cantas (-as ending)</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>4. Las familias celebran sus tradiciones ancestrales.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: celebran</div>
+                <div style="color: #666; font-size: 0.9rem;">"Celebrar" with "las familias" (ellas) = celebran (-an ending)</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>5. Yo miro las danzas con mucha atención.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: miro</div>
+                <div style="color: #666; font-size: 0.9rem;">"Mirar" with "yo" = miro (-o ending)</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>6. La señora prepara mole para el festival.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: prepara</div>
+                <div style="color: #666; font-size: 0.9rem;">"Preparar" with "la señora" (ella) = prepara (-a ending)</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>7. Nosotros visitamos Oaxaca en julio.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: visitamos</div>
+                <div style="color: #666; font-size: 0.9rem;">"Visitar" with "nosotros" = visitamos (-amos ending)</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>8. Los turistas compran artesanías hermosas.</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: compran</div>
+                <div style="color: #666; font-size: 0.9rem;">"Comprar" with "los turistas" (ellos) = compran (-an ending)</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            © 2025 Spanish Learning Edge LLC. All rights reserved.<br>
+            Designed by Angélica García Genel using instructional expertise and AI-assisted tools.<br>
+            Not for redistribution without permission. - Mexican Cultural Worksheets
+        </div>
+    </div>
+
+    <script>
+        const exercises = [
+            {
+                sentence: "Los bailarines _____ en el escenario principal.",
+                correct: "bailan",
+                explanation: '"Bailar" with "los bailarines" (ellos) = bailan (-an ending)'
+            },
+            {
+                sentence: "Nosotros _____ instrumentos tradicionales.",
+                correct: "tocamos",
+                explanation: '"Tocar" with "nosotros" = tocamos (-amos ending)'
+            },
+            {
+                sentence: "Tú _____ canciones oaxaqueñas muy bien.",
+                correct: "cantas",
+                explanation: '"Cantar" with "tú" = cantas (-as ending)'
+            },
+            {
+                sentence: "Las familias _____ sus tradiciones ancestrales.",
+                correct: "celebran",
+                explanation: '"Celebrar" with "las familias" (ellas) = celebran (-an ending)'
+            },
+            {
+                sentence: "Yo _____ las danzas con mucha atención.",
+                correct: "miro",
+                explanation: '"Mirar" with "yo" = miro (-o ending)'
+            },
+            {
+                sentence: "La señora _____ mole para el festival.",
+                correct: "prepara",
+                explanation: '"Preparar" with "la señora" (ella) = prepara (-a ending)'
+            },
+            {
+                sentence: "Nosotros _____ Oaxaca en julio.",
+                correct: "visitamos",
+                explanation: '"Visitar" with "nosotros" = visitamos (-amos ending)'
+            },
+            {
+                sentence: "Los turistas _____ artesanías hermosas.",
+                correct: "compran",
+                explanation: '"Comprar" with "los turistas" (ellos) = compran (-an ending)'
+            }
+        ];
+        
+        let answers = {};
+        let attempts = {};
+        let draggedElement = null;
+        
+        // Initialize drag and drop functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDragAndDrop();
+        });
+        
+        function initializeDragAndDrop() {
+            // Add event listeners to draggable verbs
+            const draggableVerbs = document.querySelectorAll('.draggable-verb');
+            draggableVerbs.forEach(verb => {
+                verb.addEventListener('dragstart', handleDragStart);
+                verb.addEventListener('dragend', handleDragEnd);
+            });
+            
+            // Add event listeners to drop zones
+            const dropZones = document.querySelectorAll('.drop-zone');
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('dragenter', handleDragEnter);
+                zone.addEventListener('dragleave', handleDragLeave);
+                zone.addEventListener('drop', handleDrop);
+            });
+        }
+        
+        function handleDragStart(e) {
+            if (e.target.classList.contains('used')) {
+                e.preventDefault();
+                return;
+            }
+            draggedElement = e.target;
+            e.target.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', e.target.outerHTML);
+        }
+        
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+        
+        function handleDragEnter(e) {
+            e.preventDefault();
+            if (!e.target.classList.contains('filled')) {
+                e.target.classList.add('drag-over');
+            }
+        }
+        
+        function handleDragLeave(e) {
+            e.target.classList.remove('drag-over');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            e.target.classList.remove('drag-over');
+            
+            if (draggedElement && !e.target.classList.contains('filled')) {
+                // Clear any existing content
+                e.target.textContent = '';
+                
+                // Add the verb text to the drop zone
+                e.target.textContent = draggedElement.textContent;
+                e.target.classList.add('filled');
+                
+                // Mark the original verb as used
+                draggedElement.classList.add('used');
+                draggedElement.draggable = false;
+                
+                // Store the answer
+                const questionIndex = parseInt(e.target.closest('.exercise').dataset.question);
+                answers[questionIndex] = draggedElement.textContent;
+            }
+            
+            draggedElement = null;
+        }
+        
+        function checkAnswer(questionIndex) {
+            const exercise = exercises[questionIndex];
+            const currentAttempts = attempts[questionIndex] || 0;
+            
+            if (currentAttempts >= 3) return;
+            
+            const dropZone = document.querySelector(`[data-question="${questionIndex}"] .drop-zone`);
+            const userAnswer = answers[questionIndex];
+            
+            if (!userAnswer) {
+                alert('Please drag a verb to the yellow box first!');
+                return;
+            }
+            
+            attempts[questionIndex] = currentAttempts + 1;
+            
+            const questionDiv = document.querySelector(`[data-question="${questionIndex}"]`);
+            const feedbackContainer = questionDiv.querySelector('.feedback-container');
+            const explanationContainer = questionDiv.querySelector('.explanation-container');
+            const checkBtn = questionDiv.querySelector('.check-btn');
+            
+            const isCorrect = userAnswer === exercise.correct;
+            
+            if (isCorrect) {
+                dropZone.classList.add('filled');
+                dropZone.classList.remove('wrong');
+                checkBtn.disabled = true;
+                checkBtn.textContent = 'Correct!';
+            } else {
+                dropZone.classList.add('wrong');
+                if (attempts[questionIndex] >= 3) {
+                    checkBtn.disabled = true;
+                    checkBtn.textContent = 'No more attempts';
+                }
+            }
+            
+            // Show feedback
+            feedbackContainer.innerHTML = `
+                <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                    ${isCorrect ? '✅' : '❌'} ${isCorrect ? '¡Correcto!' : 'Try again!'}
+                    <span class="attempts">(${attempts[questionIndex]}/3 attempts)</span>
+                </div>
+            `;
+            
+            // Show explanation if incorrect and no attempts left
+            if (!isCorrect && attempts[questionIndex] >= 3) {
+                explanationContainer.innerHTML = `
+                    <div class="explanation">
+                        <strong>Correct answer:</strong> ${exercise.correct}<br>
+                        ${exercise.explanation}
+                    </div>
+                `;
+            }
+            
+            // Check if all questions answered correctly
+            let correctCount = 0;
+            exercises.forEach((ex, index) => {
+                if (answers[index] === ex.correct) {
+                    correctCount++;
+                }
+            });
+            
+            if (correctCount === exercises.length) {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            let correctCount = 0;
+            exercises.forEach((exercise, index) => {
+                if (answers[index] === exercise.correct) {
+                    correctCount++;
+                }
+            });
+            
+            const resultsDiv = document.getElementById('results');
+            const scoreDiv = document.getElementById('score');
+            const feedbackDiv = document.getElementById('feedback-message');
+            const toggleBtn = document.getElementById('toggle-answers');
+            
+            scoreDiv.textContent = `${correctCount}/${exercises.length}`;
+            
+            let message = '';
+            if (correctCount === exercises.length) {
+                message = 'Excellent work! You can drag and drop -AR verbs perfectly!';
+            } else if (correctCount >= exercises.length * 0.75) {
+                message = 'Good job! Keep practicing with drag and drop exercises!';
+            } else {
+                message = 'Keep practicing! Drag and drop helps you learn verb patterns.';
+            }
+            
+            feedbackDiv.textContent = message;
+            resultsDiv.style.display = 'block';
+            toggleBtn.style.display = 'inline-flex';
+        }
+        
+        function toggleAnswers() {
+            const answerKey = document.getElementById('answer-key');
+            const toggleBtn = document.getElementById('toggle-answers');
+            
+            if (answerKey.classList.contains('show')) {
+                answerKey.classList.remove('show');
+                toggleBtn.innerHTML = '👁️ Show All Answers';
+            } else {
+                answerKey.classList.add('show');
+                toggleBtn.innerHTML = '🙈 Hide Answers';
+            }
+        }
+        
+        function resetQuiz() {
+            answers = {};
+            attempts = {};
+            
+            // Reset all drop zones
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.textContent = '';
+                zone.classList.remove('filled', 'wrong', 'drag-over');
+            });
+            
+            // Reset all draggable verbs
+            document.querySelectorAll('.draggable-verb').forEach(verb => {
+                verb.classList.remove('used');
+                verb.draggable = true;
+            });
+            
+            // Reset check buttons
+            document.querySelectorAll('.check-btn').forEach(btn => {
+                btn.disabled = false;
+                btn.textContent = 'Check Answer';
+            });
+            
+            // Clear feedback and explanations
+            document.querySelectorAll('.feedback-container').forEach(container => {
+                container.innerHTML = '';
+            });
+            
+            document.querySelectorAll('.explanation-container').forEach(container => {
+                container.innerHTML = '';
+            });
+            
+            // Hide results and answers
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('toggle-answers').style.display = 'none';
+            document.getElementById('answer-key').classList.remove('show');
+        }
+    </script>
+</body>
+</html>
