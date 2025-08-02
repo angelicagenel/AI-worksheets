@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time in Mexican Culture - Novice Spanish Worksheet - Spanish Learning Edge LLC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fef2f2 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-top: 4px solid #ef7c8e;
+        }
+        
+        .header h1 {
+            color: #ef7c8e;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            color: #373f45;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b8d94;
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .section h3 {
+            color: #373f45;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .cultural-section {
+            border-left: 4px solid #6b8d94;
+        }
+        
+        .exercise {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #ffe8e3;
+            border-radius: 8px;
+        }
+        
+        .question {
+            color: #373f45;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .context {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .option-btn {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            background: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            text-align: left;
+        }
+        
+        .option-btn:hover {
+            background: #f0f0f0;
+            border-color: #ef7c8e;
+        }
+        
+        .option-btn.correct {
+            background: #dcfce7;
+            border-color: #16a34a;
+            color: #15803d;
+        }
+        
+        .option-btn.incorrect {
+            background: #fef2f2;
+            border-color: #dc2626;
+            color: #dc2626;
+        }
+        
+        .option-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .feedback {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        
+        .feedback.correct {
+            color: #16a34a;
+        }
+        
+        .feedback.incorrect {
+            color: #dc2626;
+        }
+        
+        .attempts {
+            font-size: 0.8rem;
+            color: #666;
+            margin-left: 8px;
+        }
+        
+        .explanation {
+            margin-top: 10px;
+            padding: 15px;
+            background: #eff6ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .explanation strong {
+            color: #1e40af;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ef7c8e;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            background: #ef7c8e;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #db6565;
+        }
+        
+        .btn-secondary {
+            background: #6b8d94;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a7980;
+        }
+        
+        .answer-key {
+            display: none;
+        }
+        
+        .answer-key.show {
+            display: block;
+        }
+        
+        .answer-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .time-guide {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .time-guide h4 {
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+        
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .time-item {
+            color: #0369a1;
+            padding: 8px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 4px;
+        }
+        
+        .cultural-insight {
+            background: #fef7ff;
+            border: 2px solid #d946ef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .cultural-insight h4 {
+            color: #a21caf;
+            margin-bottom: 10px;
+        }
+        
+        .mexican-expression {
+            font-style: italic;
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+        
+        .audio-button {
+            background: #ef7c8e;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        
+        .audio-button:hover {
+            background: #db6565;
+            transform: scale(1.1);
+        }
+        
+        .spanish-english {
+            background: rgba(239, 124, 142, 0.1);
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #ef7c8e;
+        }
+        
+        @media (max-width: 768px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .time-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Spanish Learning Edge LLC</h1>
+            <h2>Time in Mexican Culture: A Living, Breathing Cycle</h2>
+            <p>ACTFL Level: Novice Mid/High</p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="section">
+            <h3>Instructions | Instrucciones</h3>
+            <p><strong>English:</strong> Learn how Mexican people talk about time. Practice basic time expressions while learning about Mexican culture.</p>
+            <p><strong>Español:</strong> Aprende como las personas mexicanas hablan del tiempo. Practica expresiones básicas del tiempo mientras aprendes sobre la cultura mexicana.</p>
+        </div>
+
+        <!-- Time Expressions Guide -->
+        <div class="section">
+            <div class="time-guide">
+                <h4>⏰ Basic Time Expressions | Expresiones Básicas del Tiempo:</h4>
+                <div class="time-grid">
+                    <div class="time-item"><strong>¿Qué hora es?</strong><br>What time is it?</div>
+                    <div class="time-item"><strong>¿A qué hora?</strong><br>At what time?</div>
+                    <div class="time-item"><strong>Es la una</strong><br>It's one o'clock</div>
+                    <div class="time-item"><strong>Son las dos</strong><br>It's two o'clock</div>
+                    <div class="time-item"><strong>a tiempo</strong><br>on time</div>
+                    <div class="time-item"><strong>temprano</strong><br>early</div>
+                    <div class="time-item"><strong>tarde</strong><br>late</div>
+                    <div class="time-item"><strong>ahora</strong><br>now</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cultural Insight -->
+        <div class="section">
+            <div class="cultural-insight">
+                <h4>🌟 Cultural Understanding | Entendimiento Cultural</h4>
+                <p><strong>English:</strong> In Mexican culture, time is flexible and focuses on relationships. The word <span class="mexican-expression">ahorita</span> means "now" but can also mean "later" - it depends on the situation!</p>
+                <p><strong>Español:</strong> En la cultura mexicana, el tiempo es flexible y se enfoca en las relaciones. La palabra <span class="mexican-expression">ahorita</span> significa "now" pero también puede significar "later" - ¡depende de la situación!</p>
+            </div>
+        </div>
+
+        <!-- Cultural Content -->
+        <div class="section cultural-section">
+            <h3>Cultural Information | Información Cultural</h3>
+            <p><strong>English:</strong> Before clocks, Mexican indigenous peoples understood time differently. They focused on natural cycles and relationships, not exact minutes. Today, many Mexican expressions show this cultural view of flexible time.</p>
+            <p><strong>Español:</strong> Antes de los relojes, los pueblos indígenas mexicanos entendían el tiempo diferente. Se enfocaban en los ciclos naturales y las relaciones, no en minutos exactos. Hoy, muchas expresiones mexicanas muestran esta visión cultural del tiempo flexible.</p>
+        </div>
+
+        <!-- Exercises -->
+        <div class="section">
+            <h3>Practice Exercises | Ejercicios de Práctica</h3>
+            
+            <div class="exercise" data-question="0">
+                <div class="question">1. When someone says <span class="spanish-english">"ahorita vengo"</span> (I'm coming right now), they usually mean...</div>
+                <div class="context">Understanding Mexican time expression</div>
+                <div class="options" id="options-0">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="1">
+                <div class="question">2. If it's 3:00 PM in Spanish, you say...</div>
+                <div class="context">Basic time telling</div>
+                <div class="options" id="options-1">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="2">
+                <div class="question">3. The Mexican expression <span class="spanish-english">"al rato"</span> means...</div>
+                <div class="context">Mexican time vocabulary</div>
+                <div class="options" id="options-2">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="3">
+                <div class="question">4. To ask "What time is it?" in Spanish, you say...</div>
+                <div class="context">Basic time question</div>
+                <div class="options" id="options-3">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="4">
+                <div class="question">5. In Mexican culture, being <span class="spanish-english">"a tiempo"</span> (on time) is...</div>
+                <div class="context">Cultural understanding</div>
+                <div class="options" id="options-4">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="5">
+                <div class="question">6. When someone says <span class="spanish-english">"luego"</span>, it means...</div>
+                <div class="context">Time vocabulary</div>
+                <div class="options" id="options-5">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="6">
+                <div class="question">7. If someone is <span class="spanish-english">"tarde"</span>, they are...</div>
+                <div class="context">Time adjectives</div>
+                <div class="options" id="options-6">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+
+            <div class="exercise" data-question="7">
+                <div class="question">8. For 1:00 o'clock in Spanish, you use <span class="spanish-english">"es"</span> because...</div>
+                <div class="context">Grammar rule</div>
+                <div class="options" id="options-7">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <div class="feedback-container"></div>
+                <div class="explanation-container"></div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="section results" id="results" style="display: none;">
+            <h3>Results | Resultados</h3>
+            <div class="score" id="score">0/8</div>
+            <p id="feedback-message">Complete all questions to see your results!</p>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="section" style="text-align: center;">
+            <button class="btn btn-secondary" onclick="toggleAnswers()" id="toggle-answers" style="display: none;">
+                👁️ Show All Answers | Mostrar Respuestas
+            </button>
+            <button class="btn" onclick="resetQuiz()">
+                🔄 Try Again | Intentar Otra Vez
+            </button>
+        </div>
+
+        <!-- Answer Key -->
+        <div class="section answer-key" id="answer-key">
+            <h3>Answer Key | Clave de Respuestas</h3>
+            <div class="answer-item">
+                <div class="question"><strong>1. When someone says "ahorita vengo" (I'm coming right now), they usually mean: I will return in a flexible time that depends on the situation</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: I will return in a flexible time that depends on the situation</div>
+                <div style="color: #666; font-size: 0.9rem;">"Ahorita" shows Mexican flexible time culture - it's polite and relationship-focused.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>2. If it's 3:00 PM in Spanish, you say: Son las tres</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: Son las tres</div>
+                <div style="color: #666; font-size: 0.9rem;">Use "son las" for all hours except 1:00 (es la una).</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>3. The Mexican expression "al rato" means: later (flexible time)</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: later (flexible time)</div>
+                <div style="color: #666; font-size: 0.9rem;">"Al rato" is common in Mexico and means "later" without specific time.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>4. To ask "What time is it?" in Spanish, you say: ¿Qué hora es?</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: ¿Qué hora es?</div>
+                <div style="color: #666; font-size: 0.9rem;">This is the standard way to ask for the current time in Spanish.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>5. In Mexican culture, being "a tiempo" (on time) is: important but relationships come first</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: important but relationships come first</div>
+                <div style="color: #666; font-size: 0.9rem;">Mexican culture values punctuality but prioritizes human connections and flexibility.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>6. When someone says "luego", it means: later</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: later</div>
+                <div style="color: #666; font-size: 0.9rem;">"Luego" means "later" and is used in many time expressions.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>7. If someone is "tarde", they are: late</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: late</div>
+                <div style="color: #666; font-size: 0.9rem;">"Tarde" means late. "Temprano" means early.</div>
+            </div>
+            <div class="answer-item">
+                <div class="question"><strong>8. For 1:00 o'clock in Spanish, you use "es" because: it's singular (one hour)</strong></div>
+                <div style="color: #16a34a; font-weight: 600; margin: 5px 0;">Answer: it's singular (one hour)</div>
+                <div style="color: #666; font-size: 0.9rem;">Use "es la una" for 1:00 and "son las" for all other hours (2:00-12:00).</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            © 2025 Spanish Learning Edge LLC. All rights reserved.<br>
+            Designed by Angélica García Genel using instructional expertise and AI-assisted tools.<br>
+            Not for redistribution without permission. - Mexican Cultural Worksheets - Novice Level
+        </div>
+    </div>
+
+    <script>
+        const exercises = [
+            {
+                question: "When someone says \"ahorita vengo\" (I'm coming right now), they usually mean...",
+                context: "Understanding Mexican time expression",
+                options: ["I will return in exactly 5 minutes", "I will return in a flexible time that depends on the situation", "I will never return", "I will return tomorrow"],
+                correct: "I will return in a flexible time that depends on the situation",
+                explanation: "\"Ahorita\" shows Mexican flexible time culture - it's polite and relationship-focused."
+            },
+            {
+                question: "If it's 3:00 PM in Spanish, you say...",
+                context: "Basic time telling",
+                options: ["Es las tres", "Son las tres", "Está tres", "Hay tres"],
+                correct: "Son las tres",
+                explanation: "Use \"son las\" for all hours except 1:00 (es la una)."
+            },
+            {
+                question: "The Mexican expression \"al rato\" means...",
+                context: "Mexican time vocabulary",
+                options: ["right now", "never", "later (flexible time)", "yesterday"],
+                correct: "later (flexible time)",
+                explanation: "\"Al rato\" is common in Mexico and means \"later\" without specific time."
+            },
+            {
+                question: "To ask \"What time is it?\" in Spanish, you say...",
+                context: "Basic time question",
+                options: ["¿Cómo es la hora?", "¿Qué hora es?", "¿Cuándo es tiempo?", "¿Dónde está el tiempo?"],
+                correct: "¿Qué hora es?",
+                explanation: "This is the standard way to ask for the current time in Spanish."
+            },
+            {
+                question: "In Mexican culture, being \"a tiempo\" (on time) is...",
+                context: "Cultural understanding",
+                options: ["not important at all", "important but relationships come first", "the most important thing", "impossible to do"],
+                correct: "important but relationships come first",
+                explanation: "Mexican culture values punctuality but prioritizes human connections and flexibility."
+            },
+            {
+                question: "When someone says \"luego\", it means...",
+                context: "Time vocabulary",
+                options: ["now", "later", "never", "always"],
+                correct: "later",
+                explanation: "\"Luego\" means \"later\" and is used in many time expressions."
+            },
+            {
+                question: "If someone is \"tarde\", they are...",
+                context: "Time adjectives",
+                options: ["early", "on time", "late", "confused"],
+                correct: "late",
+                explanation: "\"Tarde\" means late. \"Temprano\" means early."
+            },
+            {
+                question: "For 1:00 o'clock in Spanish, you use \"es\" because...",
+                context: "Grammar rule",
+                options: ["it sounds better", "it's singular (one hour)", "it's always used for time", "it's more polite"],
+                correct: "it's singular (one hour)",
+                explanation: "Use \"es la una\" for 1:00 and \"son las\" for all other hours (2:00-12:00)."
+            }
+        ];
+        
+        let answers = {};
+        let attempts = {};
+        
+        // Shuffle array function
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+        
+        // Initialize randomized options for all questions
+        function initializeOptions() {
+            exercises.forEach((exercise, questionIndex) => {
+                const shuffledOptions = shuffleArray(exercise.options);
+                const optionsContainer = document.getElementById(`options-${questionIndex}`);
+                
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn';
+                    button.textContent = option;
+                    button.dataset.option = option;
+                    button.onclick = () => selectAnswer(questionIndex, option);
+                    optionsContainer.appendChild(button);
+                });
+            });
+        }
+        
+        function selectAnswer(questionIndex, selectedOption) {
+            const exercise = exercises[questionIndex];
+            const currentAttempts = attempts[questionIndex] || 0;
+            
+            if (currentAttempts >= 3) return;
+            
+            answers[questionIndex] = selectedOption;
+            attempts[questionIndex] = currentAttempts + 1;
+            
+            // Update UI
+            const questionDiv = document.querySelector(`[data-question="${questionIndex}"]`);
+            const buttons = questionDiv.querySelectorAll('.option-btn');
+            const feedbackContainer = questionDiv.querySelector('.feedback-container');
+            const explanationContainer = questionDiv.querySelector('.explanation-container');
+            
+            // Update button states
+            buttons.forEach(btn => {
+                if (btn.dataset.option === selectedOption) {
+                    if (selectedOption === exercise.correct) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                }
+                if (attempts[questionIndex] >= 3) {
+                    btn.disabled = true;
+                }
+            });
+            
+            // Show feedback
+            const isCorrect = selectedOption === exercise.correct;
+            feedbackContainer.innerHTML = `
+                <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                    ${isCorrect ? '✅' : '❌'} ${isCorrect ? '¡Correcto! | Correct!' : 'Try again! | ¡Inténtalo otra vez!'}
+                    <span class="attempts">(${attempts[questionIndex]}/3 attempts)</span>
+                </div>
+            `;
+            
+            // Show explanation if incorrect and no attempts left
+            if (!isCorrect && attempts[questionIndex] >= 3) {
+                explanationContainer.innerHTML = `
+                    <div class="explanation">
+                        <strong>Correct answer | Respuesta correcta:</strong> ${exercise.correct}<br>
+                        ${exercise.explanation}
+                    </div>
+                `;
+            }
+            
+            // Check if all questions answered
+            if (Object.keys(answers).length === exercises.length) {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            let correctCount = 0;
+            exercises.forEach((exercise, index) => {
+                if (answers[index] === exercise.correct) {
+                    correctCount++;
+                }
+            });
+            
+            const resultsDiv = document.getElementById('results');
+            const scoreDiv = document.getElementById('score');
+            const feedbackDiv = document.getElementById('feedback-message');
+            const toggleBtn = document.getElementById('toggle-answers');
+            
+            scoreDiv.textContent = `${correctCount}/${exercises.length}`;
+            
+            let message = '';
+            if (correctCount === exercises.length) {
+                message = '¡Excelente! Excellent work! You understand Mexican time culture! | ¡Entiendes la cultura mexicana del tiempo!';
+            } else if (correctCount >= exercises.length * 0.75) {
+                message = '¡Buen trabajo! Good job! You understand Mexican time expressions! | ¡Entiendes las expresiones mexicanas del tiempo!';
+            } else {
+                message = '¡Sigue practicando! Keep practicing! Cultural understanding takes time! | ¡El entendimiento cultural toma tiempo!';
+            }
+            
+            feedbackDiv.textContent = message;
+            resultsDiv.style.display = 'block';
+            toggleBtn.style.display = 'inline-flex';
+        }
+        
+        function toggleAnswers() {
+            const answerKey = document.getElementById('answer-key');
+            const toggleBtn = document.getElementById('toggle-answers');
+            
+            if (answerKey.classList.contains('show')) {
+                answerKey.classList.remove('show');
+                toggleBtn.innerHTML = '👁️ Show All Answers | Mostrar Respuestas';
+            } else {
+                answerKey.classList.add('show');
+                toggleBtn.innerHTML = '🙈 Hide Answers | Ocultar Respuestas';
+            }
+        }
+        
+        function resetQuiz() {
+            answers = {};
+            attempts = {};
+            
+            // Reset all buttons and feedback
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('correct', 'incorrect');
+                btn.disabled = false;
+            });
+            
+            document.querySelectorAll('.feedback-container').forEach(container => {
+                container.innerHTML = '';
+            });
+            
+            document.querySelectorAll('.explanation-container').forEach(container => {
+                container.innerHTML = '';
+            });
+            
+            // Hide results and answers
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('toggle-answers').style.display = 'none';
+            document.getElementById('answer-key').classList.remove('show');
+            
+            // Re-randomize options
+            document.querySelectorAll('.options').forEach(container => {
+                container.innerHTML = '';
+            });
+            initializeOptions();
+        }
+        
+        // Initialize the worksheet when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeOptions();
+        });
+    </script>
+</body>
+</html>
