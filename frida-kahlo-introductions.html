@@ -624,6 +624,40 @@
             }
         }
         
+        async function sendGrade() {
+            const params = new URLSearchParams(window.location.search);
+            const attempt_id = params.get('attempt_id');
+            const token = params.get('token');
+
+            if (!attempt_id || !token) return;
+
+            let correctCount = 0;
+            exercises.forEach((exercise, index) => {
+                if (answers[index] === exercise.correct) correctCount++;
+            });
+
+            try {
+                const response = await fetch(
+                    'https://sle-lti-server-950105557003.us-central1.run.app/api/grade',
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            attempt_id: attempt_id,
+                            token: token,
+                            score: correctCount,
+                            max_score: exercises.length,
+                            block_id: 'frida-kahlo-introductions'
+                        })
+                    }
+                );
+                const data = await response.json();
+                console.log('Grade passback:', data);
+            } catch (err) {
+                console.error('Grade passback failed:', err);
+            }
+        }
+
         function showResults() {
             let correctCount = 0;
             exercises.forEach((exercise, index) => {
@@ -631,6 +665,8 @@
                     correctCount++;
                 }
             });
+
+            sendGrade();
             
             const resultsDiv = document.getElementById('results');
             const scoreDiv = document.getElementById('score');
