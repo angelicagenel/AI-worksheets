@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L01 — Mucho gusto | Workbook · SLE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ivory: #F8F8F6;
+            --eucalyptus-surface: #F0F3F3;
+            --charcoal: #2F3437;
+            --secondary-text: #474747;
+            --eucalyptus: #557076;
+            --eucalyptus-dark: #44595E;
+            --eucalyptus-light: #C3D1D4;
+            --rose: #D5ADAD;
+            --border: #DCDCDC;
+            --ok-text: #166534;
+            --ok-bg: #EAF3EC;
+            --ok-border: #2E7D4F;
+            --bad-text: #9F1D1D;
+            --bad-bg: #FAEFEF;
+            --bad-border: #B23A3A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Open Sans', Arial, sans-serif;
+            background: var(--ivory);
+            color: var(--charcoal);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.55;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(47, 52, 55, 0.06);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .header {
+            text-align: center;
+            border-top: 5px solid var(--eucalyptus);
+        }
+
+        .header .brand {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--eucalyptus);
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            color: var(--charcoal);
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            color: var(--eucalyptus);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .header .time {
+            display: inline-block;
+            background: var(--eucalyptus-surface);
+            border: 1px solid var(--eucalyptus-light);
+            border-radius: 999px;
+            padding: 5px 16px;
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
+
+        .card h3 {
+            color: var(--charcoal);
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            color: var(--secondary-text);
+            margin-bottom: 8px;
+        }
+
+        .intro ul {
+            color: var(--secondary-text);
+            margin: 8px 0 0 22px;
+        }
+
+        /* ---------- Exercise framing ---------- */
+        .exercise {
+            border-left: 5px solid var(--eucalyptus-light);
+        }
+
+        .ex-head {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .ex-num {
+            flex: 0 0 auto;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--eucalyptus);
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .ex-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+        }
+
+        .ex-points {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--eucalyptus);
+            background: var(--eucalyptus-surface);
+            border-radius: 999px;
+            padding: 2px 10px;
+            margin-left: auto;
+            white-space: nowrap;
+            align-self: center;
+        }
+
+        .scenario {
+            background: var(--eucalyptus-surface);
+            border: 1px solid var(--eucalyptus-light);
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            color: var(--secondary-text);
+            margin: 10px 0 16px;
+        }
+
+        .scenario strong {
+            color: var(--charcoal);
+        }
+
+        .instruction {
+            color: var(--secondary-text);
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+        }
+
+        /* ---------- Item rows / controls ---------- */
+        .item-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #FFFFFF;
+        }
+
+        .item-row .sentence {
+            flex: 1 1 280px;
+            color: var(--charcoal);
+        }
+
+        select {
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--charcoal);
+            padding: 8px 10px;
+            border: 2px solid var(--eucalyptus-light);
+            border-radius: 6px;
+            background: #FFFFFF;
+            cursor: pointer;
+        }
+
+        select.inline-select {
+            padding: 4px 6px;
+            margin: 0 2px;
+        }
+
+        select:focus-visible,
+        input:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--eucalyptus);
+            outline-offset: 2px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .choice {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: var(--ivory);
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--charcoal);
+            transition: border-color 0.15s, background 0.15s;
+        }
+
+        .choice:hover {
+            border-color: var(--eucalyptus);
+            background: var(--eucalyptus-surface);
+        }
+
+        .choice input {
+            width: 19px;
+            height: 19px;
+            accent-color: var(--eucalyptus);
+            flex: 0 0 auto;
+            cursor: pointer;
+        }
+
+        .mr-list .choice {
+            margin-bottom: 10px;
+        }
+
+        .mr-list .choice .situation {
+            font-size: 0.88rem;
+            color: var(--secondary-text);
+            display: block;
+        }
+
+        .question-line {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin: 14px 0 4px;
+            color: var(--charcoal);
+        }
+
+        .paragraph-box {
+            background: var(--ivory);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 1.05rem;
+            line-height: 2.2;
+        }
+
+        /* ---------- Word bank ---------- */
+        .word-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: var(--eucalyptus-surface);
+            border: 1px dashed var(--eucalyptus);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+
+        .bank-word {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            background: #FFFFFF;
+            border: 2px solid var(--eucalyptus-light);
+            border-radius: 999px;
+            padding: 7px 16px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .bank-word:hover:not(:disabled) {
+            border-color: var(--eucalyptus);
+            background: var(--eucalyptus-surface);
+        }
+
+        .bank-word.used {
+            background: var(--eucalyptus);
+            border-color: var(--eucalyptus);
+            color: #FFFFFF;
+        }
+
+        .blank-btn {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            background: var(--ivory);
+            border: 2px dashed var(--eucalyptus);
+            border-radius: 6px;
+            min-width: 90px;
+            padding: 5px 12px;
+            cursor: pointer;
+            margin: 0 3px;
+        }
+
+        .blank-btn.active {
+            background: var(--eucalyptus-surface);
+            border-style: solid;
+            box-shadow: 0 0 0 3px var(--eucalyptus-light);
+        }
+
+        .blank-btn.filled {
+            border-style: solid;
+            background: #FFFFFF;
+        }
+
+        .bank-hint {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+            margin-bottom: 12px;
+        }
+
+        /* ---------- Feedback ---------- */
+        .item-fb {
+            flex: 1 1 100%;
+            font-size: 0.92rem;
+            border-radius: 6px;
+            padding: 8px 12px;
+            display: none;
+        }
+
+        .item-fb.show {
+            display: block;
+        }
+
+        .item-fb.ok {
+            background: var(--ok-bg);
+            color: var(--ok-text);
+            border-left: 4px solid var(--ok-border);
+            font-weight: 500;
+        }
+
+        .item-fb.bad {
+            background: var(--bad-bg);
+            color: var(--bad-text);
+            border-left: 4px solid var(--bad-border);
+            font-weight: 500;
+        }
+
+        .ex-status {
+            margin-top: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            min-height: 1.4em;
+        }
+
+        .ex-status.ok { color: var(--ok-text); }
+        .ex-status.partial { color: var(--bad-text); }
+        .ex-status.note { color: var(--secondary-text); font-weight: 500; }
+
+        /* ---------- Buttons ---------- */
+        .btn {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--eucalyptus);
+            color: #FFFFFF;
+            padding: 11px 24px;
+            border: 2px solid var(--eucalyptus);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s;
+            margin: 4px 2px;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: var(--eucalyptus-dark);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: #FFFFFF;
+            color: var(--eucalyptus);
+        }
+
+        .btn-outline:hover:not(:disabled) {
+            background: var(--eucalyptus-surface);
+        }
+
+        .btn-submit {
+            font-size: 1.05rem;
+            padding: 14px 34px;
+        }
+
+        /* ---------- Summary / results ---------- */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.95rem;
+        }
+
+        .summary-table th,
+        .summary-table td {
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .summary-table th {
+            background: var(--eucalyptus-surface);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: var(--charcoal);
+        }
+
+        .summary-table td.pts {
+            text-align: right;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .summary-table tr.total-row td {
+            background: var(--eucalyptus-surface);
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .submit-note {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            margin-top: 8px;
+        }
+
+        .final-score {
+            text-align: center;
+            display: none;
+        }
+
+        .final-score.show {
+            display: block;
+        }
+
+        .final-score .big {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--eucalyptus);
+            margin: 8px 0;
+        }
+
+        .final-score .accent-bar {
+            width: 70px;
+            height: 5px;
+            background: var(--rose);
+            border-radius: 3px;
+            margin: 12px auto;
+        }
+
+        /* ---------- Answer key ---------- */
+        .answer-key {
+            display: none;
+        }
+
+        .answer-key.show {
+            display: block;
+        }
+
+        .ak-item {
+            background: var(--ivory);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 14px;
+        }
+
+        .ak-item h4 {
+            color: var(--eucalyptus);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .ak-answer {
+            color: var(--ok-text);
+            font-weight: 600;
+        }
+
+        .ak-rule {
+            color: var(--secondary-text);
+            font-size: 0.92rem;
+            margin-top: 4px;
+        }
+
+        .ak-item ul {
+            margin: 6px 0 0 20px;
+            color: var(--secondary-text);
+            font-size: 0.95rem;
+        }
+
+        .ak-item li {
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-bottom: 20px;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            body { padding: 12px; }
+            .card { padding: 18px; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.45rem; }
+            .ex-head { flex-wrap: wrap; }
+            .ex-points { margin-left: 0; }
+            .paragraph-box { line-height: 2.6; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="card header">
+            <div class="brand">Spanish Learning Edge</div>
+            <h1>L01: Mucho gusto, soy yo — Workbook</h1>
+            <div class="subtitle">Unit 1 · SER · Feria de Oaxaca</div>
+            <div class="time">⏱ Estimated time: 25–30 min</div>
+        </header>
+
+        <!-- Instructions -->
+        <section class="card intro" aria-labelledby="intro-h">
+            <h3 id="intro-h">How this workbook works</h3>
+            <p>You already met don Marcos, doña Rosa, and señora López at the feria de Oaxaca. Now it's your turn to produce the full SER paradigm and choose between <strong>tú</strong> and <strong>usted</strong> like a local.</p>
+            <ul>
+                <li>10 exercises · 30 points total · no time limit, no attempt limits.</li>
+                <li>Press <strong>Check</strong> on each exercise to see your score and the rule for anything you missed.</li>
+                <li>You can change any answer and re-check until you press <strong>Submit</strong> at the end.</li>
+            </ul>
+        </section>
+
+        <!-- ════════ Exercise 1: Ordering ════════ -->
+        <section class="card exercise" aria-labelledby="ex1-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">1</div>
+                <h3 class="ex-title" id="ex1-h">Put the introduction in order</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <div class="scenario"><strong>At the feria:</strong> Don Marcos introduces himself to a new customer at his puesto. His sentences got shuffled — choose the position (1–5) for each one.</div>
+
+            <div class="item-row">
+                <span class="sentence" id="ex1-s1-txt">Soy vendedor de café de olla.</span>
+                <select id="ex1-s1" aria-labelledby="ex1-s1-txt" aria-label="Position for: Soy vendedor de café de olla." aria-describedby="ex1-s1-fb">
+                    <option value="">Position…</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                </select>
+                <span class="item-fb" id="ex1-s1-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence" id="ex1-s2-txt">Mucho gusto, bienvenido a la feria.</span>
+                <select id="ex1-s2" aria-label="Position for: Mucho gusto, bienvenido a la feria." aria-describedby="ex1-s2-fb">
+                    <option value="">Position…</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                </select>
+                <span class="item-fb" id="ex1-s2-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence" id="ex1-s3-txt">Buenos días. Me llamo Marcos.</span>
+                <select id="ex1-s3" aria-label="Position for: Buenos días. Me llamo Marcos." aria-describedby="ex1-s3-fb">
+                    <option value="">Position…</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                </select>
+                <span class="item-fb" id="ex1-s3-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence" id="ex1-s4-txt">El café de olla es de México.</span>
+                <select id="ex1-s4" aria-label="Position for: El café de olla es de México." aria-describedby="ex1-s4-fb">
+                    <option value="">Position…</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                </select>
+                <span class="item-fb" id="ex1-s4-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence" id="ex1-s5-txt">Soy de Veracruz.</span>
+                <select id="ex1-s5" aria-label="Position for: Soy de Veracruz." aria-describedby="ex1-s5-fb">
+                    <option value="">Position…</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                </select>
+                <span class="item-fb" id="ex1-s5-fb"></span>
+            </div>
+
+            <button type="button" class="btn" data-check="ex1">Check exercise 1</button>
+            <p class="ex-status" id="ex1-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Exercise 2: Matching pronoun → SER form ════════ -->
+        <section class="card exercise" aria-labelledby="ex2-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">2</div>
+                <h3 class="ex-title" id="ex2-h">Match each pronoun to its SER form</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <p class="instruction">The full paradigm — match every pronoun to the correct form of SER.</p>
+
+            <div class="item-row">
+                <span class="sentence"><strong>yo</strong></span>
+                <select id="ex2-p1" aria-label="SER form for: yo" aria-describedby="ex2-p1-fb">
+                    <option value="">Choose…</option>
+                    <option>soy</option><option>eres</option><option>es</option><option>somos</option><option>son</option>
+                </select>
+                <span class="item-fb" id="ex2-p1-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence"><strong>tú</strong></span>
+                <select id="ex2-p2" aria-label="SER form for: tú" aria-describedby="ex2-p2-fb">
+                    <option value="">Choose…</option>
+                    <option>soy</option><option>eres</option><option>es</option><option>somos</option><option>son</option>
+                </select>
+                <span class="item-fb" id="ex2-p2-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence"><strong>él / ella / usted</strong></span>
+                <select id="ex2-p3" aria-label="SER form for: él, ella, usted" aria-describedby="ex2-p3-fb">
+                    <option value="">Choose…</option>
+                    <option>soy</option><option>eres</option><option>es</option><option>somos</option><option>son</option>
+                </select>
+                <span class="item-fb" id="ex2-p3-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence"><strong>nosotros / nosotras</strong></span>
+                <select id="ex2-p4" aria-label="SER form for: nosotros, nosotras" aria-describedby="ex2-p4-fb">
+                    <option value="">Choose…</option>
+                    <option>soy</option><option>eres</option><option>es</option><option>somos</option><option>son</option>
+                </select>
+                <span class="item-fb" id="ex2-p4-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence"><strong>ellos / ellas / ustedes</strong></span>
+                <select id="ex2-p5" aria-label="SER form for: ellos, ellas, ustedes" aria-describedby="ex2-p5-fb">
+                    <option value="">Choose…</option>
+                    <option>soy</option><option>eres</option><option>es</option><option>somos</option><option>son</option>
+                </select>
+                <span class="item-fb" id="ex2-p5-fb"></span>
+            </div>
+
+            <button type="button" class="btn" data-check="ex2">Check exercise 2</button>
+            <p class="ex-status" id="ex2-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Exercise 3: MC single — yo → soy ════════ -->
+        <section class="card exercise" aria-labelledby="ex3-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">3</div>
+                <h3 class="ex-title" id="ex3-h">Choose the correct form</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <div class="scenario"><strong>First meeting, formal:</strong> Don Marcos introduces himself to señora López, an elder customer.</div>
+            <fieldset style="border:none;">
+                <legend class="question-line">"Buenos días, señora. _____ don Marcos."</legend>
+                <div class="options-grid" role="group">
+                    <label class="choice"><input type="radio" name="ex3" value="son"> A) son</label>
+                    <label class="choice"><input type="radio" name="ex3" value="soy"> B) soy</label>
+                    <label class="choice"><input type="radio" name="ex3" value="somos"> C) somos</label>
+                    <label class="choice"><input type="radio" name="ex3" value="eres"> D) eres</label>
+                </div>
+            </fieldset>
+            <span class="item-fb" id="ex3-q-fb"></span>
+
+            <button type="button" class="btn" data-check="ex3">Check exercise 3</button>
+            <p class="ex-status" id="ex3-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Exercise 4: MC single — usted → es ════════ -->
+        <section class="card exercise" aria-labelledby="ex4-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">4</div>
+                <h3 class="ex-title" id="ex4-h">Choose the correct form (usted)</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <div class="scenario"><strong>Señora López responds</strong> — still formal, of course.</div>
+            <fieldset style="border:none;">
+                <legend class="question-line">"Mucho gusto, don Marcos. ¿De dónde _____ usted?"</legend>
+                <div class="options-grid" role="group">
+                    <label class="choice"><input type="radio" name="ex4" value="soy"> A) soy</label>
+                    <label class="choice"><input type="radio" name="ex4" value="eres"> B) eres</label>
+                    <label class="choice"><input type="radio" name="ex4" value="son"> C) son</label>
+                    <label class="choice"><input type="radio" name="ex4" value="es"> D) es</label>
+                </div>
+            </fieldset>
+            <span class="item-fb" id="ex4-q-fb"></span>
+
+            <button type="button" class="btn" data-check="ex4">Check exercise 4</button>
+            <p class="ex-status" id="ex4-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Exercise 5: MR — correct sentences ════════ -->
+        <section class="card exercise" aria-labelledby="ex5-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">5</div>
+                <h3 class="ex-title" id="ex5-h">Which sentences are correct?</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <p class="instruction">Select <strong>ALL</strong> the sentences with the correct SER form. Watch out — some look right but aren't.</p>
+
+            <div class="mr-list">
+                <label class="choice"><input type="checkbox" id="ex5-o1" aria-describedby="ex5-o1-fb"> Nosotros somos de la feria.</label>
+                <span class="item-fb" id="ex5-o1-fb"></span>
+                <label class="choice"><input type="checkbox" id="ex5-o2" aria-describedby="ex5-o2-fb"> Nosotros son de Oaxaca.</label>
+                <span class="item-fb" id="ex5-o2-fb"></span>
+                <label class="choice"><input type="checkbox" id="ex5-o3" aria-describedby="ex5-o3-fb"> Ellas son vendedoras.</label>
+                <span class="item-fb" id="ex5-o3-fb"></span>
+                <label class="choice"><input type="checkbox" id="ex5-o4" aria-describedby="ex5-o4-fb"> Ellos somos estudiantes.</label>
+                <span class="item-fb" id="ex5-o4-fb"></span>
+                <label class="choice"><input type="checkbox" id="ex5-o5" aria-describedby="ex5-o5-fb"> Don Marcos y Rosa somos amigos.</label>
+                <span class="item-fb" id="ex5-o5-fb"></span>
+            </div>
+
+            <button type="button" class="btn" data-check="ex5">Check exercise 5</button>
+            <p class="ex-status" id="ex5-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Exercise 6: Matching question → function + register ════════ -->
+        <section class="card exercise" aria-labelledby="ex6-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">6</div>
+                <h3 class="ex-title" id="ex6-h">What does each question ask — and in which register?</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <p class="instruction">Match each question to <strong>what it asks</strong> and the <strong>register</strong> it uses. Tip: listen for TE vs. SE.</p>
+
+            <div class="item-row">
+                <span class="sentence">¿Cómo te llamas?</span>
+                <select id="ex6-q1" class="ex6-sel" aria-label="Function and register of: ¿Cómo te llamas?" aria-describedby="ex6-q1-fb"></select>
+                <span class="item-fb" id="ex6-q1-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence">¿Cómo se llama usted?</span>
+                <select id="ex6-q2" class="ex6-sel" aria-label="Function and register of: ¿Cómo se llama usted?" aria-describedby="ex6-q2-fb"></select>
+                <span class="item-fb" id="ex6-q2-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence">¿De dónde eres?</span>
+                <select id="ex6-q3" class="ex6-sel" aria-label="Function and register of: ¿De dónde eres?" aria-describedby="ex6-q3-fb"></select>
+                <span class="item-fb" id="ex6-q3-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence">¿De dónde es usted?</span>
+                <select id="ex6-q4" class="ex6-sel" aria-label="Function and register of: ¿De dónde es usted?" aria-describedby="ex6-q4-fb"></select>
+                <span class="item-fb" id="ex6-q4-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence">¿A qué te dedicas?</span>
+                <select id="ex6-q5" class="ex6-sel" aria-label="Function and register of: ¿A qué te dedicas?" aria-describedby="ex6-q5-fb"></select>
+                <span class="item-fb" id="ex6-q5-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence">¿A qué se dedica usted?</span>
+                <select id="ex6-q6" class="ex6-sel" aria-label="Function and register of: ¿A qué se dedica usted?" aria-describedby="ex6-q6-fb"></select>
+                <span class="item-fb" id="ex6-q6-fb"></span>
+            </div>
+
+            <button type="button" class="btn" data-check="ex6">Check exercise 6</button>
+            <p class="ex-status" id="ex6-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Exercise 7: MR — tú vs. usted ════════ -->
+        <section class="card exercise" aria-labelledby="ex7-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">7</div>
+                <h3 class="ex-title" id="ex7-h">Tú or usted — who got it right?</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <p class="instruction">Which sentences use the <strong>correct register for the situation</strong>? Select all that apply.</p>
+
+            <div class="mr-list">
+                <label class="choice"><input type="checkbox" id="ex7-o1" aria-describedby="ex7-o1-fb"><span><span class="situation">Don Marcos meets señora López for the first time:</span> "¿Cómo se llama usted?"</span></label>
+                <span class="item-fb" id="ex7-o1-fb"></span>
+                <label class="choice"><input type="checkbox" id="ex7-o2" aria-describedby="ex7-o2-fb"><span><span class="situation">Don Marcos meets señora López for the first time:</span> "¿Cómo te llamas?"</span></label>
+                <span class="item-fb" id="ex7-o2-fb"></span>
+                <label class="choice"><input type="checkbox" id="ex7-o3" aria-describedby="ex7-o3-fb"><span><span class="situation">Two student friends at the feria:</span> "¿De dónde eres?"</span></label>
+                <span class="item-fb" id="ex7-o3-fb"></span>
+                <label class="choice"><input type="checkbox" id="ex7-o4" aria-describedby="ex7-o4-fb"><span><span class="situation">A student asks their professor:</span> "¿De dónde eres?"</span></label>
+                <span class="item-fb" id="ex7-o4-fb"></span>
+                <label class="choice"><input type="checkbox" id="ex7-o5" aria-describedby="ex7-o5-fb"><span><span class="situation">Don Marcos to doña Rosa (old friends):</span> "¿Cómo estás?"</span></label>
+                <span class="item-fb" id="ex7-o5-fb"></span>
+            </div>
+
+            <button type="button" class="btn" data-check="ex7">Check exercise 7</button>
+            <p class="ex-status" id="ex7-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Exercise 8: Contextual MC — mini-dialogue ════════ -->
+        <section class="card exercise" aria-labelledby="ex8-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">8</div>
+                <h3 class="ex-title" id="ex8-h">Complete the dialogue</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <div class="scenario"><strong>At the feria:</strong> Don Marcos talks to a new student customer from Estados Unidos.</div>
+
+            <fieldset style="border:none;">
+                <legend class="question-line">Don Marcos: "Buenos días. Me llamo Marcos. _____ de Veracruz."</legend>
+                <div class="options-grid" role="group">
+                    <label class="choice"><input type="radio" name="ex8a" value="Eres"> A) Eres</label>
+                    <label class="choice"><input type="radio" name="ex8a" value="Soy"> B) Soy</label>
+                    <label class="choice"><input type="radio" name="ex8a" value="Es"> C) Es</label>
+                    <label class="choice"><input type="radio" name="ex8a" value="Son"> D) Son</label>
+                </div>
+            </fieldset>
+            <span class="item-fb" id="ex8-a-fb"></span>
+
+            <fieldset style="border:none;">
+                <legend class="question-line">Student: "Mucho gusto. ¿_____ vendedor aquí?"</legend>
+                <div class="options-grid" role="group">
+                    <label class="choice"><input type="radio" name="ex8b" value="Soy"> A) Soy</label>
+                    <label class="choice"><input type="radio" name="ex8b" value="Eres"> B) Eres</label>
+                    <label class="choice"><input type="radio" name="ex8b" value="Son"> C) Son</label>
+                    <label class="choice"><input type="radio" name="ex8b" value="Somos"> D) Somos</label>
+                </div>
+            </fieldset>
+            <span class="item-fb" id="ex8-b-fb"></span>
+
+            <button type="button" class="btn" data-check="ex8">Check exercise 8</button>
+            <p class="ex-status" id="ex8-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Exercise 9: Contextual MC — paragraph ════════ -->
+        <section class="card exercise" aria-labelledby="ex9-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">9</div>
+                <h3 class="ex-title" id="ex9-h">Complete the paragraph</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <p class="instruction">A student tourist describes the vendors. Choose the correct SER form for each blank.</p>
+
+            <div class="paragraph-box">
+                Don Marcos y doña Rosa
+                <select id="ex9-b1" class="inline-select" aria-label="Blank 1: Don Marcos y doña Rosa blank vendedores en la feria" aria-describedby="ex9-b1-fb">
+                    <option value="">…</option><option>son</option><option>somos</option><option>es</option><option>soy</option>
+                </select>
+                vendedores en la feria. Don Marcos
+                <select id="ex9-b2" class="inline-select" aria-label="Blank 2: Don Marcos blank de Veracruz" aria-describedby="ex9-b2-fb">
+                    <option value="">…</option><option>es</option><option>soy</option><option>son</option><option>eres</option>
+                </select>
+                de Veracruz y doña Rosa
+                <select id="ex9-b3" class="inline-select" aria-label="Blank 3: doña Rosa blank de Oaxaca" aria-describedby="ex9-b3-fb">
+                    <option value="">…</option><option>es</option><option>son</option><option>soy</option><option>somos</option>
+                </select>
+                de Oaxaca. Nosotros
+                <select id="ex9-b4" class="inline-select" aria-label="Blank 4: Nosotros blank amigos" aria-describedby="ex9-b4-fb">
+                    <option value="">…</option><option>somos</option><option>son</option><option>soy</option><option>eres</option>
+                </select>
+                amigos.
+            </div>
+            <div style="margin-top:10px;">
+                <span class="item-fb" id="ex9-b1-fb"></span>
+                <span class="item-fb" id="ex9-b2-fb"></span>
+                <span class="item-fb" id="ex9-b3-fb"></span>
+                <span class="item-fb" id="ex9-b4-fb"></span>
+            </div>
+
+            <button type="button" class="btn" data-check="ex9">Check exercise 9</button>
+            <p class="ex-status" id="ex9-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Exercise 10: Controlled production — word bank ════════ -->
+        <section class="card exercise" aria-labelledby="ex10-h">
+            <div class="ex-head">
+                <div class="ex-num" aria-hidden="true">10</div>
+                <h3 class="ex-title" id="ex10-h">Build the sentences — word bank</h3>
+                <span class="ex-points">3 pts</span>
+            </div>
+            <div class="scenario"><strong>Your turn:</strong> You are at the feria. Introduce yourself and a friend to don Felipe, an elder vendor. Fill each blank with the correct SER form from the word bank.</div>
+            <p class="bank-hint">Click a blank, then click a word from the bank to fill it (or just click words to fill blanks in order). Click a filled blank — or press Backspace on it — to remove the word. Careful: not every word in the bank is a correct conjugated form.</p>
+
+            <div class="word-bank" role="group" aria-label="Word bank">
+                <button type="button" class="bank-word" data-word="soy">soy</button>
+                <button type="button" class="bank-word" data-word="eres">eres</button>
+                <button type="button" class="bank-word" data-word="es">es</button>
+                <button type="button" class="bank-word" data-word="somos">somos</button>
+                <button type="button" class="bank-word" data-word="son">son</button>
+                <button type="button" class="bank-word" data-word="ser">ser</button>
+                <button type="button" class="bank-word" data-word="seré">seré</button>
+                <button type="button" class="bank-word" data-word="están">están</button>
+            </div>
+
+            <div class="item-row">
+                <span class="sentence">1. Yo <button type="button" class="blank-btn" id="ex10-b1" data-answer="soy" aria-label="Blank 1: Yo blank de California. Choose a word from the word bank.">____</button> de California.</span>
+                <span class="item-fb" id="ex10-b1-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence">2. Mi amiga Ana <button type="button" class="blank-btn" id="ex10-b2" data-answer="es" aria-label="Blank 2: Mi amiga Ana blank de Texas. Choose a word from the word bank.">____</button> de Texas.</span>
+                <span class="item-fb" id="ex10-b2-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence">3. Nosotros <button type="button" class="blank-btn" id="ex10-b3" data-answer="somos" aria-label="Blank 3: Nosotros blank estudiantes. Choose a word from the word bank.">____</button> estudiantes.</span>
+                <span class="item-fb" id="ex10-b3-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence">4. Ellos <button type="button" class="blank-btn" id="ex10-b4" data-answer="son" aria-label="Blank 4: Ellos blank clientes en la feria. Choose a word from the word bank.">____</button> clientes en la feria.</span>
+                <span class="item-fb" id="ex10-b4-fb"></span>
+            </div>
+            <div class="item-row">
+                <span class="sentence">5. Tú <button type="button" class="blank-btn" id="ex10-b5" data-answer="eres" aria-label="Blank 5: Tú blank vendedor, verdad. Choose a word from the word bank.">____</button> vendedor, ¿verdad?</span>
+                <span class="item-fb" id="ex10-b5-fb"></span>
+            </div>
+
+            <button type="button" class="btn" data-check="ex10">Check exercise 10</button>
+            <p class="ex-status" id="ex10-status" aria-live="polite"></p>
+        </section>
+
+        <!-- ════════ Score summary + Submit ════════ -->
+        <section class="card" aria-labelledby="summary-h">
+            <h3 id="summary-h">Score summary</h3>
+            <table class="summary-table">
+                <thead>
+                    <tr><th scope="col">Exercise</th><th scope="col" style="text-align:right;">Points</th></tr>
+                </thead>
+                <tbody id="summary-body">
+                    <tr><td>Exercise 1 — Ordering the introduction</td><td class="pts" id="sum-ex1">— /3</td></tr>
+                    <tr><td>Exercise 2 — Pronoun → SER form</td><td class="pts" id="sum-ex2">— /3</td></tr>
+                    <tr><td>Exercise 3 — Yo → soy in context</td><td class="pts" id="sum-ex3">— /3</td></tr>
+                    <tr><td>Exercise 4 — Usted → es in context</td><td class="pts" id="sum-ex4">— /3</td></tr>
+                    <tr><td>Exercise 5 — Correct sentences (somos/son)</td><td class="pts" id="sum-ex5">— /3</td></tr>
+                    <tr><td>Exercise 6 — Question → function + register</td><td class="pts" id="sum-ex6">— /3</td></tr>
+                    <tr><td>Exercise 7 — Tú vs. usted situations</td><td class="pts" id="sum-ex7">— /3</td></tr>
+                    <tr><td>Exercise 8 — Dialogue at the puesto</td><td class="pts" id="sum-ex8">— /3</td></tr>
+                    <tr><td>Exercise 9 — Paragraph about the vendors</td><td class="pts" id="sum-ex9">— /3</td></tr>
+                    <tr><td>Exercise 10 — Word bank production</td><td class="pts" id="sum-ex10">— /3</td></tr>
+                    <tr class="total-row"><td>Total</td><td class="pts" id="sum-total">— /30</td></tr>
+                </tbody>
+            </table>
+            <div style="text-align:center;">
+                <button type="button" class="btn btn-submit" id="submit-btn" disabled>Submit final score</button>
+                <p class="submit-note" id="submit-note">Check all 10 exercises to enable Submit. You can still change answers and re-check before submitting.</p>
+            </div>
+        </section>
+
+        <!-- Final score -->
+        <section class="card final-score" id="final-score" aria-live="polite">
+            <h3>¡Muy bien! Workbook submitted</h3>
+            <div class="big" id="final-score-text">0/30</div>
+            <div class="accent-bar" aria-hidden="true"></div>
+            <p id="final-message"></p>
+        </section>
+
+        <!-- Answer key controls -->
+        <section class="card" style="text-align:center; display:none;" id="key-controls">
+            <button type="button" class="btn btn-outline" id="toggle-key" aria-expanded="false" aria-controls="answer-key">👁️ Show answer key</button>
+        </section>
+
+        <!-- ════════ Answer key ════════ -->
+        <section class="card answer-key" id="answer-key" aria-labelledby="ak-h">
+            <h3 id="ak-h">Answer key</h3>
+
+            <div class="ak-item">
+                <h4>Exercise 1 — Ordering</h4>
+                <ul>
+                    <li><span class="ak-answer">1.</span> Buenos días. Me llamo Marcos.</li>
+                    <li><span class="ak-answer">2.</span> Soy de Veracruz.</li>
+                    <li><span class="ak-answer">3.</span> Soy vendedor de café de olla.</li>
+                    <li><span class="ak-answer">4.</span> El café de olla es de México.</li>
+                    <li><span class="ak-answer">5.</span> Mucho gusto, bienvenido a la feria.</li>
+                </ul>
+                <p class="ak-rule">Rule: a Spanish introduction flows greeting + name → origin → occupation → a supporting detail → courtesy closing.</p>
+            </div>
+
+            <div class="ak-item">
+                <h4>Exercise 2 — Pronoun → SER form</h4>
+                <ul>
+                    <li>yo → <span class="ak-answer">soy</span></li>
+                    <li>tú → <span class="ak-answer">eres</span></li>
+                    <li>él / ella / usted → <span class="ak-answer">es</span></li>
+                    <li>nosotros / nosotras → <span class="ak-answer">somos</span></li>
+                    <li>ellos / ellas / ustedes → <span class="ak-answer">son</span></li>
+                </ul>
+                <p class="ak-rule">Rule: usted shares ES with él/ella; ustedes shares SON with ellos/ellas. SOMOS always includes the speaker.</p>
+            </div>
+
+            <div class="ak-item">
+                <h4>Exercise 3 — "Buenos días, señora. _____ don Marcos."</h4>
+                <p><span class="ak-answer">Answer: B) soy</span></p>
+                <p class="ak-rule">Rule: YO uses SOY. It's the only form that refers to the speaker themselves.</p>
+            </div>
+
+            <div class="ak-item">
+                <h4>Exercise 4 — "¿De dónde _____ usted?"</h4>
+                <p><span class="ak-answer">Answer: D) es</span></p>
+                <p class="ak-rule">Rule: USTED uses ES — the same form as él and ella.</p>
+            </div>
+
+            <div class="ak-item">
+                <h4>Exercise 5 — Correct sentences</h4>
+                <p><span class="ak-answer">Correct: options 1 and 3.</span></p>
+                <ul>
+                    <li>✓ Nosotros <strong>somos</strong> de la feria. — nosotros → somos.</li>
+                    <li>✗ Nosotros <em>son</em> de Oaxaca. — nosotros needs SOMOS.</li>
+                    <li>✓ Ellas <strong>son</strong> vendedoras. — ellas → son.</li>
+                    <li>✗ Ellos <em>somos</em> estudiantes. — ellos needs SON.</li>
+                    <li>✗ Don Marcos y Rosa <em>somos</em> amigos. — Don Marcos y Rosa = third person plural → SON, not SOMOS. SOMOS = when YOU are in the group.</li>
+                </ul>
+            </div>
+
+            <div class="ak-item">
+                <h4>Exercise 6 — Question → function + register</h4>
+                <ul>
+                    <li>¿Cómo te llamas? → <span class="ak-answer">name (informal — tú)</span></li>
+                    <li>¿Cómo se llama usted? → <span class="ak-answer">name (formal — usted)</span></li>
+                    <li>¿De dónde eres? → <span class="ak-answer">origin (informal — tú)</span></li>
+                    <li>¿De dónde es usted? → <span class="ak-answer">origin (formal — usted)</span></li>
+                    <li>¿A qué te dedicas? → <span class="ak-answer">occupation (informal — tú)</span></li>
+                    <li>¿A qué se dedica usted? → <span class="ak-answer">occupation (formal — usted)</span></li>
+                </ul>
+                <p class="ak-rule">Rule: TE/TU endings = tú (informal). SE/SU endings = usted (formal). The structure of the question tells you the register.</p>
+            </div>
+
+            <div class="ak-item">
+                <h4>Exercise 7 — Tú vs. usted situations</h4>
+                <p><span class="ak-answer">Correct: options 1, 3 and 5.</span></p>
+                <ul>
+                    <li>✓ First meeting with señora López (elder) → "¿Cómo se llama usted?"</li>
+                    <li>✗ "¿Cómo te llamas?" is too informal for a first meeting with an elder.</li>
+                    <li>✓ Two student friends → "¿De dónde eres?" (tú).</li>
+                    <li>✗ A professor is an authority figure → "¿De dónde es usted?"</li>
+                    <li>✓ Old friends don Marcos and doña Rosa → tú: "¿Cómo estás?"</li>
+                </ul>
+                <p class="ak-rule">Rule: USTED = first meeting, elders, authority. TÚ = friends, equals, established trust.</p>
+            </div>
+
+            <div class="ak-item">
+                <h4>Exercise 8 — Dialogue</h4>
+                <ul>
+                    <li>Don Marcos: "Me llamo Marcos. <span class="ak-answer">Soy</span> de Veracruz." (B)</li>
+                    <li>Student: "¿<span class="ak-answer">Eres</span> vendedor aquí?" (B)</li>
+                </ul>
+                <p class="ak-rule">Rule: the speaker uses SOY for themselves. TÚ uses ERES when asking about the other person.</p>
+            </div>
+
+            <div class="ak-item">
+                <h4>Exercise 9 — Paragraph</h4>
+                <ul>
+                    <li>Blank 1: <span class="ak-answer">son</span> — Don Marcos y doña Rosa = ellos → son.</li>
+                    <li>Blank 2: <span class="ak-answer">es</span> — Don Marcos = él → es.</li>
+                    <li>Blank 3: <span class="ak-answer">es</span> — doña Rosa = ella → es.</li>
+                    <li>Blank 4: <span class="ak-answer">somos</span> — nosotros includes the speaker → somos.</li>
+                </ul>
+            </div>
+
+            <div class="ak-item">
+                <h4>Exercise 10 — Word bank</h4>
+                <ul>
+                    <li>1. Yo <span class="ak-answer">soy</span> de California.</li>
+                    <li>2. Mi amiga Ana <span class="ak-answer">es</span> de Texas.</li>
+                    <li>3. Nosotros <span class="ak-answer">somos</span> estudiantes.</li>
+                    <li>4. Ellos <span class="ak-answer">son</span> clientes en la feria.</li>
+                    <li>5. Tú <span class="ak-answer">eres</span> vendedor, ¿verdad?</li>
+                </ul>
+                <p class="ak-rule">Distractors: <em>ser</em> is the unconjugated infinitive, <em>seré</em> is future tense, and <em>están</em> belongs to a different verb (ESTAR) — none of them fit these sentences.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            © 2025 Spanish Learning Edge LLC
+        </footer>
+    </div>
+
+    <script>
+        // ──────────────────────────────────────────────
+        // Exercise definitions: answers + rule-based feedback
+        // ──────────────────────────────────────────────
+        const EX6_OPTIONS = [
+            'name (informal — tú)',
+            'name (formal — usted)',
+            'origin (informal — tú)',
+            'origin (formal — usted)',
+            'occupation (informal — tú)',
+            'occupation (formal — usted)'
+        ];
+
+        const EX6_OK = '¡Perfecto! TE/TU endings = tú. SE/SU endings = usted.';
+        const EX6_BAD = 'Look at the ending: TE = informal (tú), SE = formal (usted). The structure of the question tells you the register.';
+
+        const EXERCISES = {
+            ex1: { type: 'select', pts: 3, items: [
+                { id: 'ex1-s1', answer: '3', ok: '¡Correcto! Occupation is position 3.', bad: 'Position 3 — occupation comes after the greeting (1) and origin (2).' },
+                { id: 'ex1-s2', answer: '5', ok: '¡Correcto! The courtesy closing ends it.', bad: 'Position 5 — "Mucho gusto, bienvenido…" is the courtesy closing that ends the introduction.' },
+                { id: 'ex1-s3', answer: '1', ok: '¡Correcto! Greeting + name opens everything.', bad: 'Position 1 — a Spanish introduction always opens with the greeting + name.' },
+                { id: 'ex1-s4', answer: '4', ok: '¡Correcto! The detail comes fourth.', bad: 'Position 4 — the supporting detail about the product comes right after the occupation.' },
+                { id: 'ex1-s5', answer: '2', ok: '¡Correcto! Origin follows the name.', bad: 'Position 2 — origin ("Soy de…") follows immediately after the name.' }
+            ]},
+            ex2: { type: 'select', pts: 3, items: [
+                { id: 'ex2-p1', answer: 'soy', ok: '¡Correcto! SOY = yo, always.', bad: 'YO always pairs with SOY — the only form for the speaker alone.' },
+                { id: 'ex2-p2', answer: 'eres', ok: '¡Correcto! TÚ → ERES.', bad: 'TÚ pairs with ERES — the informal "you are".' },
+                { id: 'ex2-p3', answer: 'es', ok: '¡Correcto! Él, ella and usted share ES.', bad: 'ÉL, ELLA and USTED all share the same form: ES.' },
+                { id: 'ex2-p4', answer: 'somos', ok: '¡Correcto! NOSOTROS → SOMOS.', bad: 'NOSOTROS/NOSOTRAS pairs with SOMOS — the speaker is part of the group.' },
+                { id: 'ex2-p5', answer: 'son', ok: '¡Correcto! Ellos, ellas and ustedes share SON.', bad: 'ELLOS, ELLAS and USTEDES all share the same form: SON.' }
+            ]},
+            ex3: { type: 'radio', pts: 3, items: [
+                { name: 'ex3', fb: 'ex3-q-fb', answer: 'soy', ok: '¡Correcto! SOY = yo, always. Don Marcos is talking about himself.', bad: 'Rule: YO uses SOY. It’s the only form that refers to the speaker themselves.' }
+            ]},
+            ex4: { type: 'radio', pts: 3, items: [
+                { name: 'ex4', fb: 'ex4-q-fb', answer: 'es', ok: '¡Correcto! USTED takes ES, just like él and ella.', bad: 'Rule: USTED uses ES — the same form as él and ella.' }
+            ]},
+            ex5: { type: 'check', pts: 3, items: [
+                { id: 'ex5-o1', answer: true,  ok: '¡Correcto! NOSOTROS → SOMOS.', bad: 'This sentence IS correct: NOSOTROS pairs with SOMOS — you should select it.' },
+                { id: 'ex5-o2', answer: false, ok: '¡Correcto! You left it out — it’s wrong.', bad: 'NOSOTROS needs SOMOS, not SON. This sentence is incorrect.' },
+                { id: 'ex5-o3', answer: true,  ok: '¡Correcto! ELLAS → SON.', bad: 'This sentence IS correct: ELLAS pairs with SON — you should select it.' },
+                { id: 'ex5-o4', answer: false, ok: '¡Correcto! You left it out — it’s wrong.', bad: 'ELLOS needs SON. SOMOS is only for groups that include YOU.' },
+                { id: 'ex5-o5', answer: false, ok: '¡Correcto! You spotted the trap.', bad: 'Don Marcos y Rosa = third person plural → SON, not SOMOS. SOMOS = when YOU are in the group.' }
+            ]},
+            ex6: { type: 'select', pts: 3, items: [
+                { id: 'ex6-q1', answer: EX6_OPTIONS[0], ok: EX6_OK, bad: EX6_BAD },
+                { id: 'ex6-q2', answer: EX6_OPTIONS[1], ok: EX6_OK, bad: EX6_BAD },
+                { id: 'ex6-q3', answer: EX6_OPTIONS[2], ok: EX6_OK, bad: EX6_BAD },
+                { id: 'ex6-q4', answer: EX6_OPTIONS[3], ok: EX6_OK, bad: EX6_BAD },
+                { id: 'ex6-q5', answer: EX6_OPTIONS[4], ok: EX6_OK, bad: EX6_BAD },
+                { id: 'ex6-q6', answer: EX6_OPTIONS[5], ok: EX6_OK, bad: EX6_BAD }
+            ]},
+            ex7: { type: 'check', pts: 3, items: [
+                { id: 'ex7-o1', answer: true,  ok: '¡Correcto! First meeting + elder → usted.', bad: 'This register IS correct: a first meeting with an elder requires USTED — select it.' },
+                { id: 'ex7-o2', answer: false, ok: '¡Correcto! Too informal for that situation.', bad: 'A first meeting with an elder requires USTED: "¿Cómo se llama usted?" — tú is too informal here.' },
+                { id: 'ex7-o3', answer: true,  ok: '¡Correcto! Friends and equals → tú.', bad: 'This register IS correct: student friends use TÚ ("¿De dónde eres?") — select it.' },
+                { id: 'ex7-o4', answer: false, ok: '¡Correcto! A professor needs usted.', bad: 'A professor is an authority figure → USTED: "¿De dónde es usted?"' },
+                { id: 'ex7-o5', answer: true,  ok: '¡Correcto! Old friends, established trust → tú.', bad: 'This register IS correct: don Marcos and doña Rosa are old friends, so TÚ works — select it.' }
+            ]},
+            ex8: { type: 'radio', pts: 3, items: [
+                { name: 'ex8a', fb: 'ex8-a-fb', answer: 'Soy', ok: '¡Correcto! The speaker uses SOY for themselves.', bad: 'Rule: the speaker uses SOY for themselves — "Me llamo Marcos. SOY de Veracruz."' },
+                { name: 'ex8b', fb: 'ex8-b-fb', answer: 'Eres', ok: '¡Correcto! TÚ → ERES when asking about the other person.', bad: 'Rule: TÚ uses ERES when asking about the other person — "¿ERES vendedor aquí?"' }
+            ]},
+            ex9: { type: 'select', pts: 3, items: [
+                { id: 'ex9-b1', answer: 'son',   ok: '¡Correcto! Don Marcos y doña Rosa = ellos → SON.', bad: 'Don Marcos y doña Rosa = ellos (third person plural) → SON.' },
+                { id: 'ex9-b2', answer: 'es',    ok: '¡Correcto! Don Marcos = él → ES.', bad: 'Don Marcos = él → ES.' },
+                { id: 'ex9-b3', answer: 'es',    ok: '¡Correcto! Doña Rosa = ella → ES.', bad: 'Doña Rosa = ella → ES.' },
+                { id: 'ex9-b4', answer: 'somos', ok: '¡Correcto! Nosotros includes the speaker → SOMOS.', bad: 'NOSOTROS includes the speaker → SOMOS.' }
+            ]},
+            ex10: { type: 'bank', pts: 3, items: [
+                { id: 'ex10-b1', answer: 'soy',   ok: '¡Correcto! YO → SOY.', bad: 'YO → SOY. The speaker always uses soy for themselves.' },
+                { id: 'ex10-b2', answer: 'es',    ok: '¡Correcto! Ana = ella → ES.', bad: 'Mi amiga Ana = ella → ES.' },
+                { id: 'ex10-b3', answer: 'somos', ok: '¡Correcto! NOSOTROS → SOMOS.', bad: 'NOSOTROS → SOMOS — you are part of the group.' },
+                { id: 'ex10-b4', answer: 'son',   ok: '¡Correcto! ELLOS → SON.', bad: 'ELLOS → SON.' },
+                { id: 'ex10-b5', answer: 'eres',  ok: '¡Correcto! TÚ → ERES.', bad: 'TÚ → ERES — the informal "you are".' }
+            ]}
+        };
+
+        const MAX_SCORE = 30;
+        const scores = {};   // key → points earned (float)
+
+        // Populate exercise 6 selects with the shared option list
+        document.querySelectorAll('.ex6-sel').forEach(sel => {
+            sel.innerHTML = '<option value="">Choose…</option>' +
+                EX6_OPTIONS.map(o => `<option>${o}</option>`).join('');
+        });
+
+        // ──────────────────────────────────────────────
+        // Word bank (exercise 10)
+        // ──────────────────────────────────────────────
+        const blanks = Array.from(document.querySelectorAll('.blank-btn'));
+        const bankWords = Array.from(document.querySelectorAll('.bank-word'));
+        let activeBlank = null;
+        let submitted = false;
+
+        function setActiveBlank(blank) {
+            blanks.forEach(b => b.classList.remove('active'));
+            activeBlank = blank;
+            if (blank) blank.classList.add('active');
+        }
+
+        function refreshBankHighlights() {
+            const usedWords = blanks.map(b => b.dataset.word).filter(Boolean);
+            bankWords.forEach(w => {
+                w.classList.toggle('used', usedWords.includes(w.dataset.word));
+                w.setAttribute('aria-pressed', usedWords.includes(w.dataset.word) ? 'true' : 'false');
+            });
+        }
+
+        function fillBlank(blank, word) {
+            blank.dataset.word = word;
+            blank.textContent = word;
+            blank.classList.add('filled');
+            refreshBankHighlights();
+            const next = blanks.find(b => !b.dataset.word);
+            setActiveBlank(next || null);
+        }
+
+        function clearBlank(blank) {
+            delete blank.dataset.word;
+            blank.textContent = '____';
+            blank.classList.remove('filled');
+            refreshBankHighlights();
+            setActiveBlank(blank);
+        }
+
+        blanks.forEach(blank => {
+            blank.addEventListener('click', () => {
+                if (submitted) return;
+                if (blank.dataset.word) clearBlank(blank);
+                else setActiveBlank(blank);
+            });
+            blank.addEventListener('keydown', e => {
+                if (submitted) return;
+                if (e.key === 'Backspace' || e.key === 'Delete') {
+                    e.preventDefault();
+                    clearBlank(blank);
+                }
+            });
+        });
+
+        bankWords.forEach(wordBtn => {
+            wordBtn.addEventListener('click', () => {
+                if (submitted) return;
+                const target = activeBlank || blanks.find(b => !b.dataset.word);
+                if (target) fillBlank(target, wordBtn.dataset.word);
+            });
+        });
+
+        // ──────────────────────────────────────────────
+        // Grading
+        // ──────────────────────────────────────────────
+        function fmt(n) {
+            return (Math.round(n * 10) / 10).toString();
+        }
+
+        function getValue(type, item) {
+            if (type === 'select') return document.getElementById(item.id).value;
+            if (type === 'radio') {
+                const checked = document.querySelector(`input[name="${item.name}"]:checked`);
+                return checked ? checked.value : '';
+            }
+            if (type === 'check') return document.getElementById(item.id).checked;
+            if (type === 'bank') return document.getElementById(item.id).dataset.word || '';
+            return '';
+        }
+
+        function setItemFeedback(fbId, isCorrect, item) {
+            const fb = document.getElementById(fbId);
+            fb.classList.add('show');
+            fb.classList.toggle('ok', isCorrect);
+            fb.classList.toggle('bad', !isCorrect);
+            fb.textContent = (isCorrect ? '✓ ' : '✗ ') + (isCorrect ? item.ok : item.bad);
+        }
+
+        function checkExercise(key) {
+            const ex = EXERCISES[key];
+            const status = document.getElementById(key + '-status');
+
+            // Require an answer for everything except checkboxes (unchecked is an answer)
+            if (ex.type !== 'check') {
+                const incomplete = ex.items.some(item => getValue(ex.type, item) === '');
+                if (incomplete) {
+                    status.className = 'ex-status note';
+                    status.textContent = 'Please answer every item in this exercise before checking.';
+                    return;
+                }
+            }
+
+            let correct = 0;
+            ex.items.forEach(item => {
+                const value = getValue(ex.type, item);
+                const isCorrect = value === item.answer;
+                if (isCorrect) correct++;
+                const fbId = item.fb || (item.id + '-fb');
+                setItemFeedback(fbId, isCorrect, item);
+            });
+
+            const pts = ex.pts * correct / ex.items.length;
+            scores[key] = pts;
+
+            const full = correct === ex.items.length;
+            status.className = 'ex-status ' + (full ? 'ok' : 'partial');
+            status.textContent = full
+                ? `${fmt(pts)}/${ex.pts} ✓ — ¡Excelente!`
+                : `${correct}/${ex.items.length} correct — ${fmt(pts)}/${ex.pts} — see the explanations above, adjust, and re-check.`;
+
+            document.getElementById('sum-' + key).textContent = `${fmt(pts)} /3`;
+            updateSummary();
+        }
+
+        document.querySelectorAll('[data-check]').forEach(btn => {
+            btn.addEventListener('click', () => checkExercise(btn.dataset.check));
+        });
+
+        function totalScore() {
+            return Object.values(scores).reduce((a, b) => a + b, 0);
+        }
+
+        function updateSummary() {
+            const keys = Object.keys(EXERCISES);
+            const done = keys.filter(k => k in scores);
+            document.getElementById('sum-total').textContent =
+                done.length ? `${fmt(totalScore())} /30` : '— /30';
+
+            const submitBtn = document.getElementById('submit-btn');
+            const note = document.getElementById('submit-note');
+            if (done.length === keys.length && !submitted) {
+                submitBtn.disabled = false;
+                note.textContent = 'All exercises checked. You can still change answers and re-check — Submit locks your final score.';
+            }
+        }
+
+        // ──────────────────────────────────────────────
+        // Submit + LTI score passback (Phase 1: display only)
+        // ──────────────────────────────────────────────
+        function displayFinalScore(score, maxScore) {
+            const panel = document.getElementById('final-score');
+            const rounded = Math.round(score * 10) / 10;
+            document.getElementById('final-score-text').textContent = `${rounded}/${maxScore}`;
+            const pct = score / maxScore;
+            let message;
+            if (pct === 1) {
+                message = '¡Perfecto! You own the full SER paradigm — don Marcos would hire you at the puesto.';
+            } else if (pct >= 0.8) {
+                message = '¡Muy bien! Strong command of SER and the tú/usted registers. Review the answer key for the few you missed.';
+            } else if (pct >= 0.6) {
+                message = '¡Buen trabajo! Solid progress — open the answer key and review the rules for the items you missed.';
+            } else {
+                message = 'Keep going — review the answer key, then revisit the SER paradigm and the tú/usted signals (TE vs. SE) in your Compendio.';
+            }
+            document.getElementById('final-message').textContent = message;
+            panel.classList.add('show');
+            if (panel.scrollIntoView) panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function reportScore(score, maxScore) {
+            // Phase 1: display only
+            displayFinalScore(score, maxScore);
+
+            // Phase 2: uncomment when Flask ready
+            // const params = new URLSearchParams(
+            //   window.location.search);
+            // const attempt_id =
+            //   params.get('attempt_id');
+            // fetch(
+            //   'https://sle-lti-server.run.app/api/grade',
+            //   { method: 'POST',
+            //     headers: {'Content-Type':
+            //       'application/json'},
+            //     body: JSON.stringify({
+            //       attempt_id, score, maxScore})
+            //   });
+        }
+
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            if (submitted) return;
+            submitted = true;
+
+            const score = Math.round(totalScore() * 10) / 10;
+            reportScore(score, MAX_SCORE);
+
+            // Lock the workbook
+            document.querySelectorAll(
+                '.exercise select, .exercise input, .exercise .bank-word, .exercise .blank-btn, .exercise [data-check]'
+            ).forEach(el => { el.disabled = true; });
+            setActiveBlank(null);
+
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Score submitted ✓';
+            document.getElementById('submit-note').textContent =
+                'Your final score has been recorded. Open the answer key below to review every rule.';
+
+            document.getElementById('key-controls').style.display = 'block';
+        });
+
+        // ──────────────────────────────────────────────
+        // Answer key toggle
+        // ──────────────────────────────────────────────
+        document.getElementById('toggle-key').addEventListener('click', () => {
+            const key = document.getElementById('answer-key');
+            const btn = document.getElementById('toggle-key');
+            const showing = key.classList.toggle('show');
+            btn.setAttribute('aria-expanded', showing ? 'true' : 'false');
+            btn.innerHTML = showing ? '🙈 Hide answer key' : '👁️ Show answer key';
+            if (showing && key.scrollIntoView) key.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+</body>
+</html>
