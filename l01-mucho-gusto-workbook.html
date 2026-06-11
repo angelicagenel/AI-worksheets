@@ -333,8 +333,9 @@
 
         .blank-btn.active {
             background: var(--eucalyptus-surface);
+            border-color: var(--eucalyptus);
             border-style: solid;
-            box-shadow: 0 0 0 3px var(--eucalyptus-light);
+            box-shadow: 0 0 0 4px var(--eucalyptus);
         }
 
         .blank-btn.filled {
@@ -923,23 +924,23 @@
             </div>
 
             <div class="item-row">
-                <span class="sentence">1. Yo <button type="button" class="blank-btn" id="ex10-b1" data-answer="soy" aria-label="Blank 1: Yo blank de California. Choose a word from the word bank.">____</button> de California.</span>
+                <span class="sentence">1. Yo <button type="button" class="blank-btn" id="ex10-b1" data-answer="soy" aria-pressed="false" aria-label="Blank 1: Yo blank de California. Choose a word from the word bank.">____</button> de California.</span>
                 <span class="item-fb" id="ex10-b1-fb"></span>
             </div>
             <div class="item-row">
-                <span class="sentence">2. Mi amiga Ana <button type="button" class="blank-btn" id="ex10-b2" data-answer="es" aria-label="Blank 2: Mi amiga Ana blank de Texas. Choose a word from the word bank.">____</button> de Texas.</span>
+                <span class="sentence">2. Mi amiga Ana <button type="button" class="blank-btn" id="ex10-b2" data-answer="es" aria-pressed="false" aria-label="Blank 2: Mi amiga Ana blank de Texas. Choose a word from the word bank.">____</button> de Texas.</span>
                 <span class="item-fb" id="ex10-b2-fb"></span>
             </div>
             <div class="item-row">
-                <span class="sentence">3. Nosotros <button type="button" class="blank-btn" id="ex10-b3" data-answer="somos" aria-label="Blank 3: Nosotros blank estudiantes. Choose a word from the word bank.">____</button> estudiantes.</span>
+                <span class="sentence">3. Nosotros <button type="button" class="blank-btn" id="ex10-b3" data-answer="somos" aria-pressed="false" aria-label="Blank 3: Nosotros blank estudiantes. Choose a word from the word bank.">____</button> estudiantes.</span>
                 <span class="item-fb" id="ex10-b3-fb"></span>
             </div>
             <div class="item-row">
-                <span class="sentence">4. Ellos <button type="button" class="blank-btn" id="ex10-b4" data-answer="son" aria-label="Blank 4: Ellos blank clientes en la feria. Choose a word from the word bank.">____</button> clientes en la feria.</span>
+                <span class="sentence">4. Ellos <button type="button" class="blank-btn" id="ex10-b4" data-answer="son" aria-pressed="false" aria-label="Blank 4: Ellos blank clientes en la feria. Choose a word from the word bank.">____</button> clientes en la feria.</span>
                 <span class="item-fb" id="ex10-b4-fb"></span>
             </div>
             <div class="item-row">
-                <span class="sentence">5. Tú <button type="button" class="blank-btn" id="ex10-b5" data-answer="eres" aria-label="Blank 5: Tú blank vendedor, verdad. Choose a word from the word bank.">____</button> vendedor, ¿verdad?</span>
+                <span class="sentence">5. Tú <button type="button" class="blank-btn" id="ex10-b5" data-answer="eres" aria-pressed="false" aria-label="Blank 5: Tú blank vendedor, verdad. Choose a word from the word bank.">____</button> vendedor, ¿verdad?</span>
                 <span class="item-fb" id="ex10-b5-fb"></span>
             </div>
 
@@ -1199,9 +1200,16 @@
         let submitted = false;
 
         function setActiveBlank(blank) {
-            blanks.forEach(b => b.classList.remove('active'));
+            blanks.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
             activeBlank = blank;
-            if (blank) blank.classList.add('active');
+            if (blank) {
+                blank.classList.add('active');
+                blank.setAttribute('aria-pressed', 'true');
+                blank.focus();
+            }
         }
 
         function refreshBankHighlights() {
