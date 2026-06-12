@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L01 — Listening | Workbook · SLE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ivory:              #F8F8F6;
+      --eucalyptus-surface: #F0F3F3;
+      --charcoal:           #2F3437;
+      --secondary-text:     #474747;
+      --eucalyptus:         #557076;
+      --eucalyptus-dark:    #44595E;
+      --eucalyptus-light:   #C3D1D4;
+      --rose:               #D5ADAD;
+      --border:             #DCDCDC;
+      --ok-text:            #166534;
+      --ok-bg:              #EAF3EC;
+      --ok-border:          #2E7D4F;
+      --bad-text:           #9F1D1D;
+      --bad-bg:             #FAEFEF;
+      --bad-border:         #B23A3A;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', 'Open Sans', Arial, sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Montserrat', Arial, sans-serif; }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    /* ── Card ── */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(47,52,55,.06);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      border-top: 5px solid var(--eucalyptus);
+      padding-top: 28px;
+    }
+    .header .brand {
+      font-size: .85rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--eucalyptus); margin-bottom: 12px;
+    }
+    .header h1 {
+      color: var(--charcoal); font-size: 1.85rem;
+      font-weight: 700; margin-bottom: 8px;
+    }
+    .header .subtitle {
+      color: var(--eucalyptus); font-size: 1rem;
+      font-weight: 600; margin-bottom: 6px;
+    }
+    .header .listen-note {
+      font-size: .95rem; color: var(--secondary-text);
+      margin-bottom: 12px;
+    }
+    .header .time {
+      display: inline-block;
+      background: var(--eucalyptus-surface);
+      border: 1px solid var(--eucalyptus-light);
+      border-radius: 999px;
+      padding: 5px 16px; font-size: .9rem;
+      color: var(--secondary-text);
+    }
+
+    /* ── Audio player ── */
+    .audio-section {
+      background: var(--eucalyptus-surface);
+      border: 2px solid var(--eucalyptus-light);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .audio-section h2 {
+      font-size: 1rem; color: var(--eucalyptus);
+      text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 4px;
+    }
+    .audio-section .audio-title {
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--charcoal); margin-bottom: 4px;
+    }
+    .audio-section .audio-meta {
+      font-size: .85rem; color: var(--secondary-text);
+      margin-bottom: 14px;
+    }
+    .audio-section audio {
+      width: 100%;
+      border-radius: 6px;
+      accent-color: var(--eucalyptus);
+    }
+    .audio-placeholder-note {
+      margin-top: 10px;
+      font-size: .82rem;
+      color: var(--secondary-text);
+      background: #fff8e1;
+      border: 1px solid #f0d060;
+      border-radius: 6px;
+      padding: 7px 12px;
+      display: flex;
+      gap: 7px;
+      align-items: flex-start;
+    }
+
+    /* ── Intro ── */
+    .intro p { color: var(--secondary-text); margin-bottom: 8px; }
+
+    /* ── Exercise framing ── */
+    .exercise { border-left: 5px solid var(--eucalyptus-light); }
+
+    .ex-head {
+      display: flex; align-items: flex-start;
+      gap: 12px; margin-bottom: 6px;
+    }
+    .ex-num {
+      flex: 0 0 auto; width: 34px; height: 34px;
+      border-radius: 50%; background: var(--eucalyptus);
+      color: #FFF; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .ex-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--charcoal); }
+    .ex-desc  { font-size: .9rem; color: var(--secondary-text); margin-top: 2px; }
+    .ex-points {
+      font-size: .82rem; font-weight: 600;
+      color: var(--eucalyptus); background: var(--eucalyptus-surface);
+      border-radius: 999px; padding: 2px 10px;
+      margin-left: auto; white-space: nowrap; align-self: center;
+    }
+
+    .scenario {
+      background: var(--eucalyptus-surface);
+      border: 1px solid var(--eucalyptus-light);
+      border-radius: 8px; padding: 12px 15px;
+      font-size: .95rem; color: var(--secondary-text);
+      margin: 10px 0 16px;
+    }
+    .scenario strong { color: var(--charcoal); }
+
+    .instruction {
+      color: var(--secondary-text); font-size: .95rem; margin-bottom: 14px;
+    }
+    .question-stem {
+      font-size: 1rem; font-weight: 600; color: var(--charcoal);
+      margin-bottom: 12px; line-height: 1.5;
+    }
+    .quote-block {
+      font-style: italic; background: var(--ivory);
+      border-left: 3px solid var(--eucalyptus-light);
+      padding: 8px 14px; border-radius: 0 6px 6px 0;
+      color: var(--charcoal); margin: 8px 0 12px;
+      font-size: 1rem;
+    }
+
+    /* ── Focus ── */
+    select:focus-visible,
+    input:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--eucalyptus);
+      outline-offset: 2px;
+    }
+
+    /* ── Options grid ── */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px; margin-bottom: 6px;
+    }
+    .choice {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 14px;
+      border: 2px solid var(--border);
+      border-radius: 8px; background: var(--ivory);
+      cursor: pointer; font-size: .97rem; color: var(--charcoal);
+      transition: border-color .15s, background .15s;
+    }
+    .choice:hover { border-color: var(--eucalyptus); background: var(--eucalyptus-surface); }
+    .choice input[type="radio"],
+    .choice input[type="checkbox"] {
+      width: 18px; height: 18px;
+      accent-color: var(--eucalyptus); flex: 0 0 auto; cursor: pointer;
+    }
+
+    /* ── Multiple response grid ── */
+    .mr-grid {
+      display: flex; flex-direction: column; gap: 10px;
+      margin: 12px 0;
+    }
+
+    /* ── Matching table ── */
+    .match-table { width: 100%; border-collapse: collapse; }
+    .match-table th {
+      font-family: 'Montserrat', sans-serif; font-size: .82rem;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: var(--eucalyptus); padding: 0 8px 8px;
+      text-align: left; border-bottom: 2px solid var(--eucalyptus-light);
+    }
+    .match-table td {
+      padding: 10px 8px; border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .match-table tr:last-child td { border-bottom: none; }
+    .match-table .word-cell {
+      font-weight: 600; font-size: 1rem; color: var(--charcoal);
+      width: 36%;
+    }
+    .match-table select {
+      font-family: inherit; font-size: .95rem;
+      color: var(--charcoal); padding: 7px 10px;
+      border: 2px solid var(--eucalyptus-light);
+      border-radius: 6px; background: #FFF; cursor: pointer;
+      width: 100%;
+    }
+    .match-table .fb-cell { font-size: .88rem; min-width: 160px; }
+
+    /* ── Feedback panels ── */
+    .fb {
+      display: flex; align-items: flex-start; gap: 8px;
+      border-radius: 7px; padding: 9px 13px;
+      font-size: .88rem; margin-top: 8px;
+    }
+    .fb.hidden { display: none; }
+    .fb-ok  { background: var(--ok-bg);  border: 1px solid var(--ok-border);  color: var(--ok-text);  }
+    .fb-bad { background: var(--bad-bg); border: 1px solid var(--bad-border); color: var(--bad-text); }
+    .fb-icon { flex: 0 0 auto; font-size: 1rem; }
+
+    .ex-score {
+      font-size: .9rem; font-weight: 700;
+      margin-top: 12px;
+    }
+    .ex-score.hidden { display: none; }
+
+    /* ── Check buttons ── */
+    .check-btn {
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: .9rem; letter-spacing: .04em;
+      background: var(--eucalyptus); color: #FFF;
+      border: none; border-radius: 7px;
+      padding: 9px 22px; cursor: pointer;
+      transition: background .15s;
+      margin-top: 14px;
+    }
+    .check-btn:hover { background: var(--eucalyptus-dark); }
+
+    /* ── Score summary + submit ── */
+    .score-summary {
+      background: var(--eucalyptus-surface);
+      border: 1px solid var(--eucalyptus-light);
+      border-radius: 10px; padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+    .score-summary h3 {
+      font-size: 1rem; color: var(--eucalyptus);
+      margin-bottom: 12px; text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+    .score-row {
+      display: flex; justify-content: space-between;
+      padding: 5px 0; border-bottom: 1px solid var(--border);
+      font-size: .95rem;
+    }
+    .score-row:last-child { border-bottom: none; }
+    .score-total {
+      font-weight: 700; font-size: 1.05rem;
+      margin-top: 10px; padding-top: 10px;
+      border-top: 2px solid var(--eucalyptus-light);
+      display: flex; justify-content: space-between;
+    }
+
+    .submit-btn {
+      width: 100%; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 1.05rem; letter-spacing: .05em;
+      background: var(--eucalyptus); color: #FFF;
+      border: none; border-radius: 9px; padding: 15px;
+      cursor: pointer; transition: background .15s;
+      margin-top: 6px;
+    }
+    .submit-btn:hover { background: var(--eucalyptus-dark); }
+    .submit-btn:disabled { opacity: .55; cursor: default; }
+
+    .final-result {
+      text-align: center; padding: 18px;
+      border-radius: 10px; margin-top: 16px;
+    }
+    .final-result.hidden { display: none; }
+    .final-result .big-score {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.6rem; font-weight: 700;
+      color: var(--eucalyptus);
+    }
+    .final-result .score-label {
+      font-size: 1rem; color: var(--secondary-text); margin-top: 4px;
+    }
+    .final-result .score-msg {
+      margin-top: 10px; font-size: 1rem; color: var(--charcoal);
+    }
+
+    /* ── Toggle buttons (answer key / transcript) ── */
+    .toggle-btn {
+      background: none; border: 1px solid var(--eucalyptus-light);
+      color: var(--eucalyptus); font-family: inherit;
+      font-size: .9rem; font-weight: 600;
+      padding: 7px 16px; border-radius: 6px;
+      cursor: pointer; margin-top: 14px;
+      transition: background .15s;
+    }
+    .toggle-btn:hover { background: var(--eucalyptus-surface); }
+
+    /* ── Answer key ── */
+    .answer-key { margin-top: 14px; }
+    .answer-key.hidden { display: none; }
+    .answer-key table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .answer-key th {
+      text-align: left; padding: 6px 10px;
+      background: var(--eucalyptus-surface);
+      color: var(--eucalyptus); font-size: .8rem;
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .answer-key td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
+    .answer-key tr:last-child td { border-bottom: none; }
+
+    /* ── Transcript ── */
+    .transcript-section { margin-top: 14px; }
+    .transcript-section.hidden { display: none; }
+    .transcript-box {
+      background: var(--ivory);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 22px;
+      font-size: .97rem;
+      line-height: 1.75;
+      color: var(--charcoal);
+    }
+    .transcript-box p { margin-bottom: 10px; }
+    .transcript-box p:last-child { margin-bottom: 0; }
+    .transcript-box .speaker-line {
+      border-left: 3px solid var(--eucalyptus-light);
+      padding-left: 12px; font-style: italic;
+      margin: 10px 0;
+    }
+    .kw { font-weight: 700; color: var(--eucalyptus-dark); }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center; padding: 20px 0 10px;
+      font-size: .82rem; color: var(--secondary-text);
+    }
+
+    /* ── Utility ── */
+    .hidden { display: none !important; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: 1fr; }
+      .header h1    { font-size: 1.45rem; }
+      .card         { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ══ HEADER ══ -->
+  <div class="card header">
+    <div class="brand">Spanish Learning Edge · L01 · Workbook 3 of 3</div>
+    <h1>L01: Mucho gusto, soy yo — Listening</h1>
+    <div class="subtitle">Unit 1 · Feria de Oaxaca · Listening Comprehension</div>
+    <div class="listen-note">🎧 Listen to the audio before answering each exercise.</div>
+    <div class="time">⏱ Estimated time: 10–15 min</div>
+  </div>
+
+  <!-- ══ AUDIO PLAYER ══ -->
+  <div class="audio-section" role="region" aria-labelledby="audio-heading">
+    <h2 id="audio-heading">🎧 Audio</h2>
+    <div class="audio-title">La feria de Oaxaca</div>
+    <div class="audio-meta">Narración cultural · ~45–55 segundos · You may listen as many times as you need.</div>
+    <audio id="listeningAudio" controls aria-label="La feria de Oaxaca — audio for listening exercises">
+      <source src="l01-la-feria-de-oaxaca.mp3" type="audio/mpeg">
+      Your browser does not support the HTML5 audio element.
+      Please contact your instructor for the audio file.
+    </audio>
+    <div class="audio-placeholder-note" role="note" aria-label="Production note">
+      <span aria-hidden="true">⚠️</span>
+      <span><strong>Note for production:</strong> Audio file <code>l01-la-feria-de-oaxaca.mp3</code> will be placed in the same folder as this HTML file once recorded. The player above will work automatically once the file is present.</span>
+    </div>
+  </div>
+
+  <!-- ══ INTRO ══ -->
+  <div class="card intro">
+    <h3 style="margin-bottom:10px;">How to use this workbook</h3>
+    <p>Listen to the audio once or twice to get the main idea. Then work through each exercise. You can replay the audio at any time — there are no time limits.</p>
+    <p style="margin-top:8px;">The transcript is available <strong>after you submit</strong> — try to answer from listening first.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 1 — MULTIPLE CHOICE: Global comprehension
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex1">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">1</div>
+      <div>
+        <div class="ex-title">Multiple Choice — Global Comprehension</div>
+        <div class="ex-desc">Listen for the main topic of the audio.</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <p class="question-stem">What is this audio mainly about?</p>
+
+    <fieldset style="border:none;padding:0;">
+      <legend class="hidden">Options for Exercise 1</legend>
+      <div class="options-grid">
+        <label class="choice"><input type="radio" name="ex1" value="a"> A conversation between two students</label>
+        <label class="choice"><input type="radio" name="ex1" value="b"> A traditional fair in Oaxaca</label>
+        <label class="choice"><input type="radio" name="ex1" value="c"> A cooking class in Veracruz</label>
+        <label class="choice"><input type="radio" name="ex1" value="d"> A market in Mexico City</label>
+      </div>
+    </fieldset>
+
+    <button class="check-btn" onclick="checkEx1()">Check Exercise 1</button>
+    <div id="ex1-fb" class="fb hidden" role="alert" aria-live="polite"></div>
+    <div class="ex-score hidden" id="ex1-score" aria-live="polite"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 2 — MULTIPLE RESPONSE: True statements
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex2">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">2</div>
+      <div>
+        <div class="ex-title">Multiple Response — True Statements</div>
+        <div class="ex-desc">Select every statement that the audio supports.</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <p class="question-stem">According to the audio, which statements are true? Select <strong>ALL</strong> that apply.</p>
+
+    <div class="mr-grid" role="group" aria-labelledby="mr2-legend">
+      <span id="mr2-legend" class="hidden">True/false statements about the audio</span>
+
+      <label class="choice">
+        <input type="checkbox" id="mr2-a" value="a">
+        Don Marcos is from Veracruz.
+      </label>
+      <label class="choice">
+        <input type="checkbox" id="mr2-b" value="b">
+        There are vendors from different parts of Mexico at the fair.
+      </label>
+      <label class="choice">
+        <input type="checkbox" id="mr2-c" value="c">
+        Don Marcos and Rosa are both vendors.
+      </label>
+      <label class="choice">
+        <input type="checkbox" id="mr2-d" value="d">
+        Don Marcos is from Oaxaca.
+      </label>
+      <label class="choice">
+        <input type="checkbox" id="mr2-e" value="e">
+        There are no people at don Marcos's stall.
+      </label>
+    </div>
+
+    <button class="check-btn" onclick="checkEx2()">Check Exercise 2</button>
+    <div id="ex2-fb" class="fb hidden" role="alert" aria-live="polite"></div>
+    <div class="ex-score hidden" id="ex2-score" aria-live="polite"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 3 — MATCHING: Person/place → detail
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex3">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">3</div>
+      <div>
+        <div class="ex-title">Matching — Person / Place → Detail</div>
+        <div class="ex-desc">Match each name or place to what the audio says about it.</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <p class="instruction">Select the description from the audio that matches each item.</p>
+
+    <table class="match-table" aria-label="Matching exercise — person or place to audio detail">
+      <thead>
+        <tr>
+          <th>Person / Place</th>
+          <th>What the audio says</th>
+          <th aria-label="Feedback"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="word-cell">Don Marcos</td>
+          <td>
+            <select id="m3-1" aria-label="Description of Don Marcos">
+              <option value="">— choose —</option>
+              <option value="a">vendedor de café de olla</option>
+              <option value="b">una celebración tradicional</option>
+              <option value="c">amiga de don Marcos y vendedora</option>
+              <option value="d">de donde es don Marcos</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m3-1-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+        <tr>
+          <td class="word-cell">La feria</td>
+          <td>
+            <select id="m3-2" aria-label="Description of La feria">
+              <option value="">— choose —</option>
+              <option value="a">vendedor de café de olla</option>
+              <option value="b">una celebración tradicional</option>
+              <option value="c">amiga de don Marcos y vendedora</option>
+              <option value="d">de donde es don Marcos</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m3-2-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+        <tr>
+          <td class="word-cell">Rosa</td>
+          <td>
+            <select id="m3-3" aria-label="Description of Rosa">
+              <option value="">— choose —</option>
+              <option value="a">vendedor de café de olla</option>
+              <option value="b">una celebración tradicional</option>
+              <option value="c">amiga de don Marcos y vendedora</option>
+              <option value="d">de donde es don Marcos</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m3-3-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+        <tr>
+          <td class="word-cell">Veracruz</td>
+          <td>
+            <select id="m3-4" aria-label="Description of Veracruz">
+              <option value="">— choose —</option>
+              <option value="a">vendedor de café de olla</option>
+              <option value="b">una celebración tradicional</option>
+              <option value="c">amiga de don Marcos y vendedora</option>
+              <option value="d">de donde es don Marcos</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m3-4-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="check-btn" onclick="checkEx3()">Check Exercise 3</button>
+    <div class="ex-score hidden" id="ex3-score" aria-live="polite"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 4 — MULTIPLE CHOICE: SER form (ellos)
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex4">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">4</div>
+      <div>
+        <div class="ex-title">Multiple Choice — SER in Context</div>
+        <div class="ex-desc">Listen for the correct form of SER.</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <p class="question-stem">You hear this sentence in the audio:</p>
+    <div class="quote-block" aria-label="Audio excerpt">"Los vendedores _____ de diferentes partes de México."</div>
+    <p class="question-stem" style="margin-top:0;">Which form of <em>SER</em> completes this sentence?</p>
+
+    <fieldset style="border:none;padding:0;">
+      <legend class="hidden">Options for Exercise 4</legend>
+      <div class="options-grid">
+        <label class="choice"><input type="radio" name="ex4" value="a"> soy</label>
+        <label class="choice"><input type="radio" name="ex4" value="b"> eres</label>
+        <label class="choice"><input type="radio" name="ex4" value="c"> es</label>
+        <label class="choice"><input type="radio" name="ex4" value="d"> son</label>
+      </div>
+    </fieldset>
+
+    <button class="check-btn" onclick="checkEx4()">Check Exercise 4</button>
+    <div id="ex4-fb" class="fb hidden" role="alert" aria-live="polite"></div>
+    <div class="ex-score hidden" id="ex4-score" aria-live="polite"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 5 — MULTIPLE CHOICE: SER form (nosotros)
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex5">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">5</div>
+      <div>
+        <div class="ex-title">Multiple Choice — SER in Context</div>
+        <div class="ex-desc">Listen for what don Marcos says about himself and Rosa.</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <p class="question-stem">You hear don Marcos say:</p>
+    <div class="quote-block" aria-label="Audio excerpt">"Mi amiga Rosa y yo _____ vendedores aquí."</div>
+    <p class="question-stem" style="margin-top:0;">Which form of <em>SER</em> did he use?</p>
+
+    <fieldset style="border:none;padding:0;">
+      <legend class="hidden">Options for Exercise 5</legend>
+      <div class="options-grid">
+        <label class="choice"><input type="radio" name="ex5" value="a"> son</label>
+        <label class="choice"><input type="radio" name="ex5" value="b"> somos</label>
+        <label class="choice"><input type="radio" name="ex5" value="c"> soy</label>
+        <label class="choice"><input type="radio" name="ex5" value="d"> es</label>
+      </div>
+    </fieldset>
+
+    <button class="check-btn" onclick="checkEx5()">Check Exercise 5</button>
+    <div id="ex5-fb" class="fb hidden" role="alert" aria-live="polite"></div>
+    <div class="ex-score hidden" id="ex5-score" aria-live="polite"></div>
+  </div>
+
+  <!-- ══ SCORE SUMMARY + SUBMIT ══ -->
+  <div class="card" id="submit-section">
+    <h3 style="margin-bottom:16px;">Your Score Summary</h3>
+    <div class="score-summary">
+      <h3>Exercise Scores</h3>
+      <div class="score-row"><span>Exercise 1 — Global Comprehension</span> <span id="s1-display">—/3</span></div>
+      <div class="score-row"><span>Exercise 2 — True Statements</span>       <span id="s2-display">—/3</span></div>
+      <div class="score-row"><span>Exercise 3 — Matching</span>              <span id="s3-display">—/3</span></div>
+      <div class="score-row"><span>Exercise 4 — SER (ellos)</span>           <span id="s4-display">—/3</span></div>
+      <div class="score-row"><span>Exercise 5 — SER (nosotros)</span>        <span id="s5-display">—/3</span></div>
+      <div class="score-total"><span>Total</span><span id="total-display">—/15</span></div>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitWorkbook()" aria-label="Submit workbook and record score">
+      Submit Workbook
+    </button>
+
+    <div class="final-result hidden" id="finalResult">
+      <div class="big-score" id="finalBigScore"></div>
+      <div class="score-label">out of 15 points</div>
+      <div class="score-msg" id="finalMsg"></div>
+    </div>
+
+    <!-- Answer key (hidden by default, revealed after submit) -->
+    <div style="margin-top:16px; text-align:center;">
+      <button class="toggle-btn hidden" id="akToggleBtn"
+              onclick="toggleSection('answerKey','akToggleBtn','Show Answer Key ▾','Hide Answer Key ▴')"
+              aria-expanded="false">
+        Show Answer Key ▾
+      </button>
+    </div>
+    <div class="answer-key hidden" id="answerKey" aria-label="Answer key">
+      <table>
+        <thead><tr><th>Ex.</th><th>Item</th><th>Correct Answer</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Main topic</td><td>B — A traditional fair in Oaxaca</td></tr>
+          <tr><td>2</td><td>True statements</td><td>A, B, C — Don Marcos from Veracruz; vendors from many regions; Don Marcos &amp; Rosa both vendors</td></tr>
+          <tr><td>3</td><td>Don Marcos</td><td>vendedor de café de olla</td></tr>
+          <tr><td>3</td><td>La feria</td><td>una celebración tradicional</td></tr>
+          <tr><td>3</td><td>Rosa</td><td>amiga de don Marcos y vendedora</td></tr>
+          <tr><td>3</td><td>Veracruz</td><td>de donde es don Marcos</td></tr>
+          <tr><td>4</td><td>Los vendedores _____</td><td>son</td></tr>
+          <tr><td>5</td><td>Mi amiga Rosa y yo _____</td><td>somos</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Transcript toggle (hidden until submit) -->
+    <div style="margin-top:10px; text-align:center;">
+      <button class="toggle-btn hidden" id="txToggleBtn"
+              onclick="toggleSection('transcriptSection','txToggleBtn','Show Transcript ▾','Hide Transcript ▴')"
+              aria-expanded="false">
+        Show Transcript ▾
+      </button>
+      <div style="font-size:.8rem;color:var(--secondary-text);margin-top:4px;" id="txHint" class="hidden">
+        Transcript — only open after completing all exercises.
+      </div>
+    </div>
+
+    <div class="transcript-section hidden" id="transcriptSection" aria-label="Full audio transcript">
+      <h3 style="font-size:.9rem;text-transform:uppercase;letter-spacing:.07em;color:var(--eucalyptus);margin:14px 0 8px;">
+        Transcript — La feria de Oaxaca
+      </h3>
+      <div class="transcript-box">
+        <p>La feria de Oaxaca es una <span class="kw">celebración</span> tradicional.</p>
+        <p>Hay música y hay danzas. Hay <span class="kw">artesanías</span> y comida tradicional.</p>
+        <p>Los <span class="kw">vendedores</span> son de diferentes partes de México. Algunos son de Oaxaca. Otros son de Veracruz o de Puebla.</p>
+        <p>Don Marcos es <span class="kw">vendedor</span> de <span class="kw">café de olla</span>. El puesto de don Marcos está en la feria. Hay muchas personas en el puesto.</p>
+        <div class="speaker-line">
+          "Me llamo Marcos. Soy de Veracruz. Mi amiga Rosa y yo somos vendedores aquí.
+          ¡<span class="kw">Bienvenidos</span> a la feria!"
+        </div>
+      </div>
+      <p style="font-size:.8rem;color:var(--secondary-text);margin-top:8px;">
+        <strong>Key vocabulary bolded:</strong> vendedor · artesanías · café de olla · celebración · bienvenidos
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer">© 2025 Spanish Learning Edge LLC · L01 Listening Workbook · All rights reserved.</div>
+
+</div><!-- /container -->
+
+<script>
+/* ════════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════════ */
+const scores = { ex1: null, ex2: null, ex3: null, ex4: null, ex5: null };
+
+/* ════════════════════════════════════════════════
+   HELPERS
+════════════════════════════════════════════════ */
+function showFb(id, ok, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.className = 'fb ' + (ok ? 'fb-ok' : 'fb-bad');
+  el.innerHTML =
+    (ok ? '<span class="fb-icon" aria-hidden="true">✓</span>'
+        : '<span class="fb-icon" aria-hidden="true">✗</span>') +
+    ' ' + msg;
+}
+
+function showScore(id, got, max) {
+  const el = document.getElementById(id);
+  el.className = 'ex-score';
+  el.textContent = got + '/' + max +
+    (got === max ? ' ✓ — ¡Excelente!' : ' — listen again and review feedback.');
+  el.style.color = got === max ? 'var(--ok-text)' : 'var(--bad-text)';
+  updateSummary();
+}
+
+function updateSummary() {
+  const map = { ex1: 's1-display', ex2: 's2-display', ex3: 's3-display',
+                ex4: 's4-display', ex5: 's5-display' };
+  let total = 0, allDone = true;
+  for (const [k, v] of Object.entries(map)) {
+    const s = scores[k];
+    document.getElementById(v).textContent = s !== null ? s + '/3' : '—/3';
+    if (s !== null) total += s; else allDone = false;
+  }
+  document.getElementById('total-display').textContent =
+    (allDone ? total : '—') + '/15';
+}
+
+/* ════════════════════════════════════════════════
+   EX 1 — GLOBAL COMPREHENSION
+   Correct: b
+════════════════════════════════════════════════ */
+function checkEx1() {
+  const chosen = document.querySelector('input[name="ex1"]:checked');
+  const ok = chosen && chosen.value === 'b';
+  if (ok) {
+    showFb('ex1-fb', true,
+      '¡Correcto! The audio describes <em>la feria de Oaxaca</em> — a traditional celebration with music, crafts, and food.');
+    scores.ex1 = 3;
+  } else {
+    showFb('ex1-fb', false,
+      'Listen again for the main topic. The speaker describes <em>una feria</em> — a fair with <em>artesanías</em>, <em>comida</em>, and vendors.');
+    scores.ex1 = 0;
+  }
+  showScore('ex1-score', scores.ex1, 3);
+}
+
+/* ════════════════════════════════════════════════
+   EX 2 — MULTIPLE RESPONSE
+   Correct: a, b, c  |  Incorrect: d, e
+   Scoring: 1 pt per correct item selected,
+   minus 1 pt per incorrect item selected, min 0
+════════════════════════════════════════════════ */
+function checkEx2() {
+  const correct   = ['mr2-a', 'mr2-b', 'mr2-c'];
+  const incorrect = ['mr2-d', 'mr2-e'];
+
+  let pts = 0;
+  correct.forEach(function(id) {
+    if (document.getElementById(id).checked) pts++;
+  });
+  incorrect.forEach(function(id) {
+    if (document.getElementById(id).checked) pts--;
+  });
+  pts = Math.max(0, Math.min(3, pts));
+
+  const allCorrect =
+    correct.every(function(id) { return document.getElementById(id).checked; }) &&
+    incorrect.every(function(id) { return !document.getElementById(id).checked; });
+
+  if (allCorrect) {
+    showFb('ex2-fb', true, '¡Perfecto! You caught all three key details from the audio.');
+    scores.ex2 = 3;
+  } else {
+    showFb('ex2-fb', false,
+      'Listen again carefully. Don Marcos says <em>"Soy de Veracruz"</em> — not Oaxaca. ' +
+      'And <em>"Hay muchas personas en el puesto"</em> — there are many people at his stall. ' +
+      'He also says <em>"Mi amiga Rosa y yo somos vendedores aquí."</em>');
+    scores.ex2 = pts;
+  }
+  showScore('ex2-score', scores.ex2, 3);
+}
+
+/* ════════════════════════════════════════════════
+   EX 3 — MATCHING
+   m3-1 (Don Marcos) = a
+   m3-2 (La feria)   = b
+   m3-3 (Rosa)       = c
+   m3-4 (Veracruz)   = d
+════════════════════════════════════════════════ */
+const ex3Data = {
+  'm3-1': {
+    val: 'a', subject: 'Don Marcos',
+    detail: 'vendedor de café de olla',
+    quote: '"Don Marcos es vendedor de café de olla."'
+  },
+  'm3-2': {
+    val: 'b', subject: 'La feria',
+    detail: 'una celebración tradicional',
+    quote: '"La feria de Oaxaca es una celebración tradicional."'
+  },
+  'm3-3': {
+    val: 'c', subject: 'Rosa',
+    detail: 'amiga de don Marcos y vendedora',
+    quote: '"Mi amiga Rosa y yo somos vendedores aquí."'
+  },
+  'm3-4': {
+    val: 'd', subject: 'Veracruz',
+    detail: 'de donde es don Marcos',
+    quote: '"Soy de Veracruz."'
+  },
+};
+
+function checkEx3() {
+  let correct = 0;
+  for (const [id, data] of Object.entries(ex3Data)) {
+    const sel = document.getElementById(id);
+    const ok  = sel && sel.value === data.val;
+    if (ok) {
+      correct++;
+      showFb(id + '-fb', true,
+        '¡Correcto! The audio says: <em>' + data.quote + '</em>');
+    } else {
+      showFb(id + '-fb', false,
+        'Listen again for <strong>' + data.subject + '</strong>. ' +
+        'The audio says: <em>' + data.quote + '</em>');
+    }
+  }
+  scores.ex3 = Math.min(3, Math.round(correct * 3 / 4));
+  showScore('ex3-score', scores.ex3, 3);
+}
+
+/* ════════════════════════════════════════════════
+   EX 4 — SER FORM (ellos → son)
+════════════════════════════════════════════════ */
+function checkEx4() {
+  const chosen = document.querySelector('input[name="ex4"]:checked');
+  const ok = chosen && chosen.value === 'd';
+  if (ok) {
+    showFb('ex4-fb', true,
+      '¡Correcto! <em>Los vendedores</em> = ellos → <strong>SON</strong>.');
+    scores.ex4 = 3;
+  } else {
+    showFb('ex4-fb', false,
+      '<em>Los vendedores</em> is third person plural (ellos) → use <strong>SON</strong>. ' +
+      'SOY = yo &nbsp;·&nbsp; ERES = tú &nbsp;·&nbsp; ES = él / ella / usted.');
+    scores.ex4 = 0;
+  }
+  showScore('ex4-score', scores.ex4, 3);
+}
+
+/* ════════════════════════════════════════════════
+   EX 5 — SER FORM (nosotros → somos)
+════════════════════════════════════════════════ */
+function checkEx5() {
+  const chosen = document.querySelector('input[name="ex5"]:checked');
+  const ok = chosen && chosen.value === 'b';
+  if (ok) {
+    showFb('ex5-fb', true,
+      '¡Correcto! <em>Mi amiga Rosa y yo</em> = nosotros → <strong>SOMOS</strong>.');
+    scores.ex5 = 3;
+  } else {
+    showFb('ex5-fb', false,
+      '<em>"Mi amiga Rosa y yo"</em> = nosotros (we, a group that includes the speaker) → use <strong>SOMOS</strong>. ' +
+      'SON = ellos &nbsp;·&nbsp; SOY = yo &nbsp;·&nbsp; ES = él / ella / usted.');
+    scores.ex5 = 0;
+  }
+  showScore('ex5-score', scores.ex5, 3);
+}
+
+/* ════════════════════════════════════════════════
+   SUBMIT
+════════════════════════════════════════════════ */
+let submitted = false;
+
+function submitWorkbook() {
+  if (submitted) return;
+  submitted = true;
+
+  if (scores.ex1 === null) checkEx1();
+  if (scores.ex2 === null) checkEx2();
+  if (scores.ex3 === null) checkEx3();
+  if (scores.ex4 === null) checkEx4();
+  if (scores.ex5 === null) checkEx5();
+
+  const total = (scores.ex1 || 0) + (scores.ex2 || 0) + (scores.ex3 || 0) +
+                (scores.ex4 || 0) + (scores.ex5 || 0);
+
+  document.getElementById('total-display').textContent = total + '/15';
+
+  // Final result panel
+  const resultEl = document.getElementById('finalResult');
+  document.getElementById('finalBigScore').textContent = total + '/15';
+  let bgColor, borderColor;
+  if (total >= 12) {
+    bgColor = 'var(--ok-bg)'; borderColor = 'var(--ok-border)';
+  } else if (total >= 9) {
+    bgColor = 'var(--eucalyptus-surface)'; borderColor = 'var(--eucalyptus-light)';
+  } else {
+    bgColor = 'var(--bad-bg)'; borderColor = 'var(--bad-border)';
+  }
+  resultEl.style.background = bgColor;
+  resultEl.style.border = '1px solid ' + borderColor;
+
+  let msg;
+  if (total === 15)     msg = '¡Perfecto! Full marks — excellent listening comprehension!';
+  else if (total >= 12) msg = '¡Muy bien! Strong work. Review any missed items above.';
+  else if (total >= 9)  msg = 'Good effort. Listen again to the audio and revisit the feedback.';
+  else                  msg = 'Keep practicing! Try listening to the audio two or three more times, then retake.';
+
+  document.getElementById('finalMsg').textContent = msg;
+  resultEl.classList.remove('hidden');
+  document.getElementById('submitBtn').disabled = true;
+
+  // Reveal post-submit controls
+  document.getElementById('akToggleBtn').classList.remove('hidden');
+  document.getElementById('txToggleBtn').classList.remove('hidden');
+  document.getElementById('txHint').classList.remove('hidden');
+
+  reportScore(total, 15);
+}
+
+/* ════════════════════════════════════════════════
+   LTI SCORE PASSBACK — Phase 1 (display only)
+════════════════════════════════════════════════ */
+function reportScore(score, maxScore) {
+  displayFinalScore(score, maxScore);
+
+  // Phase 2: uncomment when Flask ready
+  // const params = new URLSearchParams(window.location.search);
+  // const attempt_id = params.get('attempt_id');
+  // fetch('https://sle-lti-server-950105557003.us-central1.run.app/api/grade', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify({ attempt_id, score, maxScore, block_id: 'l01-listening' })
+  // });
+}
+
+function displayFinalScore(score, maxScore) {
+  console.log('[SLE Score] ' + score + '/' + maxScore);
+}
+
+/* ════════════════════════════════════════════════
+   GENERIC SECTION TOGGLE
+════════════════════════════════════════════════ */
+function toggleSection(sectionId, btnId, showLabel, hideLabel) {
+  const section = document.getElementById(sectionId);
+  const btn     = document.getElementById(btnId);
+  const isHidden = section.classList.contains('hidden');
+  section.classList.toggle('hidden');
+  btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+  btn.textContent = isHidden ? hideLabel : showLabel;
+}
+</script>
+</body>
+</html>
