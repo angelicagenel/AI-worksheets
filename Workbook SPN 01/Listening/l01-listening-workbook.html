@@ -1031,40 +1031,64 @@ function setSpeed(rate) {
 (function () {
   // SRT content inlined — converted to WebVTT format
   const srtContent = `1
-00:00:00,000 --> 00:00:04,500
-La feria de Oaxaca es una celebración tradicional.
+00:00:00,200 --> 00:00:01,390
+La feria de Oaxaca.
 
 2
-00:00:04,500 --> 00:00:09,000
-Hay música y hay danzas.
+00:00:02,930 --> 00:00:05,653
+La feria de Oaxaca es una
 
 3
-00:00:09,000 --> 00:00:14,500
-Hay artesanías y comida tradicional.
+00:00:05,653 --> 00:00:08,377
+celebración tradicional, hay música y hay
 
 4
-00:00:14,500 --> 00:00:21,000
-Los vendedores son de diferentes partes de México.
+00:00:08,377 --> 00:00:10,646
+danzas, hay artesanías y comida
 
 5
-00:00:21,000 --> 00:00:26,500
-Algunos son de Oaxaca. Otros son de Veracruz o de Puebla.
+00:00:10,646 --> 00:00:13,639
+tradicional. Los vendedores son de
 
 6
-00:00:26,500 --> 00:00:33,000
-Don Marcos es vendedor de café de olla.
+00:00:13,639 --> 00:00:16,307
+diferentes partes de México, algunos son
 
 7
-00:00:33,000 --> 00:00:38,500
-El puesto de don Marcos está en la feria.
+00:00:16,307 --> 00:00:18,976
+de Oaxaca, otros son de Veracruz
 
 8
-00:00:38,500 --> 00:00:43,000
-Hay muchas personas en el puesto.
+00:00:18,976 --> 00:00:21,834
+o de Puebla. El
 
 9
-00:00:43,000 --> 00:00:55,000
-"Me llamo Marcos. Soy de Veracruz. Mi amiga Rosa y yo somos vendedores aquí. ¡Bienvenidos a la feria!"`;
+00:00:21,834 --> 00:00:24,030
+puesto de don Marcos está en la feria.
+
+10
+00:00:24,770 --> 00:00:26,630
+Hay muchas personas en el puesto.
+
+11
+00:00:27,560 --> 00:00:30,130
+Don Marcos es vendedor de café de olla.
+
+12
+00:00:31,020 --> 00:00:33,920
+Me llamo Santiago, soy reportero y
+
+13
+00:00:33,920 --> 00:00:36,817
+estudiante de comunicaciones. Mi amiga
+
+14
+00:00:36,817 --> 00:00:38,100
+Sofía y yo somos turistas aquí.
+
+15
+00:00:39,960 --> 00:00:41,470
+Bienvenidos a la Feria.`;
 
   // Convert SRT timestamp (00:00:00,000) to VTT (00:00:00.000)
   var vtt = 'WEBVTT\n\n' + srtContent.replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g, '$1.$2');
