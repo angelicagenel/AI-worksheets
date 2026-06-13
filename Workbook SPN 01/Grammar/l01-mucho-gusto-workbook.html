@@ -537,6 +537,14 @@
             margin-bottom: 5px;
         }
 
+        .recheck-hint {
+            font-size: 0.85rem;
+            color: #7d7f7c;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        .recheck-hint.hidden { display: none; }
+
         .footer {
             text-align: center;
             margin-top: 30px;
@@ -630,6 +638,7 @@
 
             <button type="button" class="btn" data-check="ex1">Check exercise 1</button>
             <p class="ex-status" id="ex1-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex1-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Exercise 2: Matching pronoun → SER form ════════ -->
@@ -684,6 +693,7 @@
 
             <button type="button" class="btn" data-check="ex2">Check exercise 2</button>
             <p class="ex-status" id="ex2-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex2-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Exercise 3: MC single — yo → soy ════════ -->
@@ -707,6 +717,7 @@
 
             <button type="button" class="btn" data-check="ex3">Check exercise 3</button>
             <p class="ex-status" id="ex3-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex3-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Exercise 4: MC single — usted → es ════════ -->
@@ -730,6 +741,7 @@
 
             <button type="button" class="btn" data-check="ex4">Check exercise 4</button>
             <p class="ex-status" id="ex4-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex4-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Exercise 5: MR — correct sentences ════════ -->
@@ -756,6 +768,7 @@
 
             <button type="button" class="btn" data-check="ex5">Check exercise 5</button>
             <p class="ex-status" id="ex5-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex5-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Exercise 6: Matching question → function + register ════════ -->
@@ -800,6 +813,7 @@
 
             <button type="button" class="btn" data-check="ex6">Check exercise 6</button>
             <p class="ex-status" id="ex6-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex6-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Exercise 7: MR — tú vs. usted ════════ -->
@@ -826,6 +840,7 @@
 
             <button type="button" class="btn" data-check="ex7">Check exercise 7</button>
             <p class="ex-status" id="ex7-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex7-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Exercise 8: Contextual MC — mini-dialogue ════════ -->
@@ -861,6 +876,7 @@
 
             <button type="button" class="btn" data-check="ex8">Check exercise 8</button>
             <p class="ex-status" id="ex8-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex8-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Exercise 9: Contextual MC — paragraph ════════ -->
@@ -900,6 +916,7 @@
 
             <button type="button" class="btn" data-check="ex9">Check exercise 9</button>
             <p class="ex-status" id="ex9-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex9-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Exercise 10: Controlled production — word bank ════════ -->
@@ -946,6 +963,7 @@
 
             <button type="button" class="btn" data-check="ex10">Check exercise 10</button>
             <p class="ex-status" id="ex10-status" aria-live="polite"></p>
+            <p class="recheck-hint hidden" id="ex10-hint">Not happy with your answer? Change your selection above and click Check again.</p>
         </section>
 
         <!-- ════════ Score summary + Submit ════════ -->
@@ -1345,6 +1363,9 @@
 
             document.getElementById('sum-' + key).textContent = `${fmt(pts)} /3`;
             updateSummary();
+
+            const hint = document.getElementById(key + '-hint');
+            if (hint) hint.classList.remove('hidden');
         }
 
         document.querySelectorAll('[data-check]').forEach(btn => {
@@ -1438,6 +1459,8 @@
                 'Your final score has been recorded. Open the answer key below to review every rule.';
 
             document.getElementById('key-controls').style.display = 'block';
+
+            document.querySelectorAll('.recheck-hint').forEach(h => h.classList.add('hidden'));
         });
 
         // ──────────────────────────────────────────────

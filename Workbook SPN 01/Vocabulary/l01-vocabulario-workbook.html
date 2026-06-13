@@ -923,7 +923,7 @@
     </div>
 
     <div style="margin-top:16px; text-align:center;">
-      <button class="answer-key-toggle" onclick="toggleAnswerKey()" aria-expanded="false" id="akToggleBtn">
+      <button class="answer-key-toggle hidden" onclick="toggleAnswerKey()" aria-expanded="false" id="akToggleBtn">
         Show Answer Key ▾
       </button>
     </div>
@@ -1267,6 +1267,7 @@ function submitWorkbook() {
   document.getElementById('finalMsg').textContent = msg;
   resultEl.classList.remove('hidden');
   document.getElementById('submitBtn').disabled = true;
+  document.getElementById('akToggleBtn').classList.remove('hidden');
 
   reportScore(total, MAX_SCORE);
 }
