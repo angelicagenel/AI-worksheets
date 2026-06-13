@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SP101 — Listening Activities</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F8F8F6;
+      color: #2F3437;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background-color: #557076;
+      padding: 2rem 1.5rem 1.75rem;
+      text-align: center;
+    }
+
+    header .course-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.5rem;
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    header .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      margin-top: 0.5rem;
+    }
+
+    /* ── Main ── */
+    main {
+      flex: 1;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem;
+    }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #557076;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Card grid ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── Activity card ── */
+    .card {
+      background-color: #F0F3F3;
+      border: 1px solid #DCDCDC;
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: box-shadow 0.18s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(85,112,118,0.13);
+    }
+
+    /* badges row */
+    .card-badges {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .badge {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+    }
+
+    .badge-unit {
+      background-color: #D5ADAD;
+      color: #2F3437;
+    }
+
+    .badge-lesson {
+      background-color: #557076;
+      color: #ffffff;
+    }
+
+    .card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2F3437;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: #4a5568;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-footer {
+      margin-top: 0.25rem;
+    }
+
+    .btn-open {
+      display: inline-block;
+      background-color: #557076;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0.55rem 1.25rem;
+      border-radius: 6px;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-open:hover,
+    .btn-open:focus-visible {
+      background-color: #3f5a60;
+    }
+
+    .btn-open:focus-visible {
+      outline: 3px solid #D5ADAD;
+      outline-offset: 2px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background-color: #F0F3F3;
+      border-top: 1px solid #DCDCDC;
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #557076;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      header { padding: 1.5rem 1rem 1.25rem; }
+      main   { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="course-label">Spanish Learning Edge · SP101</p>
+    <h1>SP101 — Listening Activities</h1>
+    <p class="subtitle">Unit 1 · Hola, soy yo</p>
+  </header>
+
+  <main>
+    <p class="section-label">Activities</p>
+
+    <div class="card-grid">
+
+      <!-- L01 -->
+      <article class="card">
+        <div class="card-badges">
+          <span class="badge badge-unit">U1</span>
+          <span class="badge badge-lesson">L01</span>
+        </div>
+        <h2 class="card-title">L01 — La feria de Oaxaca</h2>
+        <p class="card-desc">Narrated by Santiago · ~55 seconds</p>
+        <div class="card-footer">
+          <a class="btn-open" href="./L01-Santiago-listening act/index.html">Open</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Spanish Learning Edge LLC
+  </footer>
+
+</body>
+</html>
