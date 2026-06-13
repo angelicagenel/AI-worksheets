@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L01 — Vocabulario | Workbook · SLE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ivory:              #F8F8F6;
+      --eucalyptus-surface: #F0F3F3;
+      --charcoal:           #2F3437;
+      --secondary-text:     #474747;
+      --eucalyptus:         #557076;
+      --eucalyptus-dark:    #44595E;
+      --eucalyptus-light:   #C3D1D4;
+      --rose:               #D5ADAD;
+      --border:             #DCDCDC;
+      --ok-text:            #166534;
+      --ok-bg:              #EAF3EC;
+      --ok-border:          #2E7D4F;
+      --bad-text:           #9F1D1D;
+      --bad-bg:             #FAEFEF;
+      --bad-border:         #B23A3A;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', 'Open Sans', Arial, sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
+      min-height: 100vh;
+      padding: 20px;
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Montserrat', Arial, sans-serif; }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    /* ── Card ── */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(47,52,55,.06);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      border-top: 5px solid var(--eucalyptus);
+      padding-top: 28px;
+    }
+    .header .brand {
+      font-size: .85rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--eucalyptus); margin-bottom: 12px;
+    }
+    .header h1 {
+      color: var(--charcoal); font-size: 1.85rem;
+      font-weight: 700; margin-bottom: 8px;
+    }
+    .header .subtitle {
+      color: var(--eucalyptus); font-size: 1rem;
+      font-weight: 600; margin-bottom: 12px;
+    }
+    .header .time {
+      display: inline-block;
+      background: var(--eucalyptus-surface);
+      border: 1px solid var(--eucalyptus-light);
+      border-radius: 999px;
+      padding: 5px 16px; font-size: .9rem;
+      color: var(--secondary-text);
+    }
+
+    /* ── Intro ── */
+    .intro p { color: var(--secondary-text); margin-bottom: 8px; }
+
+    /* ── Exercise framing ── */
+    .exercise { border-left: 5px solid var(--eucalyptus-light); }
+
+    .ex-head {
+      display: flex; align-items: flex-start;
+      gap: 12px; margin-bottom: 6px;
+    }
+    .ex-num {
+      flex: 0 0 auto; width: 34px; height: 34px;
+      border-radius: 50%; background: var(--eucalyptus);
+      color: #FFF; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .ex-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--charcoal); }
+    .ex-desc  { font-size: .9rem; color: var(--secondary-text); margin-top: 2px; }
+    .ex-points {
+      font-size: .82rem; font-weight: 600;
+      color: var(--eucalyptus); background: var(--eucalyptus-surface);
+      border-radius: 999px; padding: 2px 10px;
+      margin-left: auto; white-space: nowrap; align-self: center;
+    }
+
+    .scenario {
+      background: var(--eucalyptus-surface);
+      border: 1px solid var(--eucalyptus-light);
+      border-radius: 8px; padding: 12px 15px;
+      font-size: .95rem; color: var(--secondary-text);
+      margin: 10px 0 16px;
+    }
+    .scenario strong { color: var(--charcoal); }
+
+    .instruction {
+      color: var(--secondary-text); font-size: .95rem; margin-bottom: 14px;
+    }
+
+    /* ── Focus / interactive ── */
+    select:focus-visible,
+    input:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--eucalyptus);
+      outline-offset: 2px;
+    }
+
+    /* ══════════════════════════════════════
+       EX 1 — MATCHING
+    ══════════════════════════════════════ */
+    .match-table { width: 100%; border-collapse: collapse; }
+    .match-table th {
+      font-family: 'Montserrat', sans-serif; font-size: .82rem;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: var(--eucalyptus); padding: 0 8px 8px;
+      text-align: left; border-bottom: 2px solid var(--eucalyptus-light);
+    }
+    .match-table td {
+      padding: 10px 8px; border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .match-table tr:last-child td { border-bottom: none; }
+    .match-table .word-cell {
+      font-weight: 600; font-size: 1rem; color: var(--charcoal);
+      width: 40%;
+    }
+    .match-table select {
+      font-family: inherit; font-size: .95rem;
+      color: var(--charcoal); padding: 7px 10px;
+      border: 2px solid var(--eucalyptus-light);
+      border-radius: 6px; background: #FFF; cursor: pointer;
+      width: 100%;
+    }
+    .match-table .fb-cell { font-size: .88rem; min-width: 180px; }
+
+    /* ══════════════════════════════════════
+       EX 2 — MULTIPLE CHOICE
+    ══════════════════════════════════════ */
+    .mc-block { margin-bottom: 20px; }
+    .mc-block .sentence-stem {
+      font-size: 1rem; font-weight: 500; color: var(--charcoal);
+      margin-bottom: 10px; line-height: 1.5;
+    }
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px; margin-bottom: 6px;
+    }
+    .choice {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 14px;
+      border: 2px solid var(--border);
+      border-radius: 8px; background: var(--ivory);
+      cursor: pointer; font-size: .97rem; color: var(--charcoal);
+      transition: border-color .15s, background .15s;
+    }
+    .choice:hover { border-color: var(--eucalyptus); background: var(--eucalyptus-surface); }
+    .choice input[type="radio"] {
+      width: 18px; height: 18px;
+      accent-color: var(--eucalyptus); flex: 0 0 auto; cursor: pointer;
+    }
+
+    /* ══════════════════════════════════════
+       EX 3 — MULTIPLE RESPONSE
+    ══════════════════════════════════════ */
+    .mr-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px; margin: 12px 0;
+    }
+    .mr-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px;
+      border: 2px solid var(--border);
+      border-radius: 8px; background: var(--ivory);
+      cursor: pointer; font-size: .97rem; color: var(--charcoal);
+      transition: border-color .15s, background .15s;
+    }
+    .mr-item:hover { border-color: var(--eucalyptus); background: var(--eucalyptus-surface); }
+    .mr-item input[type="checkbox"] {
+      width: 18px; height: 18px;
+      accent-color: var(--eucalyptus); flex: 0 0 auto; cursor: pointer;
+    }
+
+    /* ══════════════════════════════════════
+       EX 4 — SORTING (radio)
+    ══════════════════════════════════════ */
+    .sort-columns {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin: 12px 0;
+    }
+    .sort-col-header {
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: .92rem; color: var(--eucalyptus);
+      background: var(--eucalyptus-surface);
+      border: 1px solid var(--eucalyptus-light);
+      border-radius: 8px 8px 0 0; padding: 8px 14px;
+      text-align: center; text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .sort-col-body {
+      border: 1px solid var(--border); border-top: none;
+      border-radius: 0 0 8px 8px; padding: 6px;
+      min-height: 60px; display: flex; flex-direction: column; gap: 6px;
+    }
+
+    .sort-item {
+      background: var(--ivory); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 12px;
+      margin-bottom: 0;
+    }
+    .sort-item-phrase {
+      font-size: .97rem; font-weight: 500; color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+    .sort-radios {
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+    .sort-radios label {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .9rem; color: var(--secondary-text); cursor: pointer;
+    }
+    .sort-radios input[type="radio"] {
+      width: 17px; height: 17px;
+      accent-color: var(--eucalyptus); cursor: pointer;
+    }
+
+    /* ══════════════════════════════════════
+       EX 5 — WORD BANK / PRODUCTION
+    ══════════════════════════════════════ */
+    .word-bank {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      background: var(--eucalyptus-surface);
+      border: 1px solid var(--eucalyptus-light);
+      border-radius: 10px; padding: 14px;
+      margin-bottom: 18px;
+    }
+    .bank-word {
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: .95rem; color: var(--charcoal);
+      background: #FFF; border: 2px solid var(--eucalyptus-light);
+      border-radius: 6px; padding: 6px 14px;
+      cursor: pointer; transition: background .15s, border-color .15s;
+    }
+    .bank-word:hover:not([disabled]) { background: var(--eucalyptus-surface); border-color: var(--eucalyptus); }
+    .bank-word.selected {
+      background: var(--eucalyptus); color: #FFF;
+      border-color: var(--eucalyptus-dark);
+    }
+    .bank-word[disabled] {
+      opacity: .45; cursor: default;
+    }
+
+    .dialogue-table { width: 100%; border-collapse: collapse; }
+    .dialogue-table td {
+      padding: 9px 10px; border-bottom: 1px solid var(--border);
+      vertical-align: middle; font-size: .97rem;
+    }
+    .dialogue-table tr:last-child td { border-bottom: none; }
+    .dialogue-table .speaker {
+      font-weight: 700; color: var(--eucalyptus);
+      width: 130px; white-space: nowrap;
+    }
+    .blank-slot {
+      display: inline-block; min-width: 120px; padding: 4px 10px;
+      border-bottom: 2px solid var(--eucalyptus); font-weight: 600;
+      color: var(--eucalyptus-dark); cursor: pointer;
+      font-size: .97rem; background: transparent;
+      border-radius: 4px 4px 0 0;
+      transition: background .15s;
+    }
+    .blank-slot:hover { background: var(--eucalyptus-surface); }
+    .blank-slot.filled {
+      border: 2px solid var(--eucalyptus); border-radius: 6px;
+      background: var(--eucalyptus-surface);
+    }
+    .blank-slot:focus-visible {
+      outline: 3px solid var(--eucalyptus); outline-offset: 2px;
+    }
+
+    /* ══════════════════════════════════════
+       FEEDBACK PANELS
+    ══════════════════════════════════════ */
+    .fb {
+      display: flex; align-items: flex-start; gap: 8px;
+      border-radius: 7px; padding: 9px 13px;
+      font-size: .88rem; margin-top: 8px;
+    }
+    .fb.hidden { display: none; }
+    .fb-ok  { background: var(--ok-bg);  border: 1px solid var(--ok-border);  color: var(--ok-text);  }
+    .fb-bad { background: var(--bad-bg); border: 1px solid var(--bad-border); color: var(--bad-text); }
+    .fb-icon { flex: 0 0 auto; font-size: 1rem; }
+
+    .ex-score {
+      font-size: .9rem; font-weight: 700; color: var(--eucalyptus);
+      margin-top: 12px;
+    }
+    .ex-score.hidden { display: none; }
+
+    /* Global feedback (ex 3) */
+    .global-fb.hidden { display: none; }
+
+    /* ══════════════════════════════════════
+       CHECK BUTTONS
+    ══════════════════════════════════════ */
+    .check-btn {
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: .9rem; letter-spacing: .04em;
+      background: var(--eucalyptus); color: #FFF;
+      border: none; border-radius: 7px;
+      padding: 9px 22px; cursor: pointer;
+      transition: background .15s;
+      margin-top: 14px;
+    }
+    .check-btn:hover { background: var(--eucalyptus-dark); }
+
+    /* ══════════════════════════════════════
+       SCORE SUMMARY + SUBMIT
+    ══════════════════════════════════════ */
+    .score-summary {
+      background: var(--eucalyptus-surface);
+      border: 1px solid var(--eucalyptus-light);
+      border-radius: 10px; padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+    .score-summary h3 {
+      font-size: 1rem; color: var(--eucalyptus);
+      margin-bottom: 12px; text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+    .score-row {
+      display: flex; justify-content: space-between;
+      padding: 5px 0; border-bottom: 1px solid var(--border);
+      font-size: .95rem;
+    }
+    .score-row:last-child { border-bottom: none; }
+    .score-total {
+      font-weight: 700; font-size: 1.05rem;
+      margin-top: 10px; padding-top: 10px;
+      border-top: 2px solid var(--eucalyptus-light);
+      display: flex; justify-content: space-between;
+    }
+
+    .submit-btn {
+      width: 100%; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 1.05rem; letter-spacing: .05em;
+      background: var(--eucalyptus); color: #FFF;
+      border: none; border-radius: 9px; padding: 15px;
+      cursor: pointer; transition: background .15s;
+      margin-top: 6px;
+    }
+    .submit-btn:hover { background: var(--eucalyptus-dark); }
+    .submit-btn:disabled { opacity: .55; cursor: default; }
+
+    .final-result {
+      text-align: center; padding: 18px;
+      border-radius: 10px; margin-top: 16px;
+    }
+    .final-result.hidden { display: none; }
+    .final-result .big-score {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.6rem; font-weight: 700;
+      color: var(--eucalyptus);
+    }
+    .final-result .score-label {
+      font-size: 1rem; color: var(--secondary-text); margin-top: 4px;
+    }
+    .final-result .score-msg {
+      margin-top: 10px; font-size: 1rem; color: var(--charcoal);
+    }
+
+    .answer-key-toggle {
+      background: none; border: 1px solid var(--eucalyptus-light);
+      color: var(--eucalyptus); font-family: inherit;
+      font-size: .9rem; font-weight: 600;
+      padding: 7px 16px; border-radius: 6px;
+      cursor: pointer; margin-top: 14px;
+      transition: background .15s;
+    }
+    .answer-key-toggle:hover { background: var(--eucalyptus-surface); }
+    .answer-key { margin-top: 14px; }
+    .answer-key.hidden { display: none; }
+    .answer-key table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .answer-key th {
+      text-align: left; padding: 6px 10px;
+      background: var(--eucalyptus-surface);
+      color: var(--eucalyptus); font-size: .8rem;
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .answer-key td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
+    .answer-key tr:last-child td { border-bottom: none; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center; padding: 20px 0 10px;
+      font-size: .82rem; color: var(--secondary-text);
+    }
+
+    /* ── Utility ── */
+    .hidden { display: none !important; }
+    .correct-highlight { border-color: var(--ok-border) !important; background: var(--ok-bg) !important; }
+    .wrong-highlight   { border-color: var(--bad-border) !important; background: var(--bad-bg) !important; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .options-grid  { grid-template-columns: 1fr; }
+      .mr-grid       { grid-template-columns: 1fr; }
+      .sort-columns  { grid-template-columns: 1fr; }
+      .header h1     { font-size: 1.45rem; }
+      .card          { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ══ HEADER ══ -->
+  <div class="card header">
+    <div class="brand">Spanish Learning Edge · L01 · Workbook 2 of 3</div>
+    <h1>L01: Mucho gusto, soy yo — Vocabulario</h1>
+    <div class="subtitle">Unit 1 · Feria de Oaxaca · Vocabulary Practice</div>
+    <div class="time">⏱ Estimated time: 10–15 min</div>
+  </div>
+
+  <!-- ══ INTRO ══ -->
+  <div class="card intro">
+    <h3 style="margin-bottom:10px;">About this workbook</h3>
+    <p>You have already seen all 16 vocabulary items in the eBook — on flashcards, in the reading <em>La feria de Oaxaca</em>, and in the scene glosses. Now it is time to <strong>use</strong> the vocabulary in context.</p>
+    <p style="margin-top:8px;">Work through all five exercises, then press <strong>Submit</strong> to record your score.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 1 — MATCHING
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex1">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">1</div>
+      <div>
+        <div class="ex-title">Matching — Word → Meaning</div>
+        <div class="ex-desc">Match each Spanish word to its English meaning.</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <div class="scenario">
+      <strong>Setting:</strong> You are browsing a feria in Oaxaca. You see signs, hear greetings, and meet vendors. Connect each word to what it means.
+    </div>
+
+    <table class="match-table" aria-label="Matching exercise">
+      <thead>
+        <tr>
+          <th>Spanish</th>
+          <th>Select the English meaning</th>
+          <th aria-label="Feedback"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="m-row-1">
+          <td class="word-cell">la feria</td>
+          <td>
+            <select id="m1" aria-label="Meaning of la feria">
+              <option value="">— choose —</option>
+              <option value="a">fair (outdoor event with food, crafts, and rides)</option>
+              <option value="b">vendor</option>
+              <option value="c">stall / stand</option>
+              <option value="d">welcome</option>
+              <option value="e">crafts, handmade items</option>
+              <option value="f">nice to meet you</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m1-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+        <tr id="m-row-2">
+          <td class="word-cell">el vendedor</td>
+          <td>
+            <select id="m2" aria-label="Meaning of el vendedor">
+              <option value="">— choose —</option>
+              <option value="a">fair (outdoor event with food, crafts, and rides)</option>
+              <option value="b">vendor</option>
+              <option value="c">stall / stand</option>
+              <option value="d">welcome</option>
+              <option value="e">crafts, handmade items</option>
+              <option value="f">nice to meet you</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m2-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+        <tr id="m-row-3">
+          <td class="word-cell">el café de olla</td>
+          <td>
+            <select id="m3" aria-label="Meaning of el café de olla">
+              <option value="">— choose —</option>
+              <option value="a">fair (outdoor event with food, crafts, and rides)</option>
+              <option value="b">vendor</option>
+              <option value="c">stall / stand</option>
+              <option value="d">welcome</option>
+              <option value="e">crafts, handmade items</option>
+              <option value="f">nice to meet you</option>
+              <option value="g">traditional Mexican coffee (with cinnamon and brown sugar)</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m3-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+        <tr id="m-row-4">
+          <td class="word-cell">las artesanías</td>
+          <td>
+            <select id="m4" aria-label="Meaning of las artesanías">
+              <option value="">— choose —</option>
+              <option value="a">fair (outdoor event with food, crafts, and rides)</option>
+              <option value="b">vendor</option>
+              <option value="c">stall / stand</option>
+              <option value="d">welcome</option>
+              <option value="e">crafts, handmade items</option>
+              <option value="f">nice to meet you</option>
+              <option value="g">traditional Mexican coffee (with cinnamon and brown sugar)</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m4-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+        <tr id="m-row-5">
+          <td class="word-cell">mucho gusto</td>
+          <td>
+            <select id="m5" aria-label="Meaning of mucho gusto">
+              <option value="">— choose —</option>
+              <option value="a">fair (outdoor event with food, crafts, and rides)</option>
+              <option value="b">vendor</option>
+              <option value="c">stall / stand</option>
+              <option value="d">welcome</option>
+              <option value="e">crafts, handmade items</option>
+              <option value="f">nice to meet you</option>
+              <option value="g">traditional Mexican coffee (with cinnamon and brown sugar)</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m5-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+        <tr id="m-row-6">
+          <td class="word-cell">bienvenido/a</td>
+          <td>
+            <select id="m6" aria-label="Meaning of bienvenido/a">
+              <option value="">— choose —</option>
+              <option value="a">fair (outdoor event with food, crafts, and rides)</option>
+              <option value="b">vendor</option>
+              <option value="c">stall / stand</option>
+              <option value="d">welcome</option>
+              <option value="e">crafts, handmade items</option>
+              <option value="f">nice to meet you</option>
+              <option value="g">traditional Mexican coffee (with cinnamon and brown sugar)</option>
+            </select>
+          </td>
+          <td class="fb-cell"><div id="m6-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="check-btn" onclick="checkEx1()">Check Exercise 1</button>
+    <div class="ex-score hidden" id="ex1-score" aria-live="polite"></div>
+  </div><!-- /ex1 -->
+
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 2 — MULTIPLE CHOICE
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex2">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">2</div>
+      <div>
+        <div class="ex-title">Multiple Choice — Word in Context</div>
+        <div class="ex-desc">Choose the correct vocabulary word to complete each sentence.</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <div class="scenario">
+      <strong>Setting:</strong> Scenes from the Oaxaca feria. Don Marcos, doña Rosa, and señora López are all there.
+    </div>
+
+    <!-- Q 2a -->
+    <div class="mc-block" id="mc-1">
+      <p class="sentence-stem">a. Don Marcos tiene un <span class="blank-label">_____</span> en la feria de Oaxaca.</p>
+      <fieldset style="border:none;padding:0;">
+        <legend class="hidden">Options for sentence a</legend>
+        <div class="options-grid">
+          <label class="choice"><input type="radio" name="mc1" value="a"> el puesto</label>
+          <label class="choice"><input type="radio" name="mc1" value="b"> la canela</label>
+          <label class="choice"><input type="radio" name="mc1" value="c"> la feria</label>
+          <label class="choice"><input type="radio" name="mc1" value="d"> el colega</label>
+        </div>
+      </fieldset>
+      <div id="mc1-fb" class="fb hidden" role="alert" aria-live="polite"></div>
+    </div>
+
+    <!-- Q 2b -->
+    <div class="mc-block" id="mc-2">
+      <p class="sentence-stem">b. Don Marcos es <span class="blank-label">_____</span> de café de olla.</p>
+      <fieldset style="border:none;padding:0;">
+        <legend class="hidden">Options for sentence b</legend>
+        <div class="options-grid">
+          <label class="choice"><input type="radio" name="mc2" value="a"> colega</label>
+          <label class="choice"><input type="radio" name="mc2" value="b"> bienvenido</label>
+          <label class="choice"><input type="radio" name="mc2" value="c"> vendedor</label>
+          <label class="choice"><input type="radio" name="mc2" value="d"> puesto</label>
+        </div>
+      </fieldset>
+      <div id="mc2-fb" class="fb hidden" role="alert" aria-live="polite"></div>
+    </div>
+
+    <!-- Q 2c -->
+    <div class="mc-block" id="mc-3">
+      <p class="sentence-stem">c. <span class="blank-label">_____</span>, señora López. ¿De dónde es usted?</p>
+      <fieldset style="border:none;padding:0;">
+        <legend class="hidden">Options for sentence c</legend>
+        <div class="options-grid">
+          <label class="choice"><input type="radio" name="mc3" value="a"> Buenas tardes</label>
+          <label class="choice"><input type="radio" name="mc3" value="b"> Buenos días</label>
+          <label class="choice"><input type="radio" name="mc3" value="c"> Mucho gusto</label>
+          <label class="choice"><input type="radio" name="mc3" value="d"> Me llamo</label>
+        </div>
+      </fieldset>
+      <div id="mc3-fb" class="fb hidden" role="alert" aria-live="polite"></div>
+    </div>
+
+    <!-- Q 2d -->
+    <div class="mc-block" id="mc-4">
+      <p class="sentence-stem">d. Hay <span class="blank-label">_____</span> y comida tradicional en la feria.</p>
+      <fieldset style="border:none;padding:0;">
+        <legend class="hidden">Options for sentence d</legend>
+        <div class="options-grid">
+          <label class="choice"><input type="radio" name="mc4" value="a"> puestos</label>
+          <label class="choice"><input type="radio" name="mc4" value="b"> vendedores</label>
+          <label class="choice"><input type="radio" name="mc4" value="c"> artesanías</label>
+          <label class="choice"><input type="radio" name="mc4" value="d"> colegas</label>
+        </div>
+      </fieldset>
+      <div id="mc4-fb" class="fb hidden" role="alert" aria-live="polite"></div>
+    </div>
+
+    <!-- Q 2e -->
+    <div class="mc-block" id="mc-5">
+      <p class="sentence-stem">e. Marcos: "Me llamo Marcos." &nbsp; Señora López: "<span class="blank-label">_____</span>."</p>
+      <fieldset style="border:none;padding:0;">
+        <legend class="hidden">Options for sentence e</legend>
+        <div class="options-grid">
+          <label class="choice"><input type="radio" name="mc5" value="a"> Bienvenida</label>
+          <label class="choice"><input type="radio" name="mc5" value="b"> Soy de aquí</label>
+          <label class="choice"><input type="radio" name="mc5" value="c"> Buenos días</label>
+          <label class="choice"><input type="radio" name="mc5" value="d"> Mucho gusto</label>
+        </div>
+      </fieldset>
+      <div id="mc5-fb" class="fb hidden" role="alert" aria-live="polite"></div>
+    </div>
+
+    <button class="check-btn" onclick="checkEx2()">Check Exercise 2</button>
+    <div class="ex-score hidden" id="ex2-score" aria-live="polite"></div>
+  </div><!-- /ex2 -->
+
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 3 — MULTIPLE RESPONSE
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex3">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">3</div>
+      <div>
+        <div class="ex-title">Multiple Response — Select All That Apply</div>
+        <div class="ex-desc">Select everything that fits. There may be more than one correct answer.</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <p class="instruction">
+      Which of the following are things you would <strong>find or say</strong> at a Mexican feria? Select all that apply.
+    </p>
+
+    <div class="mr-grid" role="group" aria-labelledby="mr-heading">
+      <span id="mr-heading" class="hidden">Multiple response options</span>
+
+      <label class="mr-item">
+        <input type="checkbox" id="mr-a" value="artesanias">
+        artesanías
+      </label>
+      <label class="mr-item">
+        <input type="checkbox" id="mr-b" value="cafe">
+        café de olla
+      </label>
+      <label class="mr-item">
+        <input type="checkbox" id="mr-c" value="puestos">
+        puestos de vendedores
+      </label>
+      <label class="mr-item">
+        <input type="checkbox" id="mr-d" value="biblioteca">
+        una biblioteca
+      </label>
+      <label class="mr-item">
+        <input type="checkbox" id="mr-e" value="aeropuerto">
+        un aeropuerto
+      </label>
+      <label class="mr-item">
+        <input type="checkbox" id="mr-f" value="hospital">
+        un hospital
+      </label>
+    </div>
+
+    <button class="check-btn" onclick="checkEx3()">Check Exercise 3</button>
+    <div id="ex3-fb" class="fb hidden global-fb" role="alert" aria-live="polite"></div>
+    <div class="ex-score hidden" id="ex3-score" aria-live="polite"></div>
+  </div><!-- /ex3 -->
+
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 4 — SORTING (formal vs informal)
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex4">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">4</div>
+      <div>
+        <div class="ex-title">Sorting — Formal or Informal?</div>
+        <div class="ex-desc">Decide whether each expression is formal (usted) or informal (tú).</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <div class="scenario">
+      <strong>Tip:</strong> Look at the verb ending. <em>SE</em> and <em>SU</em> signal formal (usted). <em>TE</em> and <em>TU</em> signal informal (tú).
+    </div>
+
+    <div class="sort-columns" aria-label="Formal / informal sorting">
+      <div>
+        <div class="sort-col-header">🎩 Formal (usted)</div>
+        <div class="sort-col-body" id="formal-col" aria-label="Formal column reference">
+          <span style="font-size:.8rem;color:var(--secondary-text);padding:4px 8px;">usted → formal register</span>
+        </div>
+      </div>
+      <div>
+        <div class="sort-col-header">👋 Informal (tú)</div>
+        <div class="sort-col-body" id="informal-col" aria-label="Informal column reference">
+          <span style="font-size:.8rem;color:var(--secondary-text);padding:4px 8px;">tú → informal register</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 phrases, each with radio: formal / informal -->
+    <div id="sort-items" style="margin-top:14px; display:flex; flex-direction:column; gap:10px;">
+
+      <div class="sort-item" id="si-1">
+        <div class="sort-item-phrase">Buenos días, señora.</div>
+        <div class="sort-radios" role="radiogroup" aria-label="Classify: Buenos días, señora.">
+          <label><input type="radio" name="si1" value="formal"> Formal</label>
+          <label><input type="radio" name="si1" value="informal"> Informal</label>
+        </div>
+        <div id="si1-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:6px;"></div>
+      </div>
+
+      <div class="sort-item" id="si-2">
+        <div class="sort-item-phrase">¿A qué se dedica usted?</div>
+        <div class="sort-radios" role="radiogroup" aria-label="Classify: ¿A qué se dedica usted?">
+          <label><input type="radio" name="si2" value="formal"> Formal</label>
+          <label><input type="radio" name="si2" value="informal"> Informal</label>
+        </div>
+        <div id="si2-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:6px;"></div>
+      </div>
+
+      <div class="sort-item" id="si-3">
+        <div class="sort-item-phrase">¿Cómo se llama usted?</div>
+        <div class="sort-radios" role="radiogroup" aria-label="Classify: ¿Cómo se llama usted?">
+          <label><input type="radio" name="si3" value="formal"> Formal</label>
+          <label><input type="radio" name="si3" value="informal"> Informal</label>
+        </div>
+        <div id="si3-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:6px;"></div>
+      </div>
+
+      <div class="sort-item" id="si-4">
+        <div class="sort-item-phrase">¿A qué te dedicas?</div>
+        <div class="sort-radios" role="radiogroup" aria-label="Classify: ¿A qué te dedicas?">
+          <label><input type="radio" name="si4" value="formal"> Formal</label>
+          <label><input type="radio" name="si4" value="informal"> Informal</label>
+        </div>
+        <div id="si4-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:6px;"></div>
+      </div>
+
+      <div class="sort-item" id="si-5">
+        <div class="sort-item-phrase">¿Cómo te llamas?</div>
+        <div class="sort-radios" role="radiogroup" aria-label="Classify: ¿Cómo te llamas?">
+          <label><input type="radio" name="si5" value="formal"> Formal</label>
+          <label><input type="radio" name="si5" value="informal"> Informal</label>
+        </div>
+        <div id="si5-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:6px;"></div>
+      </div>
+
+      <div class="sort-item" id="si-6">
+        <div class="sort-item-phrase">Oye, ¿de dónde eres?</div>
+        <div class="sort-radios" role="radiogroup" aria-label="Classify: Oye, ¿de dónde eres?">
+          <label><input type="radio" name="si6" value="formal"> Formal</label>
+          <label><input type="radio" name="si6" value="informal"> Informal</label>
+        </div>
+        <div id="si6-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:6px;"></div>
+      </div>
+
+    </div>
+
+    <button class="check-btn" onclick="checkEx4()">Check Exercise 4</button>
+    <div class="ex-score hidden" id="ex4-score" aria-live="polite"></div>
+  </div><!-- /ex4 -->
+
+
+  <!-- ══════════════════════════════════════════════
+       EXERCISE 5 — CONTEXTUAL PRODUCTION
+  ══════════════════════════════════════════════ -->
+  <div class="card exercise" id="ex5">
+    <div class="ex-head">
+      <div class="ex-num" aria-hidden="true">5</div>
+      <div>
+        <div class="ex-title">Contextual Production — Complete the Conversation</div>
+        <div class="ex-desc">Click a word from the bank, then click a blank to place it. Click a filled blank to remove.</div>
+      </div>
+      <div class="ex-points">3 pts</div>
+    </div>
+
+    <div class="scenario">
+      <strong>Setting:</strong> You arrive at the feria and meet <strong>don Felipe</strong>, an elder vendor. Complete the short conversation using the word bank below. You may use each word only once.
+    </div>
+
+    <!-- Word bank -->
+    <p style="font-size:.88rem;font-weight:600;color:var(--eucalyptus);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">Word Bank</p>
+    <div class="word-bank" id="wordBank" role="toolbar" aria-label="Word bank — click a word, then click a blank">
+      <button class="bank-word" id="wb-0" data-word="Buenos días"   onclick="selectBankWord(this)" aria-pressed="false">Buenos días</button>
+      <button class="bank-word" id="wb-1" data-word="Mucho gusto"   onclick="selectBankWord(this)" aria-pressed="false">Mucho gusto</button>
+      <button class="bank-word" id="wb-2" data-word="Me llamo"      onclick="selectBankWord(this)" aria-pressed="false">Me llamo</button>
+      <button class="bank-word" id="wb-3" data-word="De dónde"      onclick="selectBankWord(this)" aria-pressed="false">De dónde</button>
+      <button class="bank-word" id="wb-4" data-word="Buenas tardes" onclick="selectBankWord(this)" aria-pressed="false">Buenas tardes</button>
+      <button class="bank-word" id="wb-5" data-word="bienvenido/a"  onclick="selectBankWord(this)" aria-pressed="false">bienvenido/a</button>
+      <button class="bank-word" id="wb-6" data-word="me dedico"     onclick="selectBankWord(this)" aria-pressed="false">me dedico</button>
+    </div>
+
+    <!-- Dialogue -->
+    <table class="dialogue-table" aria-label="Conversation to complete">
+      <tbody>
+        <tr>
+          <td class="speaker">Tú:</td>
+          <td>
+            "<button class="blank-slot" id="blank-1" onclick="fillBlank(this)" aria-label="Blank 1 — click to fill" data-slot="1">_____</button>, don Felipe."
+          </td>
+          <td style="width:200px"><div id="b1-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
+        </tr>
+        <tr>
+          <td class="speaker">Don Felipe:</td>
+          <td>
+            "<button class="blank-slot" id="blank-2" onclick="fillBlank(this)" aria-label="Blank 2 — click to fill" data-slot="2">_____</button>, bienvenido."
+          </td>
+          <td><div id="b2-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
+        </tr>
+        <tr>
+          <td class="speaker">Tú:</td>
+          <td>
+            "<button class="blank-slot" id="blank-3" onclick="fillBlank(this)" aria-label="Blank 3 — click to fill" data-slot="3">_____</button> Ana. Soy de Texas."
+          </td>
+          <td><div id="b3-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
+        </tr>
+        <tr>
+          <td class="speaker">Don Felipe:</td>
+          <td>
+            "¿<button class="blank-slot" id="blank-4" onclick="fillBlank(this)" aria-label="Blank 4 — click to fill" data-slot="4">_____</button> eres?"
+          </td>
+          <td><div id="b4-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
+        </tr>
+        <tr>
+          <td class="speaker">Tú:</td>
+          <td>
+            "Soy de Texas. <button class="blank-slot" id="blank-5" onclick="fillBlank(this)" aria-label="Blank 5 — click to fill" data-slot="5">_____</button>, don Felipe."
+          </td>
+          <td><div id="b5-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="check-btn" onclick="checkEx5()">Check Exercise 5</button>
+    <div class="ex-score hidden" id="ex5-score" aria-live="polite"></div>
+  </div><!-- /ex5 -->
+
+
+  <!-- ══ SCORE SUMMARY + SUBMIT ══ -->
+  <div class="card" id="submit-section">
+    <h3 style="margin-bottom:16px;">Your Score Summary</h3>
+    <div class="score-summary">
+      <h3>Exercise Scores</h3>
+      <div class="score-row"><span>Exercise 1 — Matching</span>          <span id="s1-display">—/3</span></div>
+      <div class="score-row"><span>Exercise 2 — Multiple Choice</span>   <span id="s2-display">—/3</span></div>
+      <div class="score-row"><span>Exercise 3 — Multiple Response</span> <span id="s3-display">—/3</span></div>
+      <div class="score-row"><span>Exercise 4 — Sorting</span>           <span id="s4-display">—/3</span></div>
+      <div class="score-row"><span>Exercise 5 — Production</span>        <span id="s5-display">—/3</span></div>
+      <div class="score-total"><span>Total</span><span id="total-display">—/15</span></div>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitWorkbook()" aria-label="Submit workbook and record score">
+      Submit Workbook
+    </button>
+
+    <div class="final-result hidden" id="finalResult">
+      <div class="big-score" id="finalBigScore"></div>
+      <div class="score-label">out of 15 points</div>
+      <div class="score-msg" id="finalMsg"></div>
+    </div>
+
+    <div style="margin-top:16px; text-align:center;">
+      <button class="answer-key-toggle" onclick="toggleAnswerKey()" aria-expanded="false" id="akToggleBtn">
+        Show Answer Key ▾
+      </button>
+    </div>
+
+    <div class="answer-key hidden" id="answerKey" aria-label="Answer key">
+      <table>
+        <thead>
+          <tr>
+            <th>Exercise</th><th>Item</th><th>Correct Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>la feria</td><td>fair (outdoor event with food, crafts, and rides)</td></tr>
+          <tr><td>1</td><td>el vendedor</td><td>vendor</td></tr>
+          <tr><td>1</td><td>el café de olla</td><td>traditional Mexican coffee (with cinnamon and brown sugar)</td></tr>
+          <tr><td>1</td><td>las artesanías</td><td>crafts, handmade items</td></tr>
+          <tr><td>1</td><td>mucho gusto</td><td>nice to meet you</td></tr>
+          <tr><td>1</td><td>bienvenido/a</td><td>welcome</td></tr>
+          <tr><td>2</td><td>sentence a</td><td>el puesto</td></tr>
+          <tr><td>2</td><td>sentence b</td><td>vendedor</td></tr>
+          <tr><td>2</td><td>sentence c</td><td>Buenos días</td></tr>
+          <tr><td>2</td><td>sentence d</td><td>artesanías</td></tr>
+          <tr><td>2</td><td>sentence e</td><td>Mucho gusto</td></tr>
+          <tr><td>3</td><td>correct items</td><td>artesanías · café de olla · puestos de vendedores</td></tr>
+          <tr><td>4</td><td>Buenos días, señora.</td><td>Formal</td></tr>
+          <tr><td>4</td><td>¿A qué se dedica usted?</td><td>Formal</td></tr>
+          <tr><td>4</td><td>¿Cómo se llama usted?</td><td>Formal</td></tr>
+          <tr><td>4</td><td>¿A qué te dedicas?</td><td>Informal</td></tr>
+          <tr><td>4</td><td>¿Cómo te llamas?</td><td>Informal</td></tr>
+          <tr><td>4</td><td>Oye, ¿de dónde eres?</td><td>Informal</td></tr>
+          <tr><td>5</td><td>Blank 1</td><td>Buenos días</td></tr>
+          <tr><td>5</td><td>Blank 2</td><td>Mucho gusto</td></tr>
+          <tr><td>5</td><td>Blank 3</td><td>Me llamo</td></tr>
+          <tr><td>5</td><td>Blank 4</td><td>De dónde</td></tr>
+          <tr><td>5</td><td>Blank 5</td><td>Mucho gusto</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer">© 2025 Spanish Learning Edge LLC · L01 Vocabulario Workbook · All rights reserved.</div>
+
+</div><!-- /container -->
+
+<script>
+/* ════════════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════════════ */
+const scores = { ex1: null, ex2: null, ex3: null, ex4: null, ex5: null };
+
+/* ════════════════════════════════════════════════════
+   HELPERS
+════════════════════════════════════════════════════ */
+function showFb(id, ok, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.className = 'fb ' + (ok ? 'fb-ok' : 'fb-bad');
+  el.innerHTML = (ok ? '<span class="fb-icon" aria-hidden="true">✓</span>' : '<span class="fb-icon" aria-hidden="true">✗</span>') + ' ' + msg;
+}
+
+function showScore(id, got, max) {
+  const el = document.getElementById(id);
+  el.className = 'ex-score';
+  el.textContent = got + '/' + max + (got === max ? ' ✓ — ¡Excelente!' : ' — review feedback above.');
+  el.style.color = got === max ? 'var(--ok-text)' : 'var(--bad-text)';
+  updateSummary();
+}
+
+function updateSummary() {
+  const labels = { ex1: 's1-display', ex2: 's2-display', ex3: 's3-display', ex4: 's4-display', ex5: 's5-display' };
+  let total = 0, allDone = true;
+  for (const [k, v] of Object.entries(labels)) {
+    const s = scores[k];
+    document.getElementById(v).textContent = s !== null ? s + '/3' : '—/3';
+    if (s !== null) total += s; else allDone = false;
+  }
+  document.getElementById('total-display').textContent = (allDone ? total : '—') + '/15';
+}
+
+/* ════════════════════════════════════════════════════
+   EX 1 — MATCHING
+   Correct answers: m1=a, m2=b, m3=g, m4=e, m5=f, m6=d
+════════════════════════════════════════════════════ */
+const ex1Answers = {
+  m1: { val: 'a', word: 'la feria',       meaning: 'fair (outdoor event with food, crafts, and rides)', note: 'La feria is a festive outdoor event — a cultural staple in Mexico.' },
+  m2: { val: 'b', word: 'el vendedor',    meaning: 'vendor', note: 'Vendedor comes from vender (to sell). Don Marcos is a vendedor at the feria.' },
+  m3: { val: 'g', word: 'el café de olla',meaning: 'traditional Mexican coffee (with cinnamon and brown sugar)', note: 'Café de olla is brewed in a clay pot (olla) with canela and piloncillo.' },
+  m4: { val: 'e', word: 'las artesanías', meaning: 'crafts, handmade items', note: 'Artesanías are handcrafted goods — textiles, pottery, and more — found at every feria.' },
+  m5: { val: 'f', word: 'mucho gusto',    meaning: 'nice to meet you', note: 'Mucho gusto is the standard polite response when being introduced.' },
+  m6: { val: 'd', word: 'bienvenido/a',   meaning: 'welcome', note: 'Bienvenida (to a woman) / bienvenido (to a man). Don Marcos says "bienvenida a la feria."' },
+};
+
+function checkEx1() {
+  let correct = 0;
+  for (const [id, data] of Object.entries(ex1Answers)) {
+    const sel = document.getElementById(id);
+    if (!sel) continue;
+    const ok = sel.value === data.val;
+    if (ok) {
+      correct++;
+      showFb(id + '-fb', true, '¡Correcto! <strong>' + data.word + '</strong> = ' + data.meaning + '.');
+    } else {
+      showFb(id + '-fb', false, '<strong>' + data.word + '</strong> means <em>' + data.meaning + '</em>. ' + data.note);
+    }
+  }
+  // Partial scoring: distribute 3 pts across 6 items (0.5 each, round to nearest int, max 3)
+  scores.ex1 = Math.min(3, Math.round(correct / 2));
+  showScore('ex1-score', scores.ex1, 3);
+}
+
+/* ════════════════════════════════════════════════════
+   EX 2 — MULTIPLE CHOICE
+════════════════════════════════════════════════════ */
+const ex2Answers = [
+  { name: 'mc1', val: 'a', correct: 'el puesto',   note: '<em>El puesto</em> means stall or stand — a vendor\'s spot at the feria. Don Marcos sells café de olla from his puesto.' },
+  { name: 'mc2', val: 'c', correct: 'vendedor',    note: '<em>Vendedor</em> means vendor — someone who sells. Don Marcos sells (vende) café de olla.' },
+  { name: 'mc3', val: 'b', correct: 'Buenos días', note: '<em>Buenos días</em> = good morning. It is the appropriate greeting early in the day, especially in a formal context like addressing señora López.' },
+  { name: 'mc4', val: 'c', correct: 'artesanías',  note: '<em>Artesanías</em> = crafts, handmade items. Ferias in Oaxaca are known for their artesanías alongside traditional food.' },
+  { name: 'mc5', val: 'd', correct: 'Mucho gusto', note: '<em>Mucho gusto</em> = nice to meet you — the natural response when someone introduces themselves.' },
+];
+
+function checkEx2() {
+  let correct = 0;
+  ex2Answers.forEach(function(item, i) {
+    const chosen = document.querySelector('input[name="' + item.name + '"]:checked');
+    const ok = chosen && chosen.value === item.val;
+    if (ok) {
+      correct++;
+      showFb(item.name + '-fb', true, '¡Correcto! <strong>' + item.correct + '</strong> fits perfectly here.');
+    } else {
+      showFb(item.name + '-fb', false, '<strong>' + item.correct + '</strong> fits here because ' + item.note);
+    }
+  });
+  scores.ex2 = Math.min(3, Math.round(correct * 3 / 5));
+  showScore('ex2-score', scores.ex2, 3);
+}
+
+/* ════════════════════════════════════════════════════
+   EX 3 — MULTIPLE RESPONSE
+   Correct: mr-a, mr-b, mr-c (artesanías, café de olla, puestos)
+════════════════════════════════════════════════════ */
+function checkEx3() {
+  const correct  = ['mr-a', 'mr-b', 'mr-c'];
+  const incorrect = ['mr-d', 'mr-e', 'mr-f'];
+  let allGood = true;
+
+  correct.forEach(function(id) {
+    if (!document.getElementById(id).checked) allGood = false;
+  });
+  incorrect.forEach(function(id) {
+    if (document.getElementById(id).checked) allGood = false;
+  });
+
+  const fb = document.getElementById('ex3-fb');
+  if (allGood) {
+    showFb('ex3-fb', true, '¡Exacto! Artesanías, café de olla, and puestos de vendedores are all things you find at a feria.');
+    scores.ex3 = 3;
+  } else {
+    showFb('ex3-fb', false, 'A feria is an outdoor fair with food, crafts (<em>artesanías</em>), and vendor stalls (<em>puestos</em>). Libraries (bibliotecas), airports (aeropuertos), and hospitals are not part of a feria.');
+    scores.ex3 = 0;
+  }
+  showScore('ex3-score', scores.ex3, 3);
+}
+
+/* ════════════════════════════════════════════════════
+   EX 4 — SORTING
+   si1=formal, si2=formal, si3=formal, si4=informal, si5=informal, si6=informal
+════════════════════════════════════════════════════ */
+const ex4Answers = {
+  si1: { val: 'formal',   phrase: 'Buenos días, señora.',      note: 'This is a respectful greeting used in a formal setting. No verb form tells you — the context (señora) signals formality.' },
+  si2: { val: 'formal',   phrase: '¿A qué se dedica usted?',   note: 'SE and USTED are the formal markers. This is the formal way to ask someone\'s occupation.' },
+  si3: { val: 'formal',   phrase: '¿Cómo se llama usted?',     note: 'SE LLAMA + USTED = formal. Compare: ¿Cómo te llamas? (informal).' },
+  si4: { val: 'informal', phrase: '¿A qué te dedicas?',        note: 'TE and the -as ending signal informal tú. You would use this with a friend, not with a señora or señor.' },
+  si5: { val: 'informal', phrase: '¿Cómo te llamas?',          note: 'TE LLAMAS = informal. Compare: ¿Cómo se llama usted? (formal).' },
+  si6: { val: 'informal', phrase: 'Oye, ¿de dónde eres?',      note: 'ERES is the tú form of ser. OYE is a casual way to get attention — both mark this as informal.' },
+};
+
+function checkEx4() {
+  let correct = 0;
+  for (const [id, data] of Object.entries(ex4Answers)) {
+    const chosen = document.querySelector('input[name="' + id + '"]:checked');
+    const ok = chosen && chosen.value === data.val;
+    if (ok) {
+      correct++;
+      showFb(id + '-fb', true, '¡Perfecto! <em>' + data.phrase + '</em> is ' + data.val + '. SE/SU = formal; TE/TU = informal.');
+    } else {
+      showFb(id + '-fb', false, 'Look for the ending: <em>' + data.phrase + '</em> is ' + data.val + '. ' + data.note);
+    }
+  }
+  scores.ex4 = Math.min(3, Math.round(correct / 2));
+  showScore('ex4-score', scores.ex4, 3);
+}
+
+/* ════════════════════════════════════════════════════
+   EX 5 — WORD BANK / PRODUCTION
+   Answers: blank1=Buenos días, blank2=Mucho gusto,
+            blank3=Me llamo, blank4=De dónde, blank5=Mucho gusto
+════════════════════════════════════════════════════ */
+const ex5Answers = {
+  1: { word: 'Buenos días',  note: '<em>Buenos días</em> = good morning — the right greeting when you arrive and meet someone for the first time in the day.' },
+  2: { word: 'Mucho gusto',  note: '<em>Mucho gusto</em> = nice to meet you — don Felipe is responding to your introduction.' },
+  3: { word: 'Me llamo',     note: '<em>Me llamo</em> = my name is. It literally means "I call myself," and is the standard self-introduction.' },
+  4: { word: 'De dónde',     note: '<em>¿De dónde eres?</em> = Where are you from? Don Felipe is asking about your origin.' },
+  5: { word: 'Mucho gusto',  note: '<em>Mucho gusto</em> can be repeated at the end of a first meeting — it is natural and polite in Spanish.' },
+};
+
+let selectedBankWord = null; // { btn, word }
+const blankContents = {}; // slot → word
+
+function selectBankWord(btn) {
+  if (btn.disabled) return;
+  // Toggle off if already selected
+  if (selectedBankWord && selectedBankWord.btn === btn) {
+    btn.classList.remove('selected');
+    btn.setAttribute('aria-pressed', 'false');
+    selectedBankWord = null;
+    return;
+  }
+  // Deselect previous
+  if (selectedBankWord) {
+    selectedBankWord.btn.classList.remove('selected');
+    selectedBankWord.btn.setAttribute('aria-pressed', 'false');
+  }
+  btn.classList.add('selected');
+  btn.setAttribute('aria-pressed', 'true');
+  selectedBankWord = { btn: btn, word: btn.dataset.word };
+}
+
+function fillBlank(slotBtn) {
+  const slot = parseInt(slotBtn.dataset.slot);
+  if (selectedBankWord) {
+    // If slot already has a word, return it to bank
+    if (blankContents[slot]) {
+      returnWordToBank(blankContents[slot]);
+    }
+    // Place word in blank
+    blankContents[slot] = selectedBankWord.word;
+    slotBtn.textContent = selectedBankWord.word;
+    slotBtn.classList.add('filled');
+    slotBtn.setAttribute('aria-label', 'Blank ' + slot + ' — filled with: ' + selectedBankWord.word + '. Click to remove.');
+    // Disable bank button
+    selectedBankWord.btn.disabled = true;
+    selectedBankWord.btn.classList.remove('selected');
+    selectedBankWord.btn.setAttribute('aria-pressed', 'false');
+    selectedBankWord = null;
+  } else {
+    // No word selected — clicking a filled blank removes it
+    if (blankContents[slot]) {
+      returnWordToBank(blankContents[slot]);
+      delete blankContents[slot];
+      slotBtn.textContent = '_____';
+      slotBtn.classList.remove('filled');
+      slotBtn.setAttribute('aria-label', 'Blank ' + slot + ' — click to fill');
+    }
+  }
+}
+
+function returnWordToBank(word) {
+  const btns = document.querySelectorAll('.bank-word');
+  btns.forEach(function(b) {
+    if (b.dataset.word === word) {
+      b.disabled = false;
+    }
+  });
+}
+
+function checkEx5() {
+  let correct = 0;
+  for (let slot = 1; slot <= 5; slot++) {
+    const filled = blankContents[slot];
+    const expected = ex5Answers[slot].word;
+    const ok = filled === expected;
+    if (ok) {
+      correct++;
+      showFb('b' + slot + '-fb', true, '¡Correcto! <strong>' + expected + '</strong>.');
+    } else if (filled) {
+      showFb('b' + slot + '-fb', false, '<strong>' + expected + '</strong> fits here. ' + ex5Answers[slot].note);
+    } else {
+      showFb('b' + slot + '-fb', false, 'This blank needs a word. ' + ex5Answers[slot].note);
+    }
+  }
+  // 5 blanks → 3 pts: round to nearest (0,1,2,3)
+  scores.ex5 = Math.round(correct * 3 / 5);
+  showScore('ex5-score', scores.ex5, 3);
+}
+
+/* ════════════════════════════════════════════════════
+   SUBMIT
+════════════════════════════════════════════════════ */
+let submitted = false;
+
+function submitWorkbook() {
+  if (submitted) return;
+  submitted = true;
+
+  // Run all checks if not already done
+  if (scores.ex1 === null) checkEx1();
+  if (scores.ex2 === null) checkEx2();
+  if (scores.ex3 === null) checkEx3();
+  if (scores.ex4 === null) checkEx4();
+  if (scores.ex5 === null) checkEx5();
+
+  const total = (scores.ex1 || 0) + (scores.ex2 || 0) + (scores.ex3 || 0) + (scores.ex4 || 0) + (scores.ex5 || 0);
+
+  document.getElementById('total-display').textContent = total + '/15';
+
+  const resultEl = document.getElementById('finalResult');
+  document.getElementById('finalBigScore').textContent = total + '/15';
+  resultEl.style.background = total >= 12 ? 'var(--ok-bg)' : total >= 9 ? 'var(--eucalyptus-surface)' : 'var(--bad-bg)';
+  resultEl.style.border = '1px solid ' + (total >= 12 ? 'var(--ok-border)' : total >= 9 ? 'var(--eucalyptus-light)' : 'var(--bad-border)');
+
+  let msg = '';
+  if (total === 15)        msg = '¡Perfecto! Full marks — your vocabulary is ready for the Oaxaca feria!';
+  else if (total >= 12)    msg = '¡Muy bien! Strong work. Review any items with feedback above.';
+  else if (total >= 9)     msg = 'Good effort. Revisit the items marked incorrect and try again before class.';
+  else                     msg = 'Keep practicing! Re-read the feria scene in the eBook and try the exercises again.';
+
+  document.getElementById('finalMsg').textContent = msg;
+  resultEl.classList.remove('hidden');
+  document.getElementById('submitBtn').disabled = true;
+
+  reportScore(total, 15);
+}
+
+/* ════════════════════════════════════════════════════
+   LTI SCORE PASSBACK — Phase 1 (display only)
+════════════════════════════════════════════════════ */
+function reportScore(score, maxScore) {
+  // Phase 1: display only
+  displayFinalScore(score, maxScore);
+
+  // Phase 2: uncomment when Flask ready
+  // const params = new URLSearchParams(window.location.search);
+  // const attempt_id = params.get('attempt_id');
+  // fetch('https://sle-lti-server-950105557003.us-central1.run.app/api/grade', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify({ attempt_id, score, maxScore, block_id: 'l01-vocabulario' })
+  // });
+}
+
+function displayFinalScore(score, maxScore) {
+  console.log('[SLE Score] ' + score + '/' + maxScore);
+}
+
+/* ════════════════════════════════════════════════════
+   ANSWER KEY TOGGLE
+════════════════════════════════════════════════════ */
+function toggleAnswerKey() {
+  const ak = document.getElementById('answerKey');
+  const btn = document.getElementById('akToggleBtn');
+  const isHidden = ak.classList.contains('hidden');
+  ak.classList.toggle('hidden');
+  btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+  btn.textContent = isHidden ? 'Hide Answer Key ▴' : 'Show Answer Key ▾';
+}
+
+/* ════════════════════════════════════════════════════
+   KEYBOARD: allow Enter/Space on blank slots
+════════════════════════════════════════════════════ */
+document.querySelectorAll('.blank-slot').forEach(function(btn) {
+  btn.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn.click();
+    }
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+      const slot = parseInt(btn.dataset.slot);
+      if (blankContents[slot]) {
+        returnWordToBank(blankContents[slot]);
+        delete blankContents[slot];
+        btn.textContent = '_____';
+        btn.classList.remove('filled');
+        btn.setAttribute('aria-label', 'Blank ' + slot + ' — click to fill');
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
