@@ -83,7 +83,7 @@
       color: var(--secondary-text);
     }
 
-    /* ── Audio player ── */
+    /* ── Video player ── */
     .audio-section {
       background: var(--eucalyptus-surface);
       border: 2px solid var(--eucalyptus-light);
@@ -104,10 +104,25 @@
       font-size: .85rem; color: var(--secondary-text);
       margin-bottom: 14px;
     }
-    .audio-section audio {
-      width: 100%;
+    .speed-controls {
+      display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+    }
+    .speed-btn {
+      background: #fff;
+      border: 1px solid var(--eucalyptus-light);
       border-radius: 6px;
-      accent-color: var(--eucalyptus);
+      padding: 5px 14px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--eucalyptus-dark);
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .speed-btn:hover { background: var(--eucalyptus-light); }
+    .speed-btn.active {
+      background: #557076;
+      color: #fff;
+      border-color: #557076;
     }
     .audio-placeholder-note {
       margin-top: 10px;
@@ -395,19 +410,22 @@
     <h2 id="audio-heading">🎧 Audio</h2>
     <div class="audio-title">La feria de Oaxaca</div>
     <div class="audio-meta">Narración cultural · ~45–55 segundos · You may listen as many times as you need.</div>
-    <div class="video-container"
-         style="position:relative;
-                padding-bottom:56.25%;
-                height:0; overflow:hidden;
-                max-width:100%; margin-bottom:2rem;">
-      <iframe
-        src="https://staging.d1n2d1wa65w5v0.amplifyapp.com/L01-Santiago-listening%20act/index.html#/lessons/ClkSn2DHzEabWTCEYbK1szDagjq9MHdY"
-        style="position:absolute; top:0; left:0;
-               width:100%; height:100%; border:0;"
-        allowfullscreen
-        title="La feria de Oaxaca — narrado por Santiago"
-        aria-label="Video: La feria de Oaxaca — narrado por Santiago">
-      </iframe>
+    <video
+      id="listeningVideo"
+      controls
+      controlsList="nodownload"
+      style="width:100%; border-radius:8px;"
+      aria-label="Video: La feria de Oaxaca — narrado por Santiago">
+      <source
+        src="https://staging.dntv8ddj8w1ct.amplifyapp.com/L01-Santiago-listening%20act/L01-Santiago%20ej-1.mp4"
+        type="video/mp4">
+    </video>
+
+    <div class="speed-controls" role="group" aria-label="Playback speed">
+      <button class="speed-btn" data-rate="0.5"  onclick="setSpeed(0.5)">0.5×</button>
+      <button class="speed-btn" data-rate="0.75" onclick="setSpeed(0.75)">0.75×</button>
+      <button class="speed-btn active" data-rate="1"    onclick="setSpeed(1)">1×</button>
+      <button class="speed-btn" data-rate="1.25" onclick="setSpeed(1.25)">1.25×</button>
     </div>
   </div>
 
@@ -468,15 +486,15 @@
 
       <label class="choice">
         <input type="checkbox" id="mr2-a" value="a">
-        Don Marcos is from Veracruz.
+        There are vendors from different parts of Mexico.
       </label>
       <label class="choice">
         <input type="checkbox" id="mr2-b" value="b">
-        There are vendors from different parts of Mexico at the fair.
+        Don Marcos is a café de olla vendor.
       </label>
       <label class="choice">
         <input type="checkbox" id="mr2-c" value="c">
-        Don Marcos and Rosa are both vendors.
+        Santiago and Sofía are tourists at the fair.
       </label>
       <label class="choice">
         <input type="checkbox" id="mr2-d" value="d">
@@ -524,8 +542,8 @@
               <option value="">— choose —</option>
               <option value="a">vendedor de café de olla</option>
               <option value="b">una celebración tradicional</option>
-              <option value="c">amiga de don Marcos y vendedora</option>
-              <option value="d">de donde es don Marcos</option>
+              <option value="c">reportero y estudiante de Comunicaciones</option>
+              <option value="d">amiga de Santiago, turista en la feria</option>
             </select>
           </td>
           <td class="fb-cell"><div id="m3-1-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
@@ -537,34 +555,34 @@
               <option value="">— choose —</option>
               <option value="a">vendedor de café de olla</option>
               <option value="b">una celebración tradicional</option>
-              <option value="c">amiga de don Marcos y vendedora</option>
-              <option value="d">de donde es don Marcos</option>
+              <option value="c">reportero y estudiante de Comunicaciones</option>
+              <option value="d">amiga de Santiago, turista en la feria</option>
             </select>
           </td>
           <td class="fb-cell"><div id="m3-2-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
         </tr>
         <tr>
-          <td class="word-cell">Rosa</td>
+          <td class="word-cell">Santiago</td>
           <td>
-            <select id="m3-3" aria-label="Description of Rosa">
+            <select id="m3-3" aria-label="Description of Santiago">
               <option value="">— choose —</option>
               <option value="a">vendedor de café de olla</option>
               <option value="b">una celebración tradicional</option>
-              <option value="c">amiga de don Marcos y vendedora</option>
-              <option value="d">de donde es don Marcos</option>
+              <option value="c">reportero y estudiante de Comunicaciones</option>
+              <option value="d">amiga de Santiago, turista en la feria</option>
             </select>
           </td>
           <td class="fb-cell"><div id="m3-3-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
         </tr>
         <tr>
-          <td class="word-cell">Veracruz</td>
+          <td class="word-cell">Sofía</td>
           <td>
-            <select id="m3-4" aria-label="Description of Veracruz">
+            <select id="m3-4" aria-label="Description of Sofía">
               <option value="">— choose —</option>
               <option value="a">vendedor de café de olla</option>
               <option value="b">una celebración tradicional</option>
-              <option value="c">amiga de don Marcos y vendedora</option>
-              <option value="d">de donde es don Marcos</option>
+              <option value="c">reportero y estudiante de Comunicaciones</option>
+              <option value="d">amiga de Santiago, turista en la feria</option>
             </select>
           </td>
           <td class="fb-cell"><div id="m3-4-fb" class="fb hidden" role="alert" aria-live="polite"></div></td>
@@ -616,13 +634,13 @@
       <div class="ex-num" aria-hidden="true">5</div>
       <div>
         <div class="ex-title">Multiple Choice — SER in Context</div>
-        <div class="ex-desc">Listen for what don Marcos says about himself and Rosa.</div>
+        <div class="ex-desc">Listen for what Santiago says about himself and Sofía.</div>
       </div>
       <div class="ex-points">3 pts</div>
     </div>
 
-    <p class="question-stem">You hear don Marcos say:</p>
-    <div class="quote-block" aria-label="Audio excerpt">"Mi amiga Rosa y yo _____ vendedores aquí."</div>
+    <p class="question-stem">You hear Santiago say:</p>
+    <div class="quote-block" aria-label="Audio excerpt">"Mi amiga Sofía y yo _____ turistas aquí."</div>
     <p class="question-stem" style="margin-top:0;">Which form of <em>SER</em> did he use?</p>
 
     <fieldset style="border:none;padding:0;">
@@ -645,11 +663,11 @@
     <h3 style="margin-bottom:16px;">Your Score Summary</h3>
     <div class="score-summary">
       <h3>Exercise Scores</h3>
-      <div class="score-row"><span>Exercise 1 — Global Comprehension</span> <span id="s1-display">—/3</span></div>
-      <div class="score-row"><span>Exercise 2 — True Statements</span>       <span id="s2-display">—/3</span></div>
-      <div class="score-row"><span>Exercise 3 — Matching</span>              <span id="s3-display">—/3</span></div>
-      <div class="score-row"><span>Exercise 4 — SER (ellos)</span>           <span id="s4-display">—/3</span></div>
-      <div class="score-row"><span>Exercise 5 — SER (nosotros)</span>        <span id="s5-display">—/3</span></div>
+      <div class="score-row" data-ex="ex1"><span>Exercise 1 — Global Comprehension</span> <span id="s1-display">—/3</span></div>
+      <div class="score-row" data-ex="ex2"><span>Exercise 2 — True Statements</span>       <span id="s2-display">—/3</span></div>
+      <div class="score-row" data-ex="ex3"><span>Exercise 3 — Matching</span>              <span id="s3-display">—/3</span></div>
+      <div class="score-row" data-ex="ex4"><span>Exercise 4 — SER (ellos)</span>           <span id="s4-display">—/3</span></div>
+      <div class="score-row" data-ex="ex5"><span>Exercise 5 — SER (nosotros)</span>        <span id="s5-display">—/3</span></div>
       <div class="score-total"><span>Total</span><span id="total-display">—/15</span></div>
     </div>
 
@@ -676,13 +694,13 @@
         <thead><tr><th>Ex.</th><th>Item</th><th>Correct Answer</th></tr></thead>
         <tbody>
           <tr><td>1</td><td>Main topic</td><td>B — A traditional fair in Oaxaca</td></tr>
-          <tr><td>2</td><td>True statements</td><td>A, B, C — Don Marcos from Veracruz; vendors from many regions; Don Marcos &amp; Rosa both vendors</td></tr>
+          <tr><td>2</td><td>True statements</td><td>A, B, C — vendors from different parts of Mexico; Don Marcos is a café de olla vendor; Santiago &amp; Sofía are tourists</td></tr>
           <tr><td>3</td><td>Don Marcos</td><td>vendedor de café de olla</td></tr>
           <tr><td>3</td><td>La feria</td><td>una celebración tradicional</td></tr>
-          <tr><td>3</td><td>Rosa</td><td>amiga de don Marcos y vendedora</td></tr>
-          <tr><td>3</td><td>Veracruz</td><td>de donde es don Marcos</td></tr>
+          <tr><td>3</td><td>Santiago</td><td>reportero y estudiante de Comunicaciones</td></tr>
+          <tr><td>3</td><td>Sofía</td><td>amiga de Santiago, turista en la feria</td></tr>
           <tr><td>4</td><td>Los vendedores _____</td><td>son</td></tr>
-          <tr><td>5</td><td>Mi amiga Rosa y yo _____</td><td>somos</td></tr>
+          <tr><td>5</td><td>Mi amiga Sofía y yo _____</td><td>somos</td></tr>
         </tbody>
       </table>
     </div>
@@ -707,14 +725,15 @@
         <p>La feria de Oaxaca es una <span class="kw">celebración</span> tradicional.</p>
         <p>Hay música y hay danzas. Hay <span class="kw">artesanías</span> y comida tradicional.</p>
         <p>Los <span class="kw">vendedores</span> son de diferentes partes de México. Algunos son de Oaxaca. Otros son de Veracruz o de Puebla.</p>
-        <p>Don Marcos es <span class="kw">vendedor</span> de <span class="kw">café de olla</span>. El puesto de don Marcos está en la feria. Hay muchas personas en el puesto.</p>
+        <p>El puesto de don Marcos está en la feria. Hay muchas personas en el puesto.</p>
+        <p>Don Marcos es <span class="kw">vendedor</span> de <span class="kw">café de olla</span>.</p>
         <div class="speaker-line">
-          "Me llamo Marcos. Soy de Veracruz. Mi amiga Rosa y yo somos vendedores aquí.
-          ¡<span class="kw">Bienvenidos</span> a la feria!"
+          "Me llamo Santiago. Soy reportero y estudiante de Comunicaciones.
+          Mi amiga Sofía y yo somos turistas aquí. ¡<span class="kw">Bienvenidos</span> a la feria!"
         </div>
       </div>
       <p style="font-size:.8rem;color:var(--secondary-text);margin-top:8px;">
-        <strong>Key vocabulary bolded:</strong> vendedor · artesanías · café de olla · celebración · bienvenidos
+        <strong>Key vocabulary:</strong> celebración · vendedores · artesanías · café de olla · bienvenidos
       </p>
     </div>
   </div>
@@ -728,7 +747,27 @@
 /* ════════════════════════════════════════════════
    STATE
 ════════════════════════════════════════════════ */
-const scores = { ex1: null, ex2: null, ex3: null, ex4: null, ex5: null };
+// ── Exercise filtering via URL param ?exercises=1,3,5 ──
+const _urlParams = new URLSearchParams(window.location.search);
+const _exParam = _urlParams.get('exercises');
+const ALL_EX_KEYS = ['ex1','ex2','ex3','ex4','ex5'];
+const ACTIVE_EXERCISES = _exParam
+    ? new Set(_exParam.split(',').map(n => 'ex' + n.trim()))
+    : new Set(ALL_EX_KEYS);
+const MAX_SCORE = ACTIVE_EXERCISES.size * 3;
+
+ALL_EX_KEYS.forEach(k => {
+    if (!ACTIVE_EXERCISES.has(k)) {
+        const el = document.getElementById(k);
+        if (el) el.hidden = true;
+    }
+});
+document.querySelectorAll('.score-row[data-ex]').forEach(row => {
+    if (!ACTIVE_EXERCISES.has(row.dataset.ex)) row.hidden = true;
+});
+document.getElementById('total-display').textContent = '—/' + MAX_SCORE;
+
+const scores = Object.fromEntries(ALL_EX_KEYS.map(k => [k, null]));
 
 /* ════════════════════════════════════════════════
    HELPERS
@@ -757,12 +796,13 @@ function updateSummary() {
                 ex4: 's4-display', ex5: 's5-display' };
   let total = 0, allDone = true;
   for (const [k, v] of Object.entries(map)) {
+    if (!ACTIVE_EXERCISES.has(k)) continue;
     const s = scores[k];
     document.getElementById(v).textContent = s !== null ? s + '/3' : '—/3';
     if (s !== null) total += s; else allDone = false;
   }
   document.getElementById('total-display').textContent =
-    (allDone ? total : '—') + '/15';
+    (allDone ? total : '—') + '/' + MAX_SCORE;
 }
 
 /* ════════════════════════════════════════════════
@@ -787,8 +827,7 @@ function checkEx1() {
 /* ════════════════════════════════════════════════
    EX 2 — MULTIPLE RESPONSE
    Correct: a, b, c  |  Incorrect: d, e
-   Scoring: 1 pt per correct item selected,
-   0 for not selecting a wrong item, min 0
+   Scoring: 1 pt per correct item selected, min 0
 ════════════════════════════════════════════════ */
 function checkEx2() {
   const correct   = ['mr2-a', 'mr2-b', 'mr2-c'];
@@ -808,10 +847,13 @@ function checkEx2() {
     showFb('ex2-fb', true, '¡Perfecto! You caught all three key details from the audio.');
     scores.ex2 = 3;
   } else {
+    var hints = [];
+    if (document.getElementById('mr2-d').checked)
+      hints.push('The audio says some vendors are from Oaxaca, but it does not say Don Marcos is from Oaxaca.');
+    if (document.getElementById('mr2-e').checked)
+      hints.push('The audio says <em>"hay muchas personas en el puesto"</em> — there are many people at the stall.');
     showFb('ex2-fb', false,
-      'Listen again carefully. Don Marcos says <em>"Soy de Veracruz"</em> — not Oaxaca. ' +
-      'And <em>"Hay muchas personas en el puesto"</em> — there are many people at his stall. ' +
-      'He also says <em>"Mi amiga Rosa y yo somos vendedores aquí."</em>');
+      'Listen again carefully. ' + (hints.length ? hints.join(' ') : 'Make sure you select all three correct statements.'));
     scores.ex2 = pts;
   }
   showScore('ex2-score', scores.ex2, 3);
@@ -821,8 +863,8 @@ function checkEx2() {
    EX 3 — MATCHING
    m3-1 (Don Marcos) = a
    m3-2 (La feria)   = b
-   m3-3 (Rosa)       = c
-   m3-4 (Veracruz)   = d
+   m3-3 (Santiago)   = c
+   m3-4 (Sofía)      = d
 ════════════════════════════════════════════════ */
 const ex3Data = {
   'm3-1': {
@@ -836,14 +878,14 @@ const ex3Data = {
     quote: '"La feria de Oaxaca es una celebración tradicional."'
   },
   'm3-3': {
-    val: 'c', subject: 'Rosa',
-    detail: 'amiga de don Marcos y vendedora',
-    quote: '"Mi amiga Rosa y yo somos vendedores aquí."'
+    val: 'c', subject: 'Santiago',
+    detail: 'reportero y estudiante de Comunicaciones',
+    quote: '"Me llamo Santiago. Soy reportero y estudiante de Comunicaciones."'
   },
   'm3-4': {
-    val: 'd', subject: 'Veracruz',
-    detail: 'de donde es don Marcos',
-    quote: '"Soy de Veracruz."'
+    val: 'd', subject: 'Sofía',
+    detail: 'amiga de Santiago, turista en la feria',
+    quote: '"Mi amiga Sofía y yo somos turistas aquí."'
   },
 };
 
@@ -893,11 +935,11 @@ function checkEx5() {
   const ok = chosen && chosen.value === 'b';
   if (ok) {
     showFb('ex5-fb', true,
-      '¡Correcto! <em>Mi amiga Rosa y yo</em> = nosotros → <strong>SOMOS</strong>.');
+      '¡Correcto! <em>Mi amiga Sofía y yo</em> = nosotros → <strong>SOMOS</strong>.');
     scores.ex5 = 3;
   } else {
     showFb('ex5-fb', false,
-      '<em>"Mi amiga Rosa y yo"</em> = nosotros (we, a group that includes the speaker) → use <strong>SOMOS</strong>. ' +
+      '<em>"Mi amiga Sofía y yo"</em> means nosotros (we, a group that includes the speaker) → use <strong>SOMOS</strong>. ' +
       'SON = ellos &nbsp;·&nbsp; SOY = yo &nbsp;·&nbsp; ES = él / ella / usted.');
     scores.ex5 = 0;
   }
@@ -913,68 +955,160 @@ function submitWorkbook() {
   if (submitted) return;
   submitted = true;
 
-  if (scores.ex1 === null) checkEx1();
-  if (scores.ex2 === null) checkEx2();
-  if (scores.ex3 === null) checkEx3();
-  if (scores.ex4 === null) checkEx4();
-  if (scores.ex5 === null) checkEx5();
+  if (ACTIVE_EXERCISES.has('ex1') && scores.ex1 === null) checkEx1();
+  if (ACTIVE_EXERCISES.has('ex2') && scores.ex2 === null) checkEx2();
+  if (ACTIVE_EXERCISES.has('ex3') && scores.ex3 === null) checkEx3();
+  if (ACTIVE_EXERCISES.has('ex4') && scores.ex4 === null) checkEx4();
+  if (ACTIVE_EXERCISES.has('ex5') && scores.ex5 === null) checkEx5();
 
-  const total = (scores.ex1 || 0) + (scores.ex2 || 0) + (scores.ex3 || 0) +
-                (scores.ex4 || 0) + (scores.ex5 || 0);
+  const total = [...ACTIVE_EXERCISES].reduce((sum, k) => sum + (scores[k] || 0), 0);
+  const pct = MAX_SCORE > 0 ? total / MAX_SCORE : 0;
 
-  document.getElementById('total-display').textContent = total + '/15';
+  document.getElementById('total-display').textContent = total + '/' + MAX_SCORE;
 
-  // Final result panel
   const resultEl = document.getElementById('finalResult');
-  document.getElementById('finalBigScore').textContent = total + '/15';
-  let bgColor, borderColor;
-  if (total >= 12) {
-    bgColor = 'var(--ok-bg)'; borderColor = 'var(--ok-border)';
-  } else if (total >= 9) {
-    bgColor = 'var(--eucalyptus-surface)'; borderColor = 'var(--eucalyptus-light)';
-  } else {
-    bgColor = 'var(--bad-bg)'; borderColor = 'var(--bad-border)';
-  }
+  document.getElementById('finalBigScore').textContent = total + '/' + MAX_SCORE;
+  document.querySelector('#finalResult .score-label').textContent = 'out of ' + MAX_SCORE + ' points';
+  const bgColor    = pct >= 0.8 ? 'var(--ok-bg)'          : pct >= 0.6 ? 'var(--eucalyptus-surface)' : 'var(--bad-bg)';
+  const borderColor = pct >= 0.8 ? 'var(--ok-border)'     : pct >= 0.6 ? 'var(--eucalyptus-light)'   : 'var(--bad-border)';
   resultEl.style.background = bgColor;
   resultEl.style.border = '1px solid ' + borderColor;
 
   let msg;
-  if (total === 15)     msg = '¡Perfecto! Full marks — excellent listening comprehension!';
-  else if (total >= 12) msg = '¡Muy bien! Strong work. Review any missed items above.';
-  else if (total >= 9)  msg = 'Good effort. Listen again to the audio and revisit the feedback.';
-  else                  msg = 'Keep practicing! Try listening to the audio two or three more times, then retake.';
+  if (pct === 1)       msg = '¡Perfecto! Full marks — excellent listening comprehension!';
+  else if (pct >= 0.8) msg = '¡Muy bien! Strong work. Review any missed items above.';
+  else if (pct >= 0.6) msg = 'Good effort. Listen again to the audio and revisit the feedback.';
+  else                 msg = 'Keep practicing! Try listening to the audio two or three more times, then retake.';
 
   document.getElementById('finalMsg').textContent = msg;
   resultEl.classList.remove('hidden');
   document.getElementById('submitBtn').disabled = true;
 
-  // Reveal post-submit controls
   document.getElementById('akToggleBtn').classList.remove('hidden');
   document.getElementById('txToggleBtn').classList.remove('hidden');
   document.getElementById('txHint').classList.remove('hidden');
 
-  reportScore(total, 15);
+  reportScore(total, MAX_SCORE);
 }
 
 /* ════════════════════════════════════════════════
    LTI SCORE PASSBACK — Phase 1 (display only)
 ════════════════════════════════════════════════ */
-function reportScore(score, maxScore) {
-  displayFinalScore(score, maxScore);
-
-  // Phase 2: uncomment when Flask ready
-  // const params = new URLSearchParams(window.location.search);
-  // const attempt_id = params.get('attempt_id');
-  // fetch('https://sle-lti-server-950105557003.us-central1.run.app/api/grade', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ attempt_id, score, maxScore, block_id: 'l01-listening' })
-  // });
-}
-
-function displayFinalScore(score, maxScore) {
+async function reportScore(score, maxScore) {
   console.log('[SLE Score] ' + score + '/' + maxScore);
+
+  const params = new URLSearchParams(window.location.search);
+  const attempt_id = params.get('attempt_id');
+  const token = params.get('token');
+  if (!attempt_id || !token) return;
+
+  try {
+    const resp = await fetch(
+      'https://sle-lti-server-950105557003.us-central1.run.app/api/grade',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ attempt_id, token, score, max_score: maxScore, block_id: 'l01-listening' })
+      }
+    );
+    if (!resp.ok) console.error('Grade passback HTTP error', resp.status);
+  } catch (e) {
+    console.error('Grade passback failed:', e);
+  }
 }
+
+/* ════════════════════════════════════════════════
+   VIDEO SPEED CONTROLS
+════════════════════════════════════════════════ */
+function setSpeed(rate) {
+  const video = document.getElementById('listeningVideo');
+  if (video) video.playbackRate = rate;
+  document.querySelectorAll('.speed-btn').forEach(function(btn) {
+    btn.classList.toggle('active', parseFloat(btn.dataset.rate) === rate);
+  });
+}
+
+/* ════════════════════════════════════════════════
+   CAPTIONS: SRT → VTT Blob URL (cross-origin safe)
+════════════════════════════════════════════════ */
+(function () {
+  // SRT content inlined — converted to WebVTT format
+  const srtContent = `1
+00:00:00,200 --> 00:00:01,390
+La feria de Oaxaca.
+
+2
+00:00:02,930 --> 00:00:05,653
+La feria de Oaxaca es una
+
+3
+00:00:05,653 --> 00:00:08,377
+celebración tradicional, hay música y hay
+
+4
+00:00:08,377 --> 00:00:10,646
+danzas, hay artesanías y comida
+
+5
+00:00:10,646 --> 00:00:13,639
+tradicional. Los vendedores son de
+
+6
+00:00:13,639 --> 00:00:16,307
+diferentes partes de México, algunos son
+
+7
+00:00:16,307 --> 00:00:18,976
+de Oaxaca, otros son de Veracruz
+
+8
+00:00:18,976 --> 00:00:21,834
+o de Puebla. El
+
+9
+00:00:21,834 --> 00:00:24,030
+puesto de don Marcos está en la feria.
+
+10
+00:00:24,770 --> 00:00:26,630
+Hay muchas personas en el puesto.
+
+11
+00:00:27,560 --> 00:00:30,130
+Don Marcos es vendedor de café de olla.
+
+12
+00:00:31,020 --> 00:00:33,920
+Me llamo Santiago, soy reportero y
+
+13
+00:00:33,920 --> 00:00:36,817
+estudiante de comunicaciones. Mi amiga
+
+14
+00:00:36,817 --> 00:00:38,100
+Sofía y yo somos turistas aquí.
+
+15
+00:00:39,960 --> 00:00:41,470
+Bienvenidos a la Feria.`;
+
+  // Convert SRT timestamp (00:00:00,000) to VTT (00:00:00.000)
+  var vtt = 'WEBVTT\n\n' + srtContent.replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g, '$1.$2');
+  var blob = new Blob([vtt], { type: 'text/vtt' });
+  var blobUrl = URL.createObjectURL(blob);
+
+  var video = document.getElementById('listeningVideo');
+  if (video) {
+    var track = document.createElement('track');
+    track.kind = 'captions';
+    track.label = 'Español';
+    track.srclang = 'es';
+    track.src = blobUrl;
+    track.default = true;
+    video.appendChild(track);
+  }
+})();
 
 /* ════════════════════════════════════════════════
    GENERIC SECTION TOGGLE
