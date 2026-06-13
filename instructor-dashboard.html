@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor Dashboard · SLE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ivory: #F8F8F6;
+            --eucalyptus-surface: #F0F3F3;
+            --charcoal: #2F3437;
+            --secondary-text: #474747;
+            --eucalyptus: #557076;
+            --eucalyptus-dark: #44595E;
+            --eucalyptus-light: #C3D1D4;
+            --rose: #D5ADAD;
+            --border: #DCDCDC;
+            --ok-text: #166534;
+            --ok-bg: #EAF3EC;
+            --ok-border: #2E7D4F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--ivory);
+            color: var(--charcoal);
+            min-height: 100vh;
+            padding: 24px 20px;
+        }
+        h1, h2, h3 { font-family: 'Montserrat', Arial, sans-serif; }
+        .container { max-width: 860px; margin: 0 auto; }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(47,52,55,.06);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .header {
+            text-align: center;
+            border-top: 5px solid var(--eucalyptus);
+            padding-top: 20px;
+        }
+        .brand {
+            font-size: .8rem; font-weight: 600; letter-spacing: .12em;
+            text-transform: uppercase; color: var(--eucalyptus); margin-bottom: 10px;
+        }
+        .header h1 { font-size: 1.7rem; margin-bottom: 6px; }
+        .header p { color: var(--secondary-text); font-size: .95rem; }
+
+        /* Workbook section */
+        .workbook-section { margin-bottom: 8px; }
+        .workbook-header {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 0 10px;
+            border-bottom: 2px solid var(--eucalyptus-light);
+            margin-bottom: 14px;
+        }
+        .workbook-header h2 { font-size: 1.05rem; color: var(--eucalyptus-dark); }
+        .category-badge {
+            display: inline-block;
+            background: var(--eucalyptus-surface);
+            border: 1px solid var(--eucalyptus-light);
+            border-radius: 999px;
+            padding: 3px 12px;
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--eucalyptus-dark);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+        .select-all-row {
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 10px;
+        }
+        .select-all-row label {
+            font-size: .85rem; font-weight: 600; color: var(--eucalyptus-dark);
+            cursor: pointer;
+        }
+
+        /* Exercise rows */
+        .ex-list { display: flex; flex-direction: column; gap: 6px; }
+        .ex-row {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--ivory);
+            transition: background .15s, border-color .15s;
+            cursor: pointer;
+        }
+        .ex-row:hover { background: var(--eucalyptus-surface); border-color: var(--eucalyptus-light); }
+        .ex-row.selected { background: var(--ok-bg); border-color: var(--ok-border); }
+        .ex-row input[type="checkbox"] {
+            width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0;
+            accent-color: var(--eucalyptus);
+        }
+        .ex-info { flex: 1; }
+        .ex-num-title {
+            font-weight: 600; font-size: .9rem; color: var(--charcoal);
+        }
+        .ex-desc { font-size: .82rem; color: var(--secondary-text); margin-top: 2px; }
+        .ex-pts {
+            font-size: .8rem; font-weight: 600; color: var(--eucalyptus-dark);
+            background: var(--eucalyptus-surface);
+            border-radius: 999px; padding: 2px 10px;
+            white-space: nowrap; align-self: center;
+        }
+
+        /* Summary bar */
+        .summary-bar {
+            background: var(--eucalyptus-surface);
+            border: 1px solid var(--eucalyptus-light);
+            border-radius: 10px;
+            padding: 16px 20px;
+            display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+        }
+        .summary-bar .stat { text-align: center; }
+        .summary-bar .stat .num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem; font-weight: 700; color: var(--eucalyptus-dark);
+        }
+        .summary-bar .stat .lbl { font-size: .75rem; color: var(--secondary-text); margin-top: 2px; }
+        .summary-bar .divider { width: 1px; height: 40px; background: var(--eucalyptus-light); }
+        .summary-bar .breakdown { flex: 1; min-width: 200px; }
+        .breakdown-row { display: flex; justify-content: space-between; font-size: .85rem; margin-bottom: 4px; }
+        .breakdown-row .cat { color: var(--secondary-text); }
+        .breakdown-row .val { font-weight: 600; color: var(--charcoal); }
+
+        /* Assign button */
+        .assign-section { text-align: center; margin-top: 4px; }
+        .btn-assign {
+            background: var(--eucalyptus);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: background .15s;
+        }
+        .btn-assign:hover { background: var(--eucalyptus-dark); }
+        .btn-assign:disabled { background: #aaa; cursor: not-allowed; }
+
+        /* Result panel */
+        .result-panel {
+            display: none;
+            background: var(--ok-bg);
+            border: 1px solid var(--ok-border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-top: 20px;
+        }
+        .result-panel.show { display: block; }
+        .result-panel h3 { color: var(--ok-text); margin-bottom: 12px; font-size: 1rem; }
+        .url-box {
+            background: #fff;
+            border: 1px solid var(--ok-border);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-family: monospace;
+            font-size: .8rem;
+            word-break: break-all;
+            color: var(--charcoal);
+            margin-bottom: 12px;
+        }
+        .copy-btn {
+            background: var(--eucalyptus);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .15s;
+        }
+        .copy-btn:hover { background: var(--eucalyptus-dark); }
+        .copy-btn.copied { background: var(--ok-border); }
+
+        .canvas-instructions {
+            margin-top: 16px;
+            font-size: .85rem;
+            color: var(--secondary-text);
+            line-height: 1.6;
+        }
+        .canvas-instructions ol { margin: 8px 0 0 18px; }
+        .canvas-instructions li { margin-bottom: 4px; }
+        .canvas-instructions strong { color: var(--charcoal); }
+
+        /* Deep link mode: hidden result, different action */
+        .deeplink-note {
+            background: #fff8e1;
+            border: 1px solid #f9c74f;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: .85rem;
+            color: #7a5c00;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .deeplink-note.show { display: block; }
+
+        @media (max-width: 600px) {
+            .summary-bar { flex-direction: column; gap: 12px; }
+            .divider { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Header -->
+    <div class="card header">
+        <div class="brand">Spanish Learning Edge · Instructor</div>
+        <h1>Assignment Builder</h1>
+        <p>Select the exercises to assign. The system will build the link and send it to Canvas automatically.</p>
+    </div>
+
+    <!-- Deep link notice (shown only when launched from Canvas) -->
+    <div class="deeplink-note" id="deeplink-notice">
+        ✅ Launched from Canvas — clicking <strong>Assign Selected Exercises</strong> will create the assignment automatically.
+    </div>
+
+    <!-- Lesson selector -->
+    <div class="card">
+        <p style="font-size:.85rem;color:var(--secondary-text);margin-bottom:20px;">
+            Lesson: <strong>L01 — Mucho gusto (SPN 01)</strong> &nbsp;·&nbsp; Choose which exercises to include.
+        </p>
+
+        <!-- Grammar -->
+        <div class="workbook-section">
+            <div class="workbook-header">
+                <span class="category-badge">Grammar</span>
+                <h2>SER · Introductions &amp; Register</h2>
+            </div>
+            <div class="select-all-row">
+                <input type="checkbox" id="sa-grammar" onchange="selectAll('grammar', this.checked)" aria-label="Select all Grammar exercises">
+                <label for="sa-grammar">Select all Grammar</label>
+            </div>
+            <div class="ex-list" id="list-grammar">
+                <!-- populated by JS -->
+            </div>
+        </div>
+
+        <!-- Vocabulary -->
+        <div class="workbook-section" style="margin-top:24px;">
+            <div class="workbook-header">
+                <span class="category-badge">Vocabulary</span>
+                <h2>L01 Vocabulary Review</h2>
+            </div>
+            <div class="select-all-row">
+                <input type="checkbox" id="sa-vocab" onchange="selectAll('vocab', this.checked)" aria-label="Select all Vocabulary exercises">
+                <label for="sa-vocab">Select all Vocabulary</label>
+            </div>
+            <div class="ex-list" id="list-vocab">
+            </div>
+        </div>
+
+        <!-- Listening -->
+        <div class="workbook-section" style="margin-top:24px;">
+            <div class="workbook-header">
+                <span class="category-badge">Listening</span>
+                <h2>L01 Listening Activities</h2>
+            </div>
+            <div class="select-all-row">
+                <input type="checkbox" id="sa-listening" onchange="selectAll('listening', this.checked)" aria-label="Select all Listening exercises">
+                <label for="sa-listening">Select all Listening</label>
+            </div>
+            <div class="ex-list" id="list-listening">
+            </div>
+        </div>
+    </div>
+
+    <!-- Score summary -->
+    <div class="card">
+        <div class="summary-bar">
+            <div class="stat">
+                <div class="num" id="total-ex">0</div>
+                <div class="lbl">Exercises</div>
+            </div>
+            <div class="divider"></div>
+            <div class="stat">
+                <div class="num" id="total-pts">0 pts</div>
+                <div class="lbl">Max score</div>
+            </div>
+            <div class="divider"></div>
+            <div class="breakdown">
+                <div class="breakdown-row"><span class="cat">Grammar</span><span class="val" id="bd-grammar">0 ex · 0 pts</span></div>
+                <div class="breakdown-row"><span class="cat">Vocabulary</span><span class="val" id="bd-vocab">0 ex · 0 pts</span></div>
+                <div class="breakdown-row"><span class="cat">Listening</span><span class="val" id="bd-listening">0 ex · 0 pts</span></div>
+            </div>
+        </div>
+
+        <div class="assign-section" style="margin-top:20px;">
+            <button class="btn-assign" id="assign-btn" disabled onclick="handleAssign()">
+                Assign Selected Exercises
+            </button>
+            <p style="font-size:.8rem;color:var(--secondary-text);margin-top:8px;" id="assign-hint">
+                Select at least one exercise to continue.
+            </p>
+        </div>
+
+        <!-- Result panel (standalone mode) -->
+        <div class="result-panel" id="result-panel">
+            <h3>✅ Assignment links ready — paste each into Canvas as an External Tool URL</h3>
+            <div id="result-links"></div>
+            <div class="canvas-instructions">
+                <strong>How to add to Canvas:</strong>
+                <ol>
+                    <li>Open Canvas → your Course → <strong>Assignments → + Assignment</strong></li>
+                    <li>Set <strong>Submission Type → External Tool</strong></li>
+                    <li>Click <strong>Find</strong> and select <em>Spanish Learning Edge</em> (or enter the URL manually)</li>
+                    <li>Paste the workbook URL above into the <strong>External Tool URL</strong> field</li>
+                    <li>Set points, due date, and attempts in Canvas as usual → <strong>Save</strong></li>
+                </ol>
+                <p style="margin-top:10px;">Canvas handles dates, attempt limits, and scoring automatically — you don't need to configure those in the workbook.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// Exercise catalog
+// ─────────────────────────────────────────────────────────────────────────────
+const CATALOG = {
+    grammar: {
+        label: 'Grammar',
+        workbookUrl: 'https://sle-workbooks.github.io/Workbook%20SPN%2001/Grammar/l01-mucho-gusto-workbook.html',
+        exercises: [
+            { num: 1, title: 'Put the introduction in order', desc: 'Sequence 5 sentences from Don Marcos\'s self-introduction at the feria.', pts: 3 },
+            { num: 2, title: 'Match pronoun → SER form', desc: 'Full paradigm: yo/tú/él/nosotros/ellos matched to the correct SER conjugation.', pts: 3 },
+            { num: 3, title: 'Choose the correct form (yo)', desc: 'Fill-in: "Buenos días, señora. _____ don Marcos." — applies SOY rule.', pts: 3 },
+            { num: 4, title: 'Choose the correct form (usted)', desc: '"¿De dónde _____ usted?" — distinguishes ES from ERES for formal register.', pts: 3 },
+            { num: 5, title: 'Which sentences are correct?', desc: 'Multiple-select: identify all sentences with the right SOMOS/SON form.', pts: 3 },
+            { num: 6, title: 'Question → function + register', desc: 'Match 6 questions (cómo te llamas / se llama, de dónde eres / es, etc.) to their communicative function and register.', pts: 3 },
+            { num: 7, title: 'Tú or usted — who got it right?', desc: 'Multiple-select: identify situationally appropriate register choices.', pts: 3 },
+            { num: 8, title: 'Dialogue at the puesto', desc: 'Two-item dialogue: select SOY vs. ERES in a contextual exchange.', pts: 3 },
+            { num: 9, title: 'Paragraph about the vendors', desc: 'Cloze paragraph: fill 4 blanks with the correct SER form.', pts: 3 },
+            { num: 10, title: 'Word bank production', desc: 'Drag soy/eres/es/somos/son into 5 sentences from a shared word bank.', pts: 3 },
+        ]
+    },
+    vocab: {
+        label: 'Vocabulary',
+        workbookUrl: 'https://sle-workbooks.github.io/Workbook%20SPN%2001/Vocabulary/l01-vocabulario-workbook.html',
+        exercises: [
+            { num: 1, title: 'Greeting match', desc: 'Match Spanish greetings to their English equivalents and appropriate time of day.', pts: 3 },
+            { num: 2, title: 'Classroom objects', desc: 'Identify vocabulary items from images or descriptions.', pts: 3 },
+            { num: 3, title: 'Numbers 0–30', desc: 'Fill in missing numbers in a sequence or match numerals to words.', pts: 3 },
+            { num: 4, title: 'Days of the week', desc: 'Order and identify días de la semana.', pts: 3 },
+            { num: 5, title: 'Colors and adjective agreement', desc: 'Match colors to objects with correct gender agreement.', pts: 3 },
+        ]
+    },
+    listening: {
+        label: 'Listening',
+        workbookUrl: 'https://sle-workbooks.github.io/Workbook%20SPN%2001/Listening/l01-listening-workbook.html',
+        exercises: [
+            { num: 1, title: 'Listen and identify the greeting', desc: 'Select which greeting phrase matches what was said.', pts: 3 },
+            { num: 2, title: 'Listen for origin', desc: 'Identify where each speaker says they are from.', pts: 3 },
+            { num: 3, title: 'Register identification', desc: 'Decide whether each audio clip uses tú or usted register.', pts: 3 },
+            { num: 4, title: 'Dialogue comprehension', desc: 'Answer comprehension questions about a short dialogue.', pts: 3 },
+            { num: 5, title: 'Dictation / fill-in', desc: 'Fill blanks with words heard in the audio.', pts: 3 },
+        ]
+    }
+};
+
+// Track selected exercises per workbook: { grammar: Set<num>, vocab: Set, listening: Set }
+const selected = { grammar: new Set(), vocab: new Set(), listening: new Set() };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Render exercise lists
+// ─────────────────────────────────────────────────────────────────────────────
+function renderList(catKey) {
+    const cat = CATALOG[catKey];
+    const container = document.getElementById('list-' + catKey);
+    container.innerHTML = '';
+    cat.exercises.forEach(ex => {
+        const row = document.createElement('label');
+        row.className = 'ex-row';
+        row.setAttribute('for', `ex-${catKey}-${ex.num}`);
+        row.innerHTML = `
+            <input type="checkbox" id="ex-${catKey}-${ex.num}"
+                   aria-label="Exercise ${ex.num}: ${ex.title}"
+                   onchange="toggleExercise('${catKey}', ${ex.num}, this.checked)">
+            <div class="ex-info">
+                <div class="ex-num-title">Exercise ${ex.num} — ${ex.title}</div>
+                <div class="ex-desc">${ex.desc}</div>
+            </div>
+            <span class="ex-pts">${ex.pts} pts</span>
+        `;
+        container.appendChild(row);
+    });
+}
+
+['grammar', 'vocab', 'listening'].forEach(renderList);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Selection logic
+// ─────────────────────────────────────────────────────────────────────────────
+function toggleExercise(catKey, num, checked) {
+    if (checked) selected[catKey].add(num);
+    else selected[catKey].delete(num);
+
+    // Style the row
+    const cb = document.getElementById(`ex-${catKey}-${num}`);
+    cb.closest('.ex-row').classList.toggle('selected', checked);
+
+    // Keep "select all" checkbox in sync
+    const cat = CATALOG[catKey];
+    const saBox = document.getElementById('sa-' + catKey);
+    saBox.checked = selected[catKey].size === cat.exercises.length;
+    saBox.indeterminate = selected[catKey].size > 0 && selected[catKey].size < cat.exercises.length;
+
+    updateSummary();
+}
+
+function selectAll(catKey, checked) {
+    const cat = CATALOG[catKey];
+    cat.exercises.forEach(ex => {
+        selected[catKey][checked ? 'add' : 'delete'](ex.num);
+        const cb = document.getElementById(`ex-${catKey}-${ex.num}`);
+        cb.checked = checked;
+        cb.closest('.ex-row').classList.toggle('selected', checked);
+    });
+    updateSummary();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Summary bar
+// ─────────────────────────────────────────────────────────────────────────────
+function updateSummary() {
+    let totalEx = 0, totalPts = 0;
+    ['grammar', 'vocab', 'listening'].forEach(catKey => {
+        const cat = CATALOG[catKey];
+        const nums = selected[catKey];
+        const exCount = nums.size;
+        const pts = [...nums].reduce((sum, n) => {
+            const ex = cat.exercises.find(e => e.num === n);
+            return sum + (ex ? ex.pts : 0);
+        }, 0);
+        document.getElementById('bd-' + catKey).textContent =
+            exCount ? `${exCount} ex · ${pts} pts` : '—';
+        totalEx += exCount;
+        totalPts += pts;
+    });
+
+    document.getElementById('total-ex').textContent = totalEx;
+    document.getElementById('total-pts').textContent = totalEx ? `${totalPts} pts` : '0 pts';
+
+    const btn = document.getElementById('assign-btn');
+    const hint = document.getElementById('assign-hint');
+    btn.disabled = totalEx === 0;
+    hint.textContent = totalEx === 0
+        ? 'Select at least one exercise to continue.'
+        : `${totalEx} exercise${totalEx !== 1 ? 's' : ''} selected (${totalPts} pts max)`;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Deep Linking detection
+// ─────────────────────────────────────────────────────────────────────────────
+const urlParams = new URLSearchParams(window.location.search);
+const deeplinkLaunchId = urlParams.get('deeplink_launch_id');
+const ltiReturnUrl = urlParams.get('return_url');   // set by server when in deeplink mode
+const isDeepLink = !!(deeplinkLaunchId || ltiReturnUrl);
+
+if (isDeepLink) {
+    document.getElementById('deeplink-notice').classList.add('show');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Assign action
+// ─────────────────────────────────────────────────────────────────────────────
+function buildWorkbookUrl(catKey) {
+    const cat = CATALOG[catKey];
+    const nums = [...selected[catKey]].sort((a, b) => a - b);
+    if (!nums.length) return null;
+    return `${cat.workbookUrl}?exercises=${nums.join(',')}`;
+}
+
+function handleAssign() {
+    if (isDeepLink) {
+        assignViaDeepLink();
+    } else {
+        showStandaloneResult();
+    }
+}
+
+function showStandaloneResult() {
+    const panel = document.getElementById('result-panel');
+    const linksDiv = document.getElementById('result-links');
+    linksDiv.innerHTML = '';
+
+    ['grammar', 'vocab', 'listening'].forEach(catKey => {
+        if (!selected[catKey].size) return;
+        const url = buildWorkbookUrl(catKey);
+        const label = CATALOG[catKey].label;
+        const nums = [...selected[catKey]].sort((a, b) => a - b);
+        linksDiv.innerHTML += `
+            <p style="font-weight:600;font-size:.85rem;margin-bottom:4px;color:var(--eucalyptus-dark);">
+                ${label} — Exercise${nums.length > 1 ? 's' : ''} ${nums.join(', ')}
+            </p>
+            <div class="url-box" id="url-${catKey}">${url}</div>
+            <button class="copy-btn" onclick="copyUrl('${catKey}')" id="copy-${catKey}">Copy URL</button>
+            <hr style="border:none;border-top:1px solid var(--border);margin:16px 0;">
+        `;
+    });
+
+    panel.classList.add('show');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyUrl(catKey) {
+    const urlEl = document.getElementById('url-' + catKey);
+    navigator.clipboard.writeText(urlEl.textContent).then(() => {
+        const btn = document.getElementById('copy-' + catKey);
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy URL'; btn.classList.remove('copied'); }, 2000);
+    });
+}
+
+// Deep Link submission — POSTs to LTI server which returns a self-submitting form
+async function assignViaDeepLink() {
+    const assignments = [];
+    ['grammar', 'vocab', 'listening'].forEach(catKey => {
+        if (!selected[catKey].size) return;
+        const nums = [...selected[catKey]].sort((a, b) => a - b);
+        assignments.push({
+            category: catKey,
+            label: CATALOG[catKey].label,
+            exercises: nums,
+            workbook_url: buildWorkbookUrl(catKey)
+        });
+    });
+
+    const btn = document.getElementById('assign-btn');
+    btn.textContent = 'Sending to Canvas…';
+    btn.disabled = true;
+
+    try {
+        const resp = await fetch(
+            'https://sle-lti-server-950105557003.us-central1.run.app/deeplink/submit',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    deeplink_launch_id: deeplinkLaunchId,
+                    assignments
+                })
+            }
+        );
+        const data = await resp.json();
+        if (data.redirect_url) {
+            window.location.href = data.redirect_url;
+        } else if (data.form_html) {
+            // Server returns a self-submitting form for LTI deep link response
+            document.open(); document.write(data.form_html); document.close();
+        } else {
+            throw new Error('Unexpected response');
+        }
+    } catch (e) {
+        btn.textContent = 'Assign Selected Exercises';
+        btn.disabled = false;
+        alert('Could not send to Canvas: ' + e.message + '\n\nUse the standalone URL method instead.');
+    }
+}
+</script>
+</body>
+</html>

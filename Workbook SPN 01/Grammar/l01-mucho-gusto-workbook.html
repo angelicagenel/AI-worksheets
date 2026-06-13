@@ -956,16 +956,16 @@
                     <tr><th scope="col">Exercise</th><th scope="col" style="text-align:right;">Points</th></tr>
                 </thead>
                 <tbody id="summary-body">
-                    <tr><td>Exercise 1 — Ordering the introduction</td><td class="pts" id="sum-ex1">— /3</td></tr>
-                    <tr><td>Exercise 2 — Pronoun → SER form</td><td class="pts" id="sum-ex2">— /3</td></tr>
-                    <tr><td>Exercise 3 — Yo → soy in context</td><td class="pts" id="sum-ex3">— /3</td></tr>
-                    <tr><td>Exercise 4 — Usted → es in context</td><td class="pts" id="sum-ex4">— /3</td></tr>
-                    <tr><td>Exercise 5 — Correct sentences (somos/son)</td><td class="pts" id="sum-ex5">— /3</td></tr>
-                    <tr><td>Exercise 6 — Question → function + register</td><td class="pts" id="sum-ex6">— /3</td></tr>
-                    <tr><td>Exercise 7 — Tú vs. usted situations</td><td class="pts" id="sum-ex7">— /3</td></tr>
-                    <tr><td>Exercise 8 — Dialogue at the puesto</td><td class="pts" id="sum-ex8">— /3</td></tr>
-                    <tr><td>Exercise 9 — Paragraph about the vendors</td><td class="pts" id="sum-ex9">— /3</td></tr>
-                    <tr><td>Exercise 10 — Word bank production</td><td class="pts" id="sum-ex10">— /3</td></tr>
+                    <tr data-ex="ex1"><td>Exercise 1 — Ordering the introduction</td><td class="pts" id="sum-ex1">— /3</td></tr>
+                    <tr data-ex="ex2"><td>Exercise 2 — Pronoun → SER form</td><td class="pts" id="sum-ex2">— /3</td></tr>
+                    <tr data-ex="ex3"><td>Exercise 3 — Yo → soy in context</td><td class="pts" id="sum-ex3">— /3</td></tr>
+                    <tr data-ex="ex4"><td>Exercise 4 — Usted → es in context</td><td class="pts" id="sum-ex4">— /3</td></tr>
+                    <tr data-ex="ex5"><td>Exercise 5 — Correct sentences (somos/son)</td><td class="pts" id="sum-ex5">— /3</td></tr>
+                    <tr data-ex="ex6"><td>Exercise 6 — Question → function + register</td><td class="pts" id="sum-ex6">— /3</td></tr>
+                    <tr data-ex="ex7"><td>Exercise 7 — Tú vs. usted situations</td><td class="pts" id="sum-ex7">— /3</td></tr>
+                    <tr data-ex="ex8"><td>Exercise 8 — Dialogue at the puesto</td><td class="pts" id="sum-ex8">— /3</td></tr>
+                    <tr data-ex="ex9"><td>Exercise 9 — Paragraph about the vendors</td><td class="pts" id="sum-ex9">— /3</td></tr>
+                    <tr data-ex="ex10"><td>Exercise 10 — Word bank production</td><td class="pts" id="sum-ex10">— /3</td></tr>
                     <tr class="total-row"><td>Total</td><td class="pts" id="sum-total">— /30</td></tr>
                 </tbody>
             </table>
@@ -1182,7 +1182,32 @@
             ]}
         };
 
-        const MAX_SCORE = 30;
+        // ── Exercise filtering via URL param ?exercises=1,3,5 ──────────────
+        const _urlParams = new URLSearchParams(window.location.search);
+        const _exParam = _urlParams.get('exercises');
+        const ACTIVE_EXERCISES = _exParam
+            ? new Set(_exParam.split(',').map(n => 'ex' + n.trim()))
+            : new Set(Object.keys(EXERCISES));
+
+        // Hide non-selected exercise sections
+        document.querySelectorAll('section.card.exercise').forEach(s => {
+            const lbl = s.getAttribute('aria-labelledby') || '';
+            const m = lbl.match(/^(ex\d+)-h$/);
+            if (m && !ACTIVE_EXERCISES.has(m[1])) s.hidden = true;
+        });
+        // Hide non-selected summary rows
+        document.querySelectorAll('#summary-body tr[data-ex]').forEach(row => {
+            if (!ACTIVE_EXERCISES.has(row.dataset.ex)) row.hidden = true;
+        });
+
+        const MAX_SCORE = [...ACTIVE_EXERCISES].reduce((s, k) => s + (EXERCISES[k]?.pts || 0), 0);
+        const _activeCount = ACTIVE_EXERCISES.size;
+
+        // Update total row and submit note to reflect actual max
+        document.getElementById('sum-total').textContent = `— /${MAX_SCORE}`;
+        document.getElementById('submit-note').textContent =
+            `Check all ${_activeCount} exercise${_activeCount !== 1 ? 's' : ''} to enable Submit. You can still change answers and re-check before submitting.`;
+
         const scores = {};   // key → points earned (float)
 
         // Populate exercise 6 selects with the shared option list
@@ -1327,18 +1352,17 @@
         });
 
         function totalScore() {
-            return Object.values(scores).reduce((a, b) => a + b, 0);
+            return [...ACTIVE_EXERCISES].reduce((sum, k) => sum + (scores[k] || 0), 0);
         }
 
         function updateSummary() {
-            const keys = Object.keys(EXERCISES);
-            const done = keys.filter(k => k in scores);
+            const done = [...ACTIVE_EXERCISES].filter(k => k in scores);
             document.getElementById('sum-total').textContent =
-                done.length ? `${fmt(totalScore())} /30` : '— /30';
+                done.length ? `${fmt(totalScore())} /${MAX_SCORE}` : `— /${MAX_SCORE}`;
 
             const submitBtn = document.getElementById('submit-btn');
             const note = document.getElementById('submit-note');
-            if (done.length === keys.length && !submitted) {
+            if (done.length === ACTIVE_EXERCISES.size && !submitted) {
                 submitBtn.disabled = false;
                 note.textContent = 'All exercises checked. You can still change answers and re-check — Submit locks your final score.';
             }
@@ -1367,23 +1391,31 @@
             if (panel.scrollIntoView) panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        function reportScore(score, maxScore) {
-            // Phase 1: display only
+        async function reportScore(score, maxScore) {
             displayFinalScore(score, maxScore);
 
-            // Phase 2: uncomment when Flask ready
-            // const params = new URLSearchParams(
-            //   window.location.search);
-            // const attempt_id =
-            //   params.get('attempt_id');
-            // fetch(
-            //   'https://sle-lti-server.run.app/api/grade',
-            //   { method: 'POST',
-            //     headers: {'Content-Type':
-            //       'application/json'},
-            //     body: JSON.stringify({
-            //       attempt_id, score, maxScore})
-            //   });
+            const params = new URLSearchParams(window.location.search);
+            const attempt_id = params.get('attempt_id');
+            const token = params.get('token');
+            if (!attempt_id || !token) return; // no LTI context
+
+            try {
+                const resp = await fetch(
+                    'https://sle-lti-server-950105557003.us-central1.run.app/api/grade',
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            attempt_id, token, score,
+                            max_score: maxScore,
+                            block_id: 'l01-grammar'
+                        })
+                    }
+                );
+                if (!resp.ok) console.error('Grade passback HTTP error', resp.status);
+            } catch (e) {
+                console.error('Grade passback failed:', e);
+            }
         }
 
         document.getElementById('submit-btn').addEventListener('click', () => {
@@ -1393,9 +1425,9 @@
             const score = Math.round(totalScore() * 10) / 10;
             reportScore(score, MAX_SCORE);
 
-            // Lock the workbook
+            // Lock only visible (active) exercises
             document.querySelectorAll(
-                '.exercise select, .exercise input, .exercise .bank-word, .exercise .blank-btn, .exercise [data-check]'
+                '.exercise:not([hidden]) select, .exercise:not([hidden]) input, .exercise:not([hidden]) .bank-word, .exercise:not([hidden]) .blank-btn, .exercise:not([hidden]) [data-check]'
             ).forEach(el => { el.disabled = true; });
             setActiveBlank(null);
 
