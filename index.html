@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SP101 — Spanish Learning Edge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ivory: #F8F8F6;
+      --surface: #F0F3F3;
+      --charcoal: #2F3437;
+      --secondary: #474747;
+      --eucalyptus: #557076;
+      --eucalyptus-dark: #44595E;
+      --eucalyptus-light: #C3D1D4;
+      --rose: #D5ADAD;
+      --border: #DCDCDC;
+    }
+
+    body {
+      background-color: var(--ivory);
+      color: var(--charcoal);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: var(--eucalyptus);
+      padding: 2.25rem 1.5rem 2rem;
+      text-align: center;
+    }
+
+    header .course-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.5rem;
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    header .subtitle {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      margin-top: 0.5rem;
+    }
+
+    main {
+      flex: 1;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem;
+    }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--eucalyptus);
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    }
+
+    .section-label:first-child { margin-top: 0; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background-color: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.18s ease, transform 0.18s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 18px rgba(85,112,118,0.15);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--secondary);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-arrow {
+      font-size: 0.85rem;
+      color: var(--eucalyptus);
+      font-weight: 600;
+      margin-top: 0.25rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0 0;
+    }
+
+    footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--eucalyptus);
+    }
+
+    @media (max-width: 480px) {
+      header { padding: 1.5rem 1rem 1.25rem; }
+      main   { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="course-label">Spanish Learning Edge · SP101</p>
+    <h1>SP101 — Hola, soy yo</h1>
+    <p class="subtitle">Unit 1 Workbooks &amp; Activities</p>
+  </header>
+
+  <main>
+
+    <p class="section-label">Workbook SP101 — Unit 1</p>
+    <div class="card-grid">
+
+      <a class="card" href="Workbook SPN 01/Listening/index.html">
+        <div class="card-icon">🎧</div>
+        <div class="card-title">Listening Activities</div>
+        <div class="card-desc">Audio comprehension exercises for Unit 1.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="Workbook SPN 01/Listening/l01-listening-workbook.html">
+        <div class="card-icon">📝</div>
+        <div class="card-title">L01 Listening Workbook</div>
+        <div class="card-desc">Workbook exercises for Lesson 01 listening.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="Workbook SPN 01/Grammar/l01-mucho-gusto-workbook.html">
+        <div class="card-icon">✏️</div>
+        <div class="card-title">L01 Grammar — Mucho Gusto</div>
+        <div class="card-desc">Grammar workbook for Lesson 01.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="Workbook SPN 01/Vocabulary/l01-vocabulario-workbook.html">
+        <div class="card-icon">🔤</div>
+        <div class="card-title">L01 Vocabulario</div>
+        <div class="card-desc">Vocabulary workbook for Lesson 01.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+    </div>
+
+    <hr class="divider" />
+
+    <p class="section-label">Misceláneos</p>
+    <div class="card-grid">
+
+      <a class="card" href="Miscelaneos/frida-kahlo-introductions.html">
+        <div class="card-icon">🎨</div>
+        <div class="card-title">Frida Kahlo — Introductions</div>
+        <div class="card-desc">Cultural reading activity.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="Miscelaneos/frida-kahlo-ser.html">
+        <div class="card-icon">🎨</div>
+        <div class="card-title">Frida Kahlo — Ser</div>
+        <div class="card-desc">Verb ser practice with cultural context.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="Miscelaneos/guelaguetza-AR-verbs-PT-drag_drop.html">
+        <div class="card-icon">🌽</div>
+        <div class="card-title">Guelaguetza — AR Verbs Drag &amp; Drop</div>
+        <div class="card-desc">Past tense AR verbs drag-and-drop activity.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="Miscelaneos/guelaguetza-AR-verbs-present-tense.html">
+        <div class="card-icon">🌽</div>
+        <div class="card-title">Guelaguetza — AR Verbs Present</div>
+        <div class="card-desc">Present tense AR verbs practice.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="Miscelaneos/la-hora-mx.html">
+        <div class="card-icon">🕐</div>
+        <div class="card-title">La Hora</div>
+        <div class="card-desc">Telling time in Spanish.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Spanish Learning Edge LLC
+  </footer>
+
+</body>
+</html>
