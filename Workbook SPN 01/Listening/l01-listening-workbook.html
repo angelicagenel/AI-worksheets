@@ -645,11 +645,11 @@
     <h3 style="margin-bottom:16px;">Your Score Summary</h3>
     <div class="score-summary">
       <h3>Exercise Scores</h3>
-      <div class="score-row"><span>Exercise 1 — Global Comprehension</span> <span id="s1-display">—/3</span></div>
-      <div class="score-row"><span>Exercise 2 — True Statements</span>       <span id="s2-display">—/3</span></div>
-      <div class="score-row"><span>Exercise 3 — Matching</span>              <span id="s3-display">—/3</span></div>
-      <div class="score-row"><span>Exercise 4 — SER (ellos)</span>           <span id="s4-display">—/3</span></div>
-      <div class="score-row"><span>Exercise 5 — SER (nosotros)</span>        <span id="s5-display">—/3</span></div>
+      <div class="score-row" data-ex="ex1"><span>Exercise 1 — Global Comprehension</span> <span id="s1-display">—/3</span></div>
+      <div class="score-row" data-ex="ex2"><span>Exercise 2 — True Statements</span>       <span id="s2-display">—/3</span></div>
+      <div class="score-row" data-ex="ex3"><span>Exercise 3 — Matching</span>              <span id="s3-display">—/3</span></div>
+      <div class="score-row" data-ex="ex4"><span>Exercise 4 — SER (ellos)</span>           <span id="s4-display">—/3</span></div>
+      <div class="score-row" data-ex="ex5"><span>Exercise 5 — SER (nosotros)</span>        <span id="s5-display">—/3</span></div>
       <div class="score-total"><span>Total</span><span id="total-display">—/15</span></div>
     </div>
 
@@ -728,7 +728,27 @@
 /* ════════════════════════════════════════════════
    STATE
 ════════════════════════════════════════════════ */
-const scores = { ex1: null, ex2: null, ex3: null, ex4: null, ex5: null };
+// ── Exercise filtering via URL param ?exercises=1,3,5 ──
+const _urlParams = new URLSearchParams(window.location.search);
+const _exParam = _urlParams.get('exercises');
+const ALL_EX_KEYS = ['ex1','ex2','ex3','ex4','ex5'];
+const ACTIVE_EXERCISES = _exParam
+    ? new Set(_exParam.split(',').map(n => 'ex' + n.trim()))
+    : new Set(ALL_EX_KEYS);
+const MAX_SCORE = ACTIVE_EXERCISES.size * 3;
+
+ALL_EX_KEYS.forEach(k => {
+    if (!ACTIVE_EXERCISES.has(k)) {
+        const el = document.getElementById(k);
+        if (el) el.hidden = true;
+    }
+});
+document.querySelectorAll('.score-row[data-ex]').forEach(row => {
+    if (!ACTIVE_EXERCISES.has(row.dataset.ex)) row.hidden = true;
+});
+document.getElementById('total-display').textContent = '—/' + MAX_SCORE;
+
+const scores = Object.fromEntries(ALL_EX_KEYS.map(k => [k, null]));
 
 /* ════════════════════════════════════════════════
    HELPERS
@@ -757,12 +777,13 @@ function updateSummary() {
                 ex4: 's4-display', ex5: 's5-display' };
   let total = 0, allDone = true;
   for (const [k, v] of Object.entries(map)) {
+    if (!ACTIVE_EXERCISES.has(k)) continue;
     const s = scores[k];
     document.getElementById(v).textContent = s !== null ? s + '/3' : '—/3';
     if (s !== null) total += s; else allDone = false;
   }
   document.getElementById('total-display').textContent =
-    (allDone ? total : '—') + '/15';
+    (allDone ? total : '—') + '/' + MAX_SCORE;
 }
 
 /* ════════════════════════════════════════════════
@@ -913,67 +934,66 @@ function submitWorkbook() {
   if (submitted) return;
   submitted = true;
 
-  if (scores.ex1 === null) checkEx1();
-  if (scores.ex2 === null) checkEx2();
-  if (scores.ex3 === null) checkEx3();
-  if (scores.ex4 === null) checkEx4();
-  if (scores.ex5 === null) checkEx5();
+  if (ACTIVE_EXERCISES.has('ex1') && scores.ex1 === null) checkEx1();
+  if (ACTIVE_EXERCISES.has('ex2') && scores.ex2 === null) checkEx2();
+  if (ACTIVE_EXERCISES.has('ex3') && scores.ex3 === null) checkEx3();
+  if (ACTIVE_EXERCISES.has('ex4') && scores.ex4 === null) checkEx4();
+  if (ACTIVE_EXERCISES.has('ex5') && scores.ex5 === null) checkEx5();
 
-  const total = (scores.ex1 || 0) + (scores.ex2 || 0) + (scores.ex3 || 0) +
-                (scores.ex4 || 0) + (scores.ex5 || 0);
+  const total = [...ACTIVE_EXERCISES].reduce((sum, k) => sum + (scores[k] || 0), 0);
+  const pct = MAX_SCORE > 0 ? total / MAX_SCORE : 0;
 
-  document.getElementById('total-display').textContent = total + '/15';
+  document.getElementById('total-display').textContent = total + '/' + MAX_SCORE;
 
-  // Final result panel
   const resultEl = document.getElementById('finalResult');
-  document.getElementById('finalBigScore').textContent = total + '/15';
-  let bgColor, borderColor;
-  if (total >= 12) {
-    bgColor = 'var(--ok-bg)'; borderColor = 'var(--ok-border)';
-  } else if (total >= 9) {
-    bgColor = 'var(--eucalyptus-surface)'; borderColor = 'var(--eucalyptus-light)';
-  } else {
-    bgColor = 'var(--bad-bg)'; borderColor = 'var(--bad-border)';
-  }
+  document.getElementById('finalBigScore').textContent = total + '/' + MAX_SCORE;
+  document.querySelector('#finalResult .score-label').textContent = 'out of ' + MAX_SCORE + ' points';
+  const bgColor    = pct >= 0.8 ? 'var(--ok-bg)'          : pct >= 0.6 ? 'var(--eucalyptus-surface)' : 'var(--bad-bg)';
+  const borderColor = pct >= 0.8 ? 'var(--ok-border)'     : pct >= 0.6 ? 'var(--eucalyptus-light)'   : 'var(--bad-border)';
   resultEl.style.background = bgColor;
   resultEl.style.border = '1px solid ' + borderColor;
 
   let msg;
-  if (total === 15)     msg = '¡Perfecto! Full marks — excellent listening comprehension!';
-  else if (total >= 12) msg = '¡Muy bien! Strong work. Review any missed items above.';
-  else if (total >= 9)  msg = 'Good effort. Listen again to the audio and revisit the feedback.';
-  else                  msg = 'Keep practicing! Try listening to the audio two or three more times, then retake.';
+  if (pct === 1)       msg = '¡Perfecto! Full marks — excellent listening comprehension!';
+  else if (pct >= 0.8) msg = '¡Muy bien! Strong work. Review any missed items above.';
+  else if (pct >= 0.6) msg = 'Good effort. Listen again to the audio and revisit the feedback.';
+  else                 msg = 'Keep practicing! Try listening to the audio two or three more times, then retake.';
 
   document.getElementById('finalMsg').textContent = msg;
   resultEl.classList.remove('hidden');
   document.getElementById('submitBtn').disabled = true;
 
-  // Reveal post-submit controls
   document.getElementById('akToggleBtn').classList.remove('hidden');
   document.getElementById('txToggleBtn').classList.remove('hidden');
   document.getElementById('txHint').classList.remove('hidden');
 
-  reportScore(total, 15);
+  reportScore(total, MAX_SCORE);
 }
 
 /* ════════════════════════════════════════════════
    LTI SCORE PASSBACK — Phase 1 (display only)
 ════════════════════════════════════════════════ */
-function reportScore(score, maxScore) {
-  displayFinalScore(score, maxScore);
-
-  // Phase 2: uncomment when Flask ready
-  // const params = new URLSearchParams(window.location.search);
-  // const attempt_id = params.get('attempt_id');
-  // fetch('https://sle-lti-server-950105557003.us-central1.run.app/api/grade', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ attempt_id, score, maxScore, block_id: 'l01-listening' })
-  // });
-}
-
-function displayFinalScore(score, maxScore) {
+async function reportScore(score, maxScore) {
   console.log('[SLE Score] ' + score + '/' + maxScore);
+
+  const params = new URLSearchParams(window.location.search);
+  const attempt_id = params.get('attempt_id');
+  const token = params.get('token');
+  if (!attempt_id || !token) return;
+
+  try {
+    const resp = await fetch(
+      'https://sle-lti-server-950105557003.us-central1.run.app/api/grade',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ attempt_id, token, score, max_score: maxScore, block_id: 'l01-listening' })
+      }
+    );
+    if (!resp.ok) console.error('Grade passback HTTP error', resp.status);
+  } catch (e) {
+    console.error('Grade passback failed:', e);
+  }
 }
 
 /* ════════════════════════════════════════════════
