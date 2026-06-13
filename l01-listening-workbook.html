@@ -395,14 +395,19 @@
     <h2 id="audio-heading">🎧 Audio</h2>
     <div class="audio-title">La feria de Oaxaca</div>
     <div class="audio-meta">Narración cultural · ~45–55 segundos · You may listen as many times as you need.</div>
-    <audio id="listeningAudio" controls aria-label="La feria de Oaxaca — audio for listening exercises">
-      <source src="l01-la-feria-de-oaxaca.mp3" type="audio/mpeg">
-      Your browser does not support the HTML5 audio element.
-      Please contact your instructor for the audio file.
-    </audio>
-    <div class="audio-placeholder-note" role="note" aria-label="Production note">
-      <span aria-hidden="true">⚠️</span>
-      <span><strong>Note for production:</strong> Audio file <code>l01-la-feria-de-oaxaca.mp3</code> will be placed in the same folder as this HTML file once recorded. The player above will work automatically once the file is present.</span>
+    <div class="video-container"
+         style="position:relative;
+                padding-bottom:56.25%;
+                height:0; overflow:hidden;
+                max-width:100%; margin-bottom:2rem;">
+      <iframe
+        src="https://staging.d1n2d1wa65w5v0.amplifyapp.com/L01-Santiago-listening%20act/index.html#/lessons/ClkSn2DHzEabWTCEYbK1szDagjq9MHdY"
+        style="position:absolute; top:0; left:0;
+               width:100%; height:100%; border:0;"
+        allowfullscreen
+        title="La feria de Oaxaca — narrado por Santiago"
+        aria-label="Video: La feria de Oaxaca — narrado por Santiago">
+      </iframe>
     </div>
   </div>
 
@@ -783,7 +788,7 @@ function checkEx1() {
    EX 2 — MULTIPLE RESPONSE
    Correct: a, b, c  |  Incorrect: d, e
    Scoring: 1 pt per correct item selected,
-   minus 1 pt per incorrect item selected, min 0
+   0 for not selecting a wrong item, min 0
 ════════════════════════════════════════════════ */
 function checkEx2() {
   const correct   = ['mr2-a', 'mr2-b', 'mr2-c'];
@@ -793,10 +798,7 @@ function checkEx2() {
   correct.forEach(function(id) {
     if (document.getElementById(id).checked) pts++;
   });
-  incorrect.forEach(function(id) {
-    if (document.getElementById(id).checked) pts--;
-  });
-  pts = Math.max(0, Math.min(3, pts));
+  pts = Math.min(3, pts);
 
   const allCorrect =
     correct.every(function(id) { return document.getElementById(id).checked; }) &&
