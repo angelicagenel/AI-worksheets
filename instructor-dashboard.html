@@ -122,6 +122,12 @@
             border-radius: 999px; padding: 3px 10px;
             white-space: nowrap; align-self: center;
         }
+        .preview-link {
+            display: inline-block; margin-top: 4px;
+            font-size: .75rem; font-weight: 600; color: var(--eucalyptus);
+            text-decoration: none;
+        }
+        .preview-link:hover { text-decoration: underline; }
 
         /* ── Summary bar ── */
         .summary-card {
@@ -214,7 +220,7 @@
 
     <!-- Deep link notice -->
     <div class="deeplink-note" id="deeplink-notice">
-        ✅ Launched from Canvas — clicking <strong>Assign Selected Exercises</strong> will create the Canvas assignment automatically.
+        ✅ Launched from your LMS — clicking <strong>Assign Selected Exercises</strong> will create the assignment automatically.
     </div>
 
     <!-- Grammar card -->
@@ -352,12 +358,15 @@ function renderList(catKey) {
         const row = document.createElement('label');
         row.className = 'ex-row';
         row.htmlFor = id;
+        const previewUrl = `${cat.workbookUrl}?exercises=${ex.num}`;
         row.innerHTML = `
             <input type="checkbox" id="${id}"
                    onchange="toggleExercise('${catKey}', ${ex.num}, this.checked)">
             <div class="ex-body">
                 <div class="ex-title">Exercise ${ex.num} — ${ex.title}</div>
                 <div class="ex-desc">${ex.desc}</div>
+                <a class="preview-link" href="${previewUrl}" target="_blank"
+                   onclick="event.stopPropagation()">Preview ↗</a>
             </div>
             <span class="ex-pts">${ex.pts} pts</span>
         `;
@@ -493,7 +502,9 @@ async function assignViaDeepLink() {
         });
     });
     const btn = document.getElementById('assign-btn');
-    btn.textContent = 'Sending to Canvas…'; btn.disabled = true;
+    const hint = document.getElementById('assign-hint');
+    btn.textContent = 'Submitting to LMS…'; btn.disabled = true;
+    hint.textContent = 'Please wait — creating your assignment…';
     try {
         const resp = await fetch(
             'https://sle-lti-server-950105557003.us-central1.run.app/deeplink/submit',
@@ -509,7 +520,8 @@ async function assignViaDeepLink() {
         else throw new Error('Unexpected response');
     } catch (e) {
         btn.textContent = 'Assign Selected Exercises'; btn.disabled = false;
-        alert('Could not send to Canvas: ' + e.message + '\n\nUse standalone URL method instead.');
+        hint.textContent = 'Error — please try again.';
+        alert('Could not submit to LMS: ' + e.message);
     }
 }
 </script>
