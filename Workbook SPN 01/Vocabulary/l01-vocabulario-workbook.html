@@ -461,7 +461,7 @@
         <div class="ex-title">Matching — Word → Meaning</div>
         <div class="ex-desc">Match each Spanish word to its English meaning.</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <div class="scenario">
@@ -589,7 +589,7 @@
         <div class="ex-title">Multiple Choice — Word in Context</div>
         <div class="ex-desc">Choose the correct vocabulary word to complete each sentence.</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <div class="scenario">
@@ -686,7 +686,7 @@
         <div class="ex-title">Multiple Response — Select All That Apply</div>
         <div class="ex-desc">Select everything that fits. There may be more than one correct answer.</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <p class="instruction">
@@ -738,7 +738,7 @@
         <div class="ex-title">Sorting — Formal or Informal?</div>
         <div class="ex-desc">Decide whether each expression is formal (usted) or informal (tú).</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <div class="scenario">
@@ -834,7 +834,7 @@
         <div class="ex-title">Contextual Production — Complete the Conversation</div>
         <div class="ex-desc">Click a word from the bank, then click a blank to place it. Click a filled blank to remove.</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <div class="scenario">
@@ -904,12 +904,12 @@
     <h3 style="margin-bottom:16px;">Your Score Summary</h3>
     <div class="score-summary">
       <h3>Exercise Scores</h3>
-      <div class="score-row" data-ex="ex1"><span>Exercise 1 — Matching</span>          <span id="s1-display">—/3</span></div>
-      <div class="score-row" data-ex="ex2"><span>Exercise 2 — Multiple Choice</span>   <span id="s2-display">—/3</span></div>
-      <div class="score-row" data-ex="ex3"><span>Exercise 3 — Multiple Response</span> <span id="s3-display">—/3</span></div>
-      <div class="score-row" data-ex="ex4"><span>Exercise 4 — Sorting</span>           <span id="s4-display">—/3</span></div>
-      <div class="score-row" data-ex="ex5"><span>Exercise 5 — Production</span>        <span id="s5-display">—/3</span></div>
-      <div class="score-total"><span>Total</span><span id="total-display">—/15</span></div>
+      <div class="score-row" data-ex="ex1"><span>Exercise 1 — Matching</span>          <span id="s1-display">—/5</span></div>
+      <div class="score-row" data-ex="ex2"><span>Exercise 2 — Multiple Choice</span>   <span id="s2-display">—/5</span></div>
+      <div class="score-row" data-ex="ex3"><span>Exercise 3 — Multiple Response</span> <span id="s3-display">—/5</span></div>
+      <div class="score-row" data-ex="ex4"><span>Exercise 4 — Sorting</span>           <span id="s4-display">—/5</span></div>
+      <div class="score-row" data-ex="ex5"><span>Exercise 5 — Production</span>        <span id="s5-display">—/5</span></div>
+      <div class="score-total"><span>Total</span><span id="total-display">—/25</span></div>
     </div>
 
     <button class="submit-btn" id="submitBtn" onclick="submitWorkbook()" aria-label="Submit workbook and record score">
@@ -918,7 +918,7 @@
 
     <div class="final-result hidden" id="finalResult">
       <div class="big-score" id="finalBigScore"></div>
-      <div class="score-label">out of 15 points</div>
+      <div class="score-label">out of 25 points</div>
       <div class="score-msg" id="finalMsg"></div>
     </div>
 
@@ -980,7 +980,7 @@ const ALL_EX_KEYS = ['ex1','ex2','ex3','ex4','ex5'];
 const ACTIVE_EXERCISES = _exParam
     ? new Set(_exParam.split(',').map(n => 'ex' + n.trim()))
     : new Set(ALL_EX_KEYS);
-const MAX_SCORE = ACTIVE_EXERCISES.size * 3;
+const MAX_SCORE = ACTIVE_EXERCISES.size * 5;
 
 ALL_EX_KEYS.forEach(k => {
     if (!ACTIVE_EXERCISES.has(k)) {
@@ -1019,7 +1019,7 @@ function updateSummary() {
   for (const [k, v] of Object.entries(map)) {
     if (!ACTIVE_EXERCISES.has(k)) continue;
     const s = scores[k];
-    document.getElementById(v).textContent = s !== null ? s + '/3' : '—/3';
+    document.getElementById(v).textContent = s !== null ? s + '/5' : '—/5';
     if (s !== null) total += s; else allDone = false;
   }
   document.getElementById('total-display').textContent = (allDone ? total : '—') + '/' + MAX_SCORE;
@@ -1051,9 +1051,9 @@ function checkEx1() {
       showFb(id + '-fb', false, '<strong>' + data.word + '</strong> means <em>' + data.meaning + '</em>. ' + data.note);
     }
   }
-  // Partial scoring: distribute 3 pts across 6 items (0.5 each, round to nearest int, max 3)
-  scores.ex1 = Math.min(3, Math.round(correct / 2));
-  showScore('ex1-score', scores.ex1, 3);
+  // Partial scoring: distribute 5 pts across 6 items, round to nearest int, max 5
+  scores.ex1 = Math.min(5, Math.round(correct * 5 / 6));
+  showScore('ex1-score', scores.ex1, 5);
 }
 
 /* ════════════════════════════════════════════════════
@@ -1079,8 +1079,8 @@ function checkEx2() {
       showFb(item.name + '-fb', false, '<strong>' + item.correct + '</strong> fits here because ' + item.note);
     }
   });
-  scores.ex2 = Math.min(3, Math.round(correct * 3 / 5));
-  showScore('ex2-score', scores.ex2, 3);
+  scores.ex2 = Math.min(5, correct);
+  showScore('ex2-score', scores.ex2, 5);
 }
 
 /* ════════════════════════════════════════════════════
@@ -1102,12 +1102,12 @@ function checkEx3() {
   const fb = document.getElementById('ex3-fb');
   if (allGood) {
     showFb('ex3-fb', true, '¡Exacto! Artesanías, café de olla, and puestos de vendedores are all things you find at a feria.');
-    scores.ex3 = 3;
+    scores.ex3 = 5;
   } else {
     showFb('ex3-fb', false, 'A feria is an outdoor fair with food, crafts (<em>artesanías</em>), and vendor stalls (<em>puestos</em>). Libraries (bibliotecas), airports (aeropuertos), and hospitals are not part of a feria.');
     scores.ex3 = 0;
   }
-  showScore('ex3-score', scores.ex3, 3);
+  showScore('ex3-score', scores.ex3, 5);
 }
 
 /* ════════════════════════════════════════════════════
@@ -1135,8 +1135,8 @@ function checkEx4() {
       showFb(id + '-fb', false, 'Look for the ending: <em>' + data.phrase + '</em> is ' + data.val + '. ' + data.note);
     }
   }
-  scores.ex4 = Math.min(3, Math.round(correct / 2));
-  showScore('ex4-score', scores.ex4, 3);
+  scores.ex4 = Math.min(5, Math.round(correct * 5 / 6));
+  showScore('ex4-score', scores.ex4, 5);
 }
 
 /* ════════════════════════════════════════════════════
@@ -1227,9 +1227,9 @@ function checkEx5() {
       showFb('b' + slot + '-fb', false, 'This blank needs a word. ' + ex5Answers[slot].note);
     }
   }
-  // 5 blanks → 3 pts: round to nearest (0,1,2,3)
-  scores.ex5 = Math.round(correct * 3 / 5);
-  showScore('ex5-score', scores.ex5, 3);
+  // 5 blanks → 5 pts: 1 pt per blank
+  scores.ex5 = Math.min(5, correct);
+  showScore('ex5-score', scores.ex5, 5);
 }
 
 /* ════════════════════════════════════════════════════

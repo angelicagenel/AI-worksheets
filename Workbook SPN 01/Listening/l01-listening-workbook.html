@@ -447,7 +447,7 @@
         <div class="ex-title">Multiple Choice — Global Comprehension</div>
         <div class="ex-desc">Listen for the main topic of the audio.</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <p class="question-stem">What is this audio mainly about?</p>
@@ -477,7 +477,7 @@
         <div class="ex-title">Multiple Response — True Statements</div>
         <div class="ex-desc">Select every statement that the audio supports.</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <p class="question-stem">According to the audio, which statements are true? Select <strong>ALL</strong> that apply.</p>
@@ -522,7 +522,7 @@
         <div class="ex-title">Matching — Person / Place → Detail</div>
         <div class="ex-desc">Match each name or place to what the audio says about it.</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <p class="instruction">Select the description from the audio that matches each item.</p>
@@ -605,7 +605,7 @@
         <div class="ex-title">Multiple Choice — SER in Context</div>
         <div class="ex-desc">Listen for the correct form of SER.</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <p class="question-stem">You hear this sentence in the audio:</p>
@@ -637,7 +637,7 @@
         <div class="ex-title">Multiple Choice — SER in Context</div>
         <div class="ex-desc">Listen for what Santiago says about himself and Sofía.</div>
       </div>
-      <div class="ex-points">3 pts</div>
+      <div class="ex-points">5 pts</div>
     </div>
 
     <p class="question-stem">You hear Santiago say:</p>
@@ -664,12 +664,12 @@
     <h3 style="margin-bottom:16px;">Your Score Summary</h3>
     <div class="score-summary">
       <h3>Exercise Scores</h3>
-      <div class="score-row" data-ex="ex1"><span>Exercise 1 — Global Comprehension</span> <span id="s1-display">—/3</span></div>
-      <div class="score-row" data-ex="ex2"><span>Exercise 2 — True Statements</span>       <span id="s2-display">—/3</span></div>
-      <div class="score-row" data-ex="ex3"><span>Exercise 3 — Matching</span>              <span id="s3-display">—/3</span></div>
-      <div class="score-row" data-ex="ex4"><span>Exercise 4 — SER (ellos)</span>           <span id="s4-display">—/3</span></div>
-      <div class="score-row" data-ex="ex5"><span>Exercise 5 — SER (nosotros)</span>        <span id="s5-display">—/3</span></div>
-      <div class="score-total"><span>Total</span><span id="total-display">—/15</span></div>
+      <div class="score-row" data-ex="ex1"><span>Exercise 1 — Global Comprehension</span> <span id="s1-display">—/5</span></div>
+      <div class="score-row" data-ex="ex2"><span>Exercise 2 — True Statements</span>       <span id="s2-display">—/5</span></div>
+      <div class="score-row" data-ex="ex3"><span>Exercise 3 — Matching</span>              <span id="s3-display">—/5</span></div>
+      <div class="score-row" data-ex="ex4"><span>Exercise 4 — SER (ellos)</span>           <span id="s4-display">—/5</span></div>
+      <div class="score-row" data-ex="ex5"><span>Exercise 5 — SER (nosotros)</span>        <span id="s5-display">—/5</span></div>
+      <div class="score-total"><span>Total</span><span id="total-display">—/25</span></div>
     </div>
 
     <button class="submit-btn" id="submitBtn" onclick="submitWorkbook()" aria-label="Submit workbook and record score">
@@ -678,7 +678,7 @@
 
     <div class="final-result hidden" id="finalResult">
       <div class="big-score" id="finalBigScore"></div>
-      <div class="score-label">out of 15 points</div>
+      <div class="score-label">out of 25 points</div>
       <div class="score-msg" id="finalMsg"></div>
     </div>
 
@@ -755,7 +755,7 @@ const ALL_EX_KEYS = ['ex1','ex2','ex3','ex4','ex5'];
 const ACTIVE_EXERCISES = _exParam
     ? new Set(_exParam.split(',').map(n => 'ex' + n.trim()))
     : new Set(ALL_EX_KEYS);
-const MAX_SCORE = ACTIVE_EXERCISES.size * 3;
+const MAX_SCORE = ACTIVE_EXERCISES.size * 5;
 
 ALL_EX_KEYS.forEach(k => {
     if (!ACTIVE_EXERCISES.has(k)) {
@@ -799,7 +799,7 @@ function updateSummary() {
   for (const [k, v] of Object.entries(map)) {
     if (!ACTIVE_EXERCISES.has(k)) continue;
     const s = scores[k];
-    document.getElementById(v).textContent = s !== null ? s + '/3' : '—/3';
+    document.getElementById(v).textContent = s !== null ? s + '/5' : '—/5';
     if (s !== null) total += s; else allDone = false;
   }
   document.getElementById('total-display').textContent =
@@ -816,13 +816,13 @@ function checkEx1() {
   if (ok) {
     showFb('ex1-fb', true,
       '¡Correcto! The audio describes <em>la feria de Oaxaca</em> — a traditional celebration with music, crafts, and food.');
-    scores.ex1 = 3;
+    scores.ex1 = 5;
   } else {
     showFb('ex1-fb', false,
       'Listen again for the main topic. The speaker describes <em>una feria</em> — a fair with <em>artesanías</em>, <em>comida</em>, and vendors.');
     scores.ex1 = 0;
   }
-  showScore('ex1-score', scores.ex1, 3);
+  showScore('ex1-score', scores.ex1, 5);
 }
 
 /* ════════════════════════════════════════════════
@@ -838,7 +838,6 @@ function checkEx2() {
   correct.forEach(function(id) {
     if (document.getElementById(id).checked) pts++;
   });
-  pts = Math.min(3, pts);
 
   const allCorrect =
     correct.every(function(id) { return document.getElementById(id).checked; }) &&
@@ -846,7 +845,7 @@ function checkEx2() {
 
   if (allCorrect) {
     showFb('ex2-fb', true, '¡Perfecto! You caught all three key details from the audio.');
-    scores.ex2 = 3;
+    scores.ex2 = 5;
   } else {
     var hints = [];
     if (document.getElementById('mr2-d').checked)
@@ -855,9 +854,9 @@ function checkEx2() {
       hints.push('The audio says <em>"hay muchas personas en el puesto"</em> — there are many people at the stall.');
     showFb('ex2-fb', false,
       'Listen again carefully. ' + (hints.length ? hints.join(' ') : 'Make sure you select all three correct statements.'));
-    scores.ex2 = pts;
+    scores.ex2 = Math.round(pts * 5 / 3);
   }
-  showScore('ex2-score', scores.ex2, 3);
+  showScore('ex2-score', scores.ex2, 5);
 }
 
 /* ════════════════════════════════════════════════
@@ -905,8 +904,8 @@ function checkEx3() {
         'The audio says: <em>' + data.quote + '</em>');
     }
   }
-  scores.ex3 = Math.min(3, Math.round(correct * 3 / 4));
-  showScore('ex3-score', scores.ex3, 3);
+  scores.ex3 = Math.min(5, Math.round(correct * 5 / 4));
+  showScore('ex3-score', scores.ex3, 5);
 }
 
 /* ════════════════════════════════════════════════
@@ -918,14 +917,14 @@ function checkEx4() {
   if (ok) {
     showFb('ex4-fb', true,
       '¡Correcto! <em>Los vendedores</em> = ellos → <strong>SON</strong>.');
-    scores.ex4 = 3;
+    scores.ex4 = 5;
   } else {
     showFb('ex4-fb', false,
       '<em>Los vendedores</em> is third person plural (ellos) → use <strong>SON</strong>. ' +
       'SOY = yo &nbsp;·&nbsp; ERES = tú &nbsp;·&nbsp; ES = él / ella / usted.');
     scores.ex4 = 0;
   }
-  showScore('ex4-score', scores.ex4, 3);
+  showScore('ex4-score', scores.ex4, 5);
 }
 
 /* ════════════════════════════════════════════════
@@ -937,14 +936,14 @@ function checkEx5() {
   if (ok) {
     showFb('ex5-fb', true,
       '¡Correcto! <em>Mi amiga Sofía y yo</em> = nosotros → <strong>SOMOS</strong>.');
-    scores.ex5 = 3;
+    scores.ex5 = 5;
   } else {
     showFb('ex5-fb', false,
       '<em>"Mi amiga Sofía y yo"</em> means nosotros (we, a group that includes the speaker) → use <strong>SOMOS</strong>. ' +
       'SON = ellos &nbsp;·&nbsp; SOY = yo &nbsp;·&nbsp; ES = él / ella / usted.');
     scores.ex5 = 0;
   }
-  showScore('ex5-score', scores.ex5, 3);
+  showScore('ex5-score', scores.ex5, 5);
 }
 
 /* ════════════════════════════════════════════════
