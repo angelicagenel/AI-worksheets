@@ -538,9 +538,10 @@
         }
 
         .recheck-hint {
-            font-size: 0.85rem;
-            color: #7d7f7c;
-            font-style: italic;
+            font-size: 0.95rem;
+            color: #166534;
+            font-weight: bold;
+            font-style: normal;
             margin-top: 0.5rem;
         }
         .recheck-hint.hidden { display: none; }
@@ -1224,7 +1225,7 @@
         // Update total row and submit note to reflect actual max
         document.getElementById('sum-total').textContent = `— /${MAX_SCORE}`;
         document.getElementById('submit-note').textContent =
-            `Check all ${_activeCount} exercise${_activeCount !== 1 ? 's' : ''} to enable Submit. You can still change answers and re-check before submitting.`;
+            `Check at least one exercise to enable Submit. You can still change answers and re-check before submitting.`;
 
         const scores = {};   // key → points earned (float)
 
@@ -1383,9 +1384,9 @@
 
             const submitBtn = document.getElementById('submit-btn');
             const note = document.getElementById('submit-note');
-            if (done.length === ACTIVE_EXERCISES.size && !submitted) {
+            if (done.length >= 1 && !submitted) {
                 submitBtn.disabled = false;
-                note.textContent = 'All exercises checked. You can still change answers and re-check — Submit locks your final score.';
+                note.textContent = 'Ready to submit! You can still check more exercises or re-check answers — Submit locks your final score.';
             }
         }
 
