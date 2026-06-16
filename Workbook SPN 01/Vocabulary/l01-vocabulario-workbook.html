@@ -1289,7 +1289,7 @@ async function reportScore(score, maxScore) {
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ attempt_id, token, score, max_score: maxScore, block_id: 'l01-vocabulario' })
+        body: JSON.stringify({ attempt_id, token, score, max_score: maxScore, block_id: 'workbook' })
       }
     );
     if (!resp.ok) console.error('Grade passback HTTP error', resp.status);
