@@ -580,160 +580,11 @@
 
 
   <!-- ══════════════════════════════════════════════
-       EXERCISE 2 — MULTIPLE CHOICE
-  ══════════════════════════════════════════════ -->
-  <div class="card exercise" id="ex2">
-    <div class="ex-head">
-      <div class="ex-num" aria-hidden="true">2</div>
-      <div>
-        <div class="ex-title">Multiple Choice — Word in Context</div>
-        <div class="ex-desc">Choose the correct vocabulary word to complete each sentence.</div>
-      </div>
-      <div class="ex-points">5 pts</div>
-    </div>
-
-    <div class="scenario">
-      <strong>Setting:</strong> Scenes from the Oaxaca feria. Don Marcos, doña Rosa, and señora López are all there.
-    </div>
-
-    <!-- Q 2a -->
-    <div class="mc-block" id="mc-1">
-      <p class="sentence-stem">a. Don Marcos tiene un <span class="blank-label">_____</span> en la feria de Oaxaca.</p>
-      <fieldset style="border:none;padding:0;">
-        <legend class="hidden">Options for sentence a</legend>
-        <div class="options-grid">
-          <label class="choice"><input type="radio" name="mc1" value="a"> puesto</label>
-          <label class="choice"><input type="radio" name="mc1" value="b"> canela</label>
-          <label class="choice"><input type="radio" name="mc1" value="c"> feria</label>
-          <label class="choice"><input type="radio" name="mc1" value="d"> café de olla</label>
-        </div>
-      </fieldset>
-      <div id="mc1-fb" class="fb hidden" role="alert" aria-live="polite"></div>
-    </div>
-
-    <!-- Q 2b -->
-    <div class="mc-block" id="mc-2">
-      <p class="sentence-stem">b. Don Marcos es <span class="blank-label">_____</span> de café de olla.</p>
-      <fieldset style="border:none;padding:0;">
-        <legend class="hidden">Options for sentence b</legend>
-        <div class="options-grid">
-          <label class="choice"><input type="radio" name="mc2" value="a"> colega</label>
-          <label class="choice"><input type="radio" name="mc2" value="b"> bienvenido</label>
-          <label class="choice"><input type="radio" name="mc2" value="c"> vendedor</label>
-          <label class="choice"><input type="radio" name="mc2" value="d"> puesto</label>
-        </div>
-      </fieldset>
-      <div id="mc2-fb" class="fb hidden" role="alert" aria-live="polite"></div>
-    </div>
-
-    <!-- Q 2c -->
-    <div class="mc-block" id="mc-3">
-      <p class="sentence-stem">c. <span class="blank-label">_____</span>, señora López. ¿De dónde es usted?</p>
-      <fieldset style="border:none;padding:0;">
-        <legend class="hidden">Options for sentence c</legend>
-        <div class="options-grid">
-          <label class="choice"><input type="radio" name="mc3" value="a"> Buenas tardes</label>
-          <label class="choice"><input type="radio" name="mc3" value="b"> Buenos días</label>
-          <label class="choice"><input type="radio" name="mc3" value="c"> Mucho gusto</label>
-          <label class="choice"><input type="radio" name="mc3" value="d"> Me llamo</label>
-        </div>
-      </fieldset>
-      <div id="mc3-fb" class="fb hidden" role="alert" aria-live="polite"></div>
-    </div>
-
-    <!-- Q 2d -->
-    <div class="mc-block" id="mc-4">
-      <p class="sentence-stem">d. Hay <span class="blank-label">_____</span> y comida tradicional en la feria.</p>
-      <fieldset style="border:none;padding:0;">
-        <legend class="hidden">Options for sentence d</legend>
-        <div class="options-grid">
-          <label class="choice"><input type="radio" name="mc4" value="a"> puestos</label>
-          <label class="choice"><input type="radio" name="mc4" value="b"> vendedores</label>
-          <label class="choice"><input type="radio" name="mc4" value="c"> artesanías</label>
-          <label class="choice"><input type="radio" name="mc4" value="d"> colegas</label>
-        </div>
-      </fieldset>
-      <div id="mc4-fb" class="fb hidden" role="alert" aria-live="polite"></div>
-    </div>
-
-    <!-- Q 2e -->
-    <div class="mc-block" id="mc-5">
-      <p class="sentence-stem">e. Marcos: "Me llamo Marcos." &nbsp; Señora López: "<span class="blank-label">_____</span>."</p>
-      <fieldset style="border:none;padding:0;">
-        <legend class="hidden">Options for sentence e</legend>
-        <div class="options-grid">
-          <label class="choice"><input type="radio" name="mc5" value="a"> Bienvenida</label>
-          <label class="choice"><input type="radio" name="mc5" value="b"> Soy de aquí</label>
-          <label class="choice"><input type="radio" name="mc5" value="c"> Buenos días</label>
-          <label class="choice"><input type="radio" name="mc5" value="d"> Mucho gusto</label>
-        </div>
-      </fieldset>
-      <div id="mc5-fb" class="fb hidden" role="alert" aria-live="polite"></div>
-    </div>
-
-    <button class="check-btn" onclick="checkEx2()">Check Exercise 2</button>
-    <div class="ex-score hidden" id="ex2-score" aria-live="polite"></div>
-  </div><!-- /ex2 -->
-
-
-  <!-- ══════════════════════════════════════════════
-       EXERCISE 3 — MULTIPLE RESPONSE
-  ══════════════════════════════════════════════ -->
-  <div class="card exercise" id="ex3">
-    <div class="ex-head">
-      <div class="ex-num" aria-hidden="true">3</div>
-      <div>
-        <div class="ex-title">Multiple Response — Select All That Apply</div>
-        <div class="ex-desc">Select everything that fits. There may be more than one correct answer.</div>
-      </div>
-      <div class="ex-points">5 pts</div>
-    </div>
-
-    <p class="instruction">
-      Which of the following are things you would <strong>find or say</strong> at a Mexican feria? Select all that apply.
-    </p>
-
-    <div class="mr-grid" role="group" aria-labelledby="mr-heading">
-      <span id="mr-heading" class="hidden">Multiple response options</span>
-
-      <label class="mr-item">
-        <input type="checkbox" id="mr-a" value="artesanias">
-        artesanías
-      </label>
-      <label class="mr-item">
-        <input type="checkbox" id="mr-b" value="cafe">
-        café de olla
-      </label>
-      <label class="mr-item">
-        <input type="checkbox" id="mr-c" value="puestos">
-        puestos de vendedores
-      </label>
-      <label class="mr-item">
-        <input type="checkbox" id="mr-d" value="biblioteca">
-        una biblioteca
-      </label>
-      <label class="mr-item">
-        <input type="checkbox" id="mr-e" value="aeropuerto">
-        un aeropuerto
-      </label>
-      <label class="mr-item">
-        <input type="checkbox" id="mr-f" value="hospital">
-        un hospital
-      </label>
-    </div>
-
-    <button class="check-btn" onclick="checkEx3()">Check Exercise 3</button>
-    <div id="ex3-fb" class="fb hidden global-fb" role="alert" aria-live="polite"></div>
-    <div class="ex-score hidden" id="ex3-score" aria-live="polite"></div>
-  </div><!-- /ex3 -->
-
-
-  <!-- ══════════════════════════════════════════════
        EXERCISE 4 — SORTING (formal vs informal)
   ══════════════════════════════════════════════ -->
   <div class="card exercise" id="ex4">
     <div class="ex-head">
-      <div class="ex-num" aria-hidden="true">4</div>
+      <div class="ex-num" aria-hidden="true">2</div>
       <div>
         <div class="ex-title">Sorting — Formal or Informal?</div>
         <div class="ex-desc">Decide whether each expression is formal (usted) or informal (tú).</div>
@@ -819,7 +670,7 @@
 
     </div>
 
-    <button class="check-btn" onclick="checkEx4()">Check Exercise 4</button>
+    <button class="check-btn" onclick="checkEx4()">Check Exercise 2</button>
     <div class="ex-score hidden" id="ex4-score" aria-live="polite"></div>
   </div><!-- /ex4 -->
 
@@ -829,7 +680,7 @@
   ══════════════════════════════════════════════ -->
   <div class="card exercise" id="ex5">
     <div class="ex-head">
-      <div class="ex-num" aria-hidden="true">5</div>
+      <div class="ex-num" aria-hidden="true">3</div>
       <div>
         <div class="ex-title">Contextual Production — Complete the Conversation</div>
         <div class="ex-desc">Click a word from the bank, then click a blank to place it. Click a filled blank to remove.</div>
@@ -894,7 +745,7 @@
       </tbody>
     </table>
 
-    <button class="check-btn" onclick="checkEx5()">Check Exercise 5</button>
+    <button class="check-btn" onclick="checkEx5()">Check Exercise 3</button>
     <div class="ex-score hidden" id="ex5-score" aria-live="polite"></div>
   </div><!-- /ex5 -->
 
@@ -905,10 +756,8 @@
     <div class="score-summary">
       <h3>Exercise Scores</h3>
       <div class="score-row" data-ex="ex1"><span>Exercise 1 — Matching</span>          <span id="s1-display">—/5</span></div>
-      <div class="score-row" data-ex="ex2"><span>Exercise 2 — Multiple Choice</span>   <span id="s2-display">—/5</span></div>
-      <div class="score-row" data-ex="ex3"><span>Exercise 3 — Multiple Response</span> <span id="s3-display">—/5</span></div>
-      <div class="score-row" data-ex="ex4"><span>Exercise 4 — Sorting</span>           <span id="s4-display">—/5</span></div>
-      <div class="score-row" data-ex="ex5"><span>Exercise 5 — Production</span>        <span id="s5-display">—/5</span></div>
+      <div class="score-row" data-ex="ex4"><span>Exercise 2 — Sorting</span>           <span id="s4-display">—/5</span></div>
+      <div class="score-row" data-ex="ex5"><span>Exercise 3 — Production</span>        <span id="s5-display">—/5</span></div>
       <div class="score-total"><span>Total</span><span id="total-display">—/25</span></div>
     </div>
 
@@ -942,23 +791,17 @@
           <tr><td>1</td><td>las artesanías</td><td>crafts, handmade items</td></tr>
           <tr><td>1</td><td>mucho gusto</td><td>nice to meet you</td></tr>
           <tr><td>1</td><td>bienvenido/a</td><td>welcome</td></tr>
-          <tr><td>2</td><td>sentence a</td><td>puesto</td></tr>
-          <tr><td>2</td><td>sentence b</td><td>vendedor</td></tr>
-          <tr><td>2</td><td>sentence c</td><td>Buenos días</td></tr>
-          <tr><td>2</td><td>sentence d</td><td>artesanías</td></tr>
-          <tr><td>2</td><td>sentence e</td><td>Mucho gusto</td></tr>
-          <tr><td>3</td><td>correct items</td><td>artesanías · café de olla · puestos de vendedores</td></tr>
-          <tr><td>4</td><td>Buenos días, señora.</td><td>Formal</td></tr>
-          <tr><td>4</td><td>¿A qué se dedica usted?</td><td>Formal</td></tr>
-          <tr><td>4</td><td>¿Cómo se llama usted?</td><td>Formal</td></tr>
-          <tr><td>4</td><td>¿A qué te dedicas?</td><td>Informal</td></tr>
-          <tr><td>4</td><td>¿Cómo te llamas?</td><td>Informal</td></tr>
-          <tr><td>4</td><td>Oye, ¿de dónde eres?</td><td>Informal</td></tr>
-          <tr><td>5</td><td>Blank 1</td><td>Buenos días</td></tr>
-          <tr><td>5</td><td>Blank 2</td><td>Mucho gusto</td></tr>
-          <tr><td>5</td><td>Blank 3</td><td>Me llamo</td></tr>
-          <tr><td>5</td><td>Blank 4</td><td>De dónde</td></tr>
-          <tr><td>5</td><td>Blank 5</td><td>Mucho gusto</td></tr>
+          <tr><td>2</td><td>Buenos días, señora.</td><td>Formal</td></tr>
+          <tr><td>2</td><td>¿A qué se dedica usted?</td><td>Formal</td></tr>
+          <tr><td>2</td><td>¿Cómo se llama usted?</td><td>Formal</td></tr>
+          <tr><td>2</td><td>¿A qué te dedicas?</td><td>Informal</td></tr>
+          <tr><td>2</td><td>¿Cómo te llamas?</td><td>Informal</td></tr>
+          <tr><td>2</td><td>Oye, ¿de dónde eres?</td><td>Informal</td></tr>
+          <tr><td>3</td><td>Blank 1</td><td>Buenos días</td></tr>
+          <tr><td>3</td><td>Blank 2</td><td>Mucho gusto</td></tr>
+          <tr><td>3</td><td>Blank 3</td><td>Me llamo</td></tr>
+          <tr><td>3</td><td>Blank 4</td><td>De dónde</td></tr>
+          <tr><td>3</td><td>Blank 5</td><td>Mucho gusto</td></tr>
         </tbody>
       </table>
     </div>
@@ -976,7 +819,7 @@
 // ── Exercise filtering via URL param ?exercises=1,3,5 ──
 const _urlParams = new URLSearchParams(window.location.search);
 const _exParam = _urlParams.get('exercises');
-const ALL_EX_KEYS = ['ex1','ex2','ex3','ex4','ex5'];
+const ALL_EX_KEYS = ['ex1','ex4','ex5'];
 const ACTIVE_EXERCISES = _exParam
     ? new Set(_exParam.split(',').map(n => 'ex' + n.trim()))
     : new Set(ALL_EX_KEYS);
@@ -1014,7 +857,7 @@ function showScore(id, got, max) {
 }
 
 function updateSummary() {
-  const map = { ex1: 's1-display', ex2: 's2-display', ex3: 's3-display', ex4: 's4-display', ex5: 's5-display' };
+  const map = { ex1: 's1-display', ex4: 's4-display', ex5: 's5-display' };
   let total = 0, allDone = true;
   for (const [k, v] of Object.entries(map)) {
     if (!ACTIVE_EXERCISES.has(k)) continue;
@@ -1054,60 +897,6 @@ function checkEx1() {
   // Partial scoring: distribute 5 pts across 6 items, round to nearest int, max 5
   scores.ex1 = Math.min(5, Math.round(correct * 5 / 6));
   showScore('ex1-score', scores.ex1, 5);
-}
-
-/* ════════════════════════════════════════════════════
-   EX 2 — MULTIPLE CHOICE
-════════════════════════════════════════════════════ */
-const ex2Answers = [
-  { name: 'mc1', val: 'a', correct: 'puesto',   note: '<em>Puesto</em> means stall or stand — a vendor\'s spot at the feria. Don Marcos sells café de olla from his puesto.' },
-  { name: 'mc2', val: 'c', correct: 'vendedor',    note: '<em>Vendedor</em> means vendor — someone who sells. Don Marcos sells (vende) café de olla.' },
-  { name: 'mc3', val: 'b', correct: 'Buenos días', note: '<em>Buenos días</em> = good morning. It is the appropriate greeting early in the day, especially in a formal context like addressing señora López.' },
-  { name: 'mc4', val: 'c', correct: 'artesanías',  note: '<em>Artesanías</em> = crafts, handmade items. Ferias in Oaxaca are known for their artesanías alongside traditional food.' },
-  { name: 'mc5', val: 'd', correct: 'Mucho gusto', note: '<em>Mucho gusto</em> = nice to meet you — the natural response when someone introduces themselves.' },
-];
-
-function checkEx2() {
-  let correct = 0;
-  ex2Answers.forEach(function(item, i) {
-    const chosen = document.querySelector('input[name="' + item.name + '"]:checked');
-    const ok = chosen && chosen.value === item.val;
-    if (ok) {
-      correct++;
-      showFb(item.name + '-fb', true, '¡Correcto! <strong>' + item.correct + '</strong> fits perfectly here.');
-    } else {
-      showFb(item.name + '-fb', false, '<strong>' + item.correct + '</strong> fits here because ' + item.note);
-    }
-  });
-  scores.ex2 = Math.min(5, correct);
-  showScore('ex2-score', scores.ex2, 5);
-}
-
-/* ════════════════════════════════════════════════════
-   EX 3 — MULTIPLE RESPONSE
-   Correct: mr-a, mr-b, mr-c (artesanías, café de olla, puestos)
-════════════════════════════════════════════════════ */
-function checkEx3() {
-  const correct  = ['mr-a', 'mr-b', 'mr-c'];
-  const incorrect = ['mr-d', 'mr-e', 'mr-f'];
-  let allGood = true;
-
-  correct.forEach(function(id) {
-    if (!document.getElementById(id).checked) allGood = false;
-  });
-  incorrect.forEach(function(id) {
-    if (document.getElementById(id).checked) allGood = false;
-  });
-
-  const fb = document.getElementById('ex3-fb');
-  if (allGood) {
-    showFb('ex3-fb', true, '¡Exacto! Artesanías, café de olla, and puestos de vendedores are all things you find at a feria.');
-    scores.ex3 = 5;
-  } else {
-    showFb('ex3-fb', false, 'A feria is an outdoor fair with food, crafts (<em>artesanías</em>), and vendor stalls (<em>puestos</em>). Libraries (bibliotecas), airports (aeropuertos), and hospitals are not part of a feria.');
-    scores.ex3 = 0;
-  }
-  showScore('ex3-score', scores.ex3, 5);
 }
 
 /* ════════════════════════════════════════════════════
@@ -1242,8 +1031,6 @@ function submitWorkbook() {
   submitted = true;
 
   if (ACTIVE_EXERCISES.has('ex1') && scores.ex1 === null) checkEx1();
-  if (ACTIVE_EXERCISES.has('ex2') && scores.ex2 === null) checkEx2();
-  if (ACTIVE_EXERCISES.has('ex3') && scores.ex3 === null) checkEx3();
   if (ACTIVE_EXERCISES.has('ex4') && scores.ex4 === null) checkEx4();
   if (ACTIVE_EXERCISES.has('ex5') && scores.ex5 === null) checkEx5();
 
