@@ -820,8 +820,9 @@
 const _urlParams = new URLSearchParams(window.location.search);
 const _exParam = _urlParams.get('exercises');
 const ALL_EX_KEYS = ['ex1','ex4','ex5'];
+const _exNumMap = { '1': 'ex1', '2': 'ex4', '3': 'ex5' };
 const ACTIVE_EXERCISES = _exParam
-    ? new Set(_exParam.split(',').map(n => 'ex' + n.trim()))
+    ? new Set(_exParam.split(',').map(n => _exNumMap[n.trim()] || ('ex' + n.trim())))
     : new Set(ALL_EX_KEYS);
 const MAX_SCORE = ACTIVE_EXERCISES.size * 5;
 
