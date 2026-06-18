@@ -689,8 +689,14 @@
     </div>
 
     <div class="scenario">
-      <strong>Setting:</strong> You arrive at the feria and meet <strong>don Felipe</strong>, an elder vendor. Complete the short conversation using the word bank below. You may use each word only once.
+      <strong>Setting:</strong> You arrive at the feria and meet <strong>don Felipe</strong>, an elder vendor. Complete the conversation using the word bank.
     </div>
+
+    <ol style="font-size:.93rem;margin:0 0 14px 0;padding-left:1.4em;line-height:1.8;">
+      <li><strong>Click a word</strong> in the Word Bank to select it (it will highlight).</li>
+      <li><strong>Click a blank</strong> in the conversation to place it.</li>
+      <li>Changed your mind? Click a filled blank to return the word, then pick again.</li>
+    </ol>
 
     <!-- Word bank -->
     <p style="font-size:.88rem;font-weight:600;color:var(--eucalyptus);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">Word Bank</p>
@@ -699,9 +705,7 @@
       <button class="bank-word" id="wb-1" data-word="Mucho gusto"   onclick="selectBankWord(this)" aria-pressed="false">Mucho gusto</button>
       <button class="bank-word" id="wb-2" data-word="Me llamo"      onclick="selectBankWord(this)" aria-pressed="false">Me llamo</button>
       <button class="bank-word" id="wb-3" data-word="De dónde"      onclick="selectBankWord(this)" aria-pressed="false">De dónde</button>
-      <button class="bank-word" id="wb-4" data-word="Buenas tardes" onclick="selectBankWord(this)" aria-pressed="false">Buenas tardes</button>
-      <button class="bank-word" id="wb-5" data-word="bienvenido/a"  onclick="selectBankWord(this)" aria-pressed="false">bienvenido/a</button>
-      <button class="bank-word" id="wb-6" data-word="me dedico"     onclick="selectBankWord(this)" aria-pressed="false">me dedico</button>
+      <button class="bank-word" id="wb-4" data-word="bienvenido/a"  onclick="selectBankWord(this)" aria-pressed="false">bienvenido/a</button>
     </div>
 
     <!-- Dialogue -->
@@ -709,38 +713,33 @@
       <tbody>
         <tr>
           <td class="speaker">Tú:</td>
-          <td>
-            "<button class="blank-slot" id="blank-1" onclick="fillBlank(this)" aria-label="Blank 1 — click to fill" data-slot="1">_____</button>, don Felipe."
-          </td>
+          <td>"<button class="blank-slot" id="blank-1" onclick="fillBlank(this)" aria-label="Blank 1 — click to fill" data-slot="1">_____</button>, ¿es usted don Felipe?"</td>
           <td style="width:200px"><div id="b1-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
         </tr>
         <tr>
           <td class="speaker">Don Felipe:</td>
-          <td>
-            "<button class="blank-slot" id="blank-2" onclick="fillBlank(this)" aria-label="Blank 2 — click to fill" data-slot="2">_____</button>, bienvenido."
-          </td>
-          <td><div id="b2-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
+          <td>"¡Sí! ¿Cómo te llamas?"</td>
+          <td></td>
         </tr>
         <tr>
           <td class="speaker">Tú:</td>
-          <td>
-            "<button class="blank-slot" id="blank-3" onclick="fillBlank(this)" aria-label="Blank 3 — click to fill" data-slot="3">_____</button> Ana. Soy de Texas."
-          </td>
+          <td>"<button class="blank-slot" id="blank-2" onclick="fillBlank(this)" aria-label="Blank 2 — click to fill" data-slot="2">_____</button> Ana."</td>
+          <td><div id="b2-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
+        </tr>
+        <tr>
+          <td class="speaker">Don Felipe:</td>
+          <td>"¿<button class="blank-slot" id="blank-3" onclick="fillBlank(this)" aria-label="Blank 3 — click to fill" data-slot="3">_____</button> eres?"</td>
           <td><div id="b3-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
         </tr>
         <tr>
-          <td class="speaker">Don Felipe:</td>
-          <td>
-            "¿<button class="blank-slot" id="blank-4" onclick="fillBlank(this)" aria-label="Blank 4 — click to fill" data-slot="4">_____</button> eres?"
-          </td>
-          <td><div id="b4-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
+          <td class="speaker">Tú:</td>
+          <td>"Soy de Texas."</td>
+          <td></td>
         </tr>
         <tr>
           <td class="speaker">Don Felipe:</td>
-          <td>
-            "¡<button class="blank-slot" id="blank-5" onclick="fillBlank(this)" aria-label="Blank 5 — click to fill" data-slot="5">_____</button>, Ana! Es un placer."
-          </td>
-          <td><div id="b5-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
+          <td>"<button class="blank-slot" id="blank-4" onclick="fillBlank(this)" aria-label="Blank 4 — click to fill" data-slot="4">_____</button>. ¡<button class="blank-slot" id="blank-5" onclick="fillBlank(this)" aria-label="Blank 5 — click to fill" data-slot="5">_____</button>, Ana!"</td>
+          <td><div id="b4-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div><div id="b5-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:4px;"></div></td>
         </tr>
       </tbody>
     </table>
@@ -798,9 +797,9 @@
           <tr><td>2</td><td>¿Cómo te llamas?</td><td>Informal</td></tr>
           <tr><td>2</td><td>Oye, ¿de dónde eres?</td><td>Informal</td></tr>
           <tr><td>3</td><td>Blank 1</td><td>Buenos días</td></tr>
-          <tr><td>3</td><td>Blank 2</td><td>Mucho gusto</td></tr>
-          <tr><td>3</td><td>Blank 3</td><td>Me llamo</td></tr>
-          <tr><td>3</td><td>Blank 4</td><td>De dónde</td></tr>
+          <tr><td>3</td><td>Blank 2</td><td>Me llamo</td></tr>
+          <tr><td>3</td><td>Blank 3</td><td>De dónde</td></tr>
+          <tr><td>3</td><td>Blank 4</td><td>Mucho gusto</td></tr>
           <tr><td>3</td><td>Blank 5</td><td>bienvenido/a</td></tr>
         </tbody>
       </table>
@@ -931,15 +930,15 @@ function checkEx4() {
 
 /* ════════════════════════════════════════════════════
    EX 5 — WORD BANK / PRODUCTION
-   Answers: blank1=Buenos días, blank2=Mucho gusto,
-            blank3=Me llamo, blank4=De dónde, blank5=bienvenido/a
+   Answers: blank1=Buenos días, blank2=Me llamo,
+            blank3=De dónde, blank4=Mucho gusto, blank5=bienvenido/a
 ════════════════════════════════════════════════════ */
 const ex5Answers = {
-  1: { word: 'Buenos días',  note: '<em>Buenos días</em> = good morning — the right greeting when you arrive and meet someone for the first time in the day.' },
-  2: { word: 'Mucho gusto',  note: '<em>Mucho gusto</em> = nice to meet you — don Felipe is responding to your introduction.' },
-  3: { word: 'Me llamo',     note: '<em>Me llamo</em> = my name is. It literally means "I call myself," and is the standard self-introduction.' },
-  4: { word: 'De dónde',     note: '<em>¿De dónde eres?</em> = Where are you from? Don Felipe is asking about your origin.' },
-  5: { word: 'bienvenido/a', note: '<em>Bienvenido/a</em> = welcome. Don Felipe is welcoming Ana to the feria after she introduces herself.' },
+  1: { word: 'Buenos días',  note: '<em>Buenos días</em> = good morning — the right greeting when meeting someone for the first time in the day.' },
+  2: { word: 'Me llamo',     note: '<em>Me llamo</em> = my name is. The standard way to introduce yourself in Spanish.' },
+  3: { word: 'De dónde',     note: '<em>¿De dónde eres?</em> = Where are you from? Don Felipe is asking about Ana\'s origin.' },
+  4: { word: 'Mucho gusto',  note: '<em>Mucho gusto</em> = nice to meet you — don Felipe\'s response after learning Ana\'s name and where she\'s from.' },
+  5: { word: 'bienvenido/a', note: '<em>Bienvenido/a</em> = welcome. Don Felipe welcomes Ana to the feria.' },
 };
 
 let selectedBankWord = null; // { btn, word }
