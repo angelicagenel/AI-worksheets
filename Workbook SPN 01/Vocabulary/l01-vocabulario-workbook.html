@@ -736,9 +736,9 @@
           <td><div id="b4-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
         </tr>
         <tr>
-          <td class="speaker">Tú:</td>
+          <td class="speaker">Don Felipe:</td>
           <td>
-            "Soy de Texas. <button class="blank-slot" id="blank-5" onclick="fillBlank(this)" aria-label="Blank 5 — click to fill" data-slot="5">_____</button>, don Felipe."
+            "¡<button class="blank-slot" id="blank-5" onclick="fillBlank(this)" aria-label="Blank 5 — click to fill" data-slot="5">_____</button>, Ana! Es un placer."
           </td>
           <td><div id="b5-fb" class="fb hidden" role="alert" aria-live="polite" style="margin-top:0;"></div></td>
         </tr>
@@ -801,7 +801,7 @@
           <tr><td>3</td><td>Blank 2</td><td>Mucho gusto</td></tr>
           <tr><td>3</td><td>Blank 3</td><td>Me llamo</td></tr>
           <tr><td>3</td><td>Blank 4</td><td>De dónde</td></tr>
-          <tr><td>3</td><td>Blank 5</td><td>Mucho gusto</td></tr>
+          <tr><td>3</td><td>Blank 5</td><td>bienvenido/a</td></tr>
         </tbody>
       </table>
     </div>
@@ -932,14 +932,14 @@ function checkEx4() {
 /* ════════════════════════════════════════════════════
    EX 5 — WORD BANK / PRODUCTION
    Answers: blank1=Buenos días, blank2=Mucho gusto,
-            blank3=Me llamo, blank4=De dónde, blank5=Mucho gusto
+            blank3=Me llamo, blank4=De dónde, blank5=bienvenido/a
 ════════════════════════════════════════════════════ */
 const ex5Answers = {
   1: { word: 'Buenos días',  note: '<em>Buenos días</em> = good morning — the right greeting when you arrive and meet someone for the first time in the day.' },
   2: { word: 'Mucho gusto',  note: '<em>Mucho gusto</em> = nice to meet you — don Felipe is responding to your introduction.' },
   3: { word: 'Me llamo',     note: '<em>Me llamo</em> = my name is. It literally means "I call myself," and is the standard self-introduction.' },
   4: { word: 'De dónde',     note: '<em>¿De dónde eres?</em> = Where are you from? Don Felipe is asking about your origin.' },
-  5: { word: 'Mucho gusto',  note: '<em>Mucho gusto</em> can be repeated at the end of a first meeting — it is natural and polite in Spanish.' },
+  5: { word: 'bienvenido/a', note: '<em>Bienvenido/a</em> = welcome. Don Felipe is welcoming Ana to the feria after she introduces herself.' },
 };
 
 let selectedBankWord = null; // { btn, word }
