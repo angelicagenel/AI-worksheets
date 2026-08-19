@@ -631,6 +631,8 @@
             const token = params.get('token');
 
             if (!attempt_id || !token) return;
+            const gradeSubmitUrl = params.get('grade_submit_url')
+                || 'https://sle-lti-server-950105557003.us-central1.run.app/api/grade';
 
             let correctCount = 0;
             exercises.forEach((exercise, index) => {
@@ -638,7 +640,7 @@
             });
 
             return fetch(
-                'https://sle-lti-server-950105557003.us-central1.run.app/api/grade',
+                gradeSubmitUrl,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
