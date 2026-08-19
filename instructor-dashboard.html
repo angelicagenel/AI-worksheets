@@ -444,6 +444,8 @@ function updateSummary() {
 // ── Deep Link detection ───────────────────────────────────────────────────────
 const urlParams = new URLSearchParams(window.location.search);
 const deeplinkLaunchId = urlParams.get('deeplink_launch_id');
+const deeplinkSubmitUrl = urlParams.get('deeplink_submit_url')
+    || 'https://sle-lti-server-950105557003.us-central1.run.app/deeplink/submit';
 const isDeepLink = !!deeplinkLaunchId;
 if (isDeepLink) document.getElementById('deeplink-notice').classList.add('show');
 
@@ -505,7 +507,7 @@ async function assignViaDeepLink() {
     hint.textContent = 'Please wait — creating your assignment…';
     try {
         const resp = await fetch(
-            'https://sle-lti-server-950105557003.us-central1.run.app/deeplink/submit',
+            deeplinkSubmitUrl,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
