@@ -1414,38 +1414,53 @@
         }
 
         async function reportScore(score, maxScore) {
-            displayFinalScore(score, maxScore);
-
             const params = new URLSearchParams(window.location.search);
             const attempt_id = params.get('attempt_id');
             const token = params.get('token');
-            if (!attempt_id || !token) return; // no LTI context
-
-            try {
-                const resp = await fetch(
-                    'https://sle-lti-server-950105557003.us-central1.run.app/api/grade',
-                    {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            attempt_id, token, score,
-                            max_score: maxScore,
-                            block_id: 'workbook'
-                        })
-                    }
-                );
-                if (!resp.ok) console.error('Grade passback HTTP error', resp.status);
-            } catch (e) {
-                console.error('Grade passback failed:', e);
+            if (!attempt_id || !token) {
+                displayFinalScore(score, maxScore);
+                return { passback: 'standalone' };
             }
+
+            const gradeSubmitUrl = params.get('grade_submit_url')
+                || 'https://sle-lti-server-950105557003.us-central1.run.app/api/grade';
+            const resp = await fetch(gradeSubmitUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    attempt_id, token, score,
+                    max_score: maxScore,
+                    block_id: 'workbook'
+                })
+            });
+            const data = await resp.json().catch(() => ({}));
+            if (!resp.ok || data.passback === 'failed') {
+                throw new Error(data.error || `Grade passback HTTP ${resp.status}`);
+            }
+            displayFinalScore(score, maxScore);
+            return data;
         }
 
-        document.getElementById('submit-btn').addEventListener('click', () => {
+        document.getElementById('submit-btn').addEventListener('click', async () => {
             if (submitted) return;
-            submitted = true;
-
             const score = Math.round(totalScore() * 10) / 10;
-            reportScore(score, MAX_SCORE);
+            const submitBtn = document.getElementById('submit-btn');
+            const submitNote = document.getElementById('submit-note');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting…';
+            submitNote.textContent = 'Sending your score to the LMS…';
+
+            try {
+                await reportScore(score, MAX_SCORE);
+            } catch (error) {
+                console.error('Grade passback failed:', error);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit final score';
+                submitNote.textContent = 'Your score was not sent. Please try again.';
+                return;
+            }
+
+            submitted = true;
 
             // Lock only visible (active) exercises
             document.querySelectorAll(
@@ -1453,10 +1468,9 @@
             ).forEach(el => { el.disabled = true; });
             setActiveBlank(null);
 
-            const submitBtn = document.getElementById('submit-btn');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Score submitted ✓';
-            document.getElementById('submit-note').textContent =
+            submitNote.textContent =
                 'Your final score has been recorded. Open the answer key below to review every rule.';
 
             document.getElementById('key-controls').style.display = 'block';
