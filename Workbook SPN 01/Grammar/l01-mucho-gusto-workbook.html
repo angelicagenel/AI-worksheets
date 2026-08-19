@@ -581,7 +581,7 @@
             <h3 id="intro-h">How this workbook works</h3>
             <p>You already met don Marcos, doña Rosa, and señora López at the feria de Oaxaca. Now it's your turn to produce the full SER paradigm and choose between <strong>tú</strong> and <strong>usted</strong> like a local.</p>
             <ul>
-                <li>10 exercises · 50 points total · no time limit, no attempt limits.</li>
+                <li><span id="assignment-summary">10 exercises · 50 points total</span> · no time limit, no attempt limits.</li>
                 <li>Press <strong>Check</strong> on each exercise to see your score and the rule for anything you missed.</li>
                 <li>You can change any answer and re-check until you press <strong>Submit</strong> at the end.</li>
             </ul>
@@ -1221,6 +1221,9 @@
 
         const MAX_SCORE = [...ACTIVE_EXERCISES].reduce((s, k) => s + (EXERCISES[k]?.pts || 0), 0);
         const _activeCount = ACTIVE_EXERCISES.size;
+        const _exerciseLabel = _activeCount === 1 ? 'exercise' : 'exercises';
+        document.getElementById('assignment-summary').textContent =
+            `${_activeCount} ${_exerciseLabel} · ${MAX_SCORE} points total`;
 
         // Update total row and submit note to reflect actual max
         document.getElementById('sum-total').textContent = `— /${MAX_SCORE}`;
