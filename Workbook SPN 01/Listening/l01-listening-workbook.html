@@ -1001,17 +1001,19 @@ async function reportScore(score, maxScore) {
   const attempt_id = params.get('attempt_id');
   const token = params.get('token');
   if (!attempt_id || !token) return;
+  const gradeSubmitUrl = params.get('grade_submit_url')
+    || 'https://sle-lti-server-950105557003.us-central1.run.app/api/grade';
 
   try {
     const resp = await fetch(
-      'https://sle-lti-server-950105557003.us-central1.run.app/api/grade',
+      gradeSubmitUrl,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ attempt_id, token, score, max_score: maxScore, block_id: 'workbook' })
       }
     );
-    if (!resp.ok) console.error('Grade passback HTTP error', resp.status);
+    if (!resp.ok) throw new Error('Grade passback HTTP ' + resp.status);
   } catch (e) {
     console.error('Grade passback failed:', e);
   }
