@@ -305,6 +305,7 @@
 const CATALOG = {
     grammar: {
         label: 'Grammar',
+        catalogVersionId: 'SP101-U01-L01-WB-GRAMMAR@1',
         workbookUrl: 'https://angelicagenel.github.io/AI-worksheets/Workbook%20SPN%2001/Grammar/l01-mucho-gusto-workbook.html',
         exercises: [
             { num: 1, title: 'Put the introduction in order', desc: 'Sequence 5 sentences from Don Marcos\'s self-introduction at the feria.', pts: 5 },
@@ -321,6 +322,7 @@ const CATALOG = {
     },
     vocab: {
         label: 'Vocabulary',
+        catalogVersionId: 'SP101-U01-L01-WB-VOCABULARY@1',
         workbookUrl: 'https://angelicagenel.github.io/AI-worksheets/Workbook%20SPN%2001/Vocabulary/l01-vocabulario-workbook.html',
         exercises: [
             { num: 1, title: 'Matching — Word → Meaning', desc: 'Match each feria word (la feria, el vendedor, artesanías…) to its English meaning.', pts: 5 },
@@ -330,6 +332,7 @@ const CATALOG = {
     },
     listening: {
         label: 'Listening',
+        catalogVersionId: 'SP101-U01-L01-WB-LISTENING@1',
         workbookUrl: 'https://angelicagenel.github.io/AI-worksheets/Workbook%20SPN%2001/Listening/l01-listening-workbook.html',
         exercises: [
             { num: 1, title: 'Multiple Choice — Global Comprehension', desc: 'Listen for the main topic of the audio about la feria de Oaxaca.', pts: 5 },
@@ -498,7 +501,7 @@ async function assignViaDeepLink() {
             category: catKey,
             label: CATALOG[catKey].label,
             exercises: [...selected[catKey]].sort((a, b) => a - b),
-            workbook_url: buildWorkbookUrl(catKey)
+            catalog_version_id: CATALOG[catKey].catalogVersionId
         });
     });
     const btn = document.getElementById('assign-btn');
