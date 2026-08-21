@@ -1011,7 +1011,7 @@
         <section class="card answer-key" id="answer-key" aria-labelledby="ak-h">
             <h3 id="ak-h">Answer key</h3>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex1">
                 <h4>Exercise 1 — Ordering</h4>
                 <ul>
                     <li><span class="ak-answer">1.</span> Buenos días. Me llamo Marcos.</li>
@@ -1023,7 +1023,7 @@
                 <p class="ak-rule">Rule: a Spanish introduction flows greeting + name → origin → occupation → a supporting detail → courtesy closing.</p>
             </div>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex2">
                 <h4>Exercise 2 — Pronoun → SER form</h4>
                 <ul>
                     <li>yo → <span class="ak-answer">soy</span></li>
@@ -1035,19 +1035,19 @@
                 <p class="ak-rule">Rule: usted shares ES with él/ella; ustedes shares SON with ellos/ellas. SOMOS always includes the speaker.</p>
             </div>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex3">
                 <h4>Exercise 3 — "Buenos días, señora. _____ don Marcos."</h4>
                 <p><span class="ak-answer">Answer: B) soy</span></p>
                 <p class="ak-rule">Rule: YO uses SOY. It's the only form that refers to the speaker themselves.</p>
             </div>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex4">
                 <h4>Exercise 4 — "¿De dónde _____ usted?"</h4>
                 <p><span class="ak-answer">Answer: D) es</span></p>
                 <p class="ak-rule">Rule: USTED uses ES — the same form as él and ella.</p>
             </div>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex5">
                 <h4>Exercise 5 — Correct sentences</h4>
                 <p><span class="ak-answer">Correct: options 1 and 3.</span></p>
                 <ul>
@@ -1059,7 +1059,7 @@
                 </ul>
             </div>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex6">
                 <h4>Exercise 6 — Question → function + register</h4>
                 <ul>
                     <li>¿Cómo te llamas? → <span class="ak-answer">name (informal — tú)</span></li>
@@ -1072,7 +1072,7 @@
                 <p class="ak-rule">Rule: TE/TU endings = tú (informal). SE/SU endings = usted (formal). The structure of the question tells you the register.</p>
             </div>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex7">
                 <h4>Exercise 7 — Tú vs. usted situations</h4>
                 <p><span class="ak-answer">Correct: options 1, 3 and 5.</span></p>
                 <ul>
@@ -1085,7 +1085,7 @@
                 <p class="ak-rule">Rule: USTED = first meeting, elders, authority. TÚ = friends, equals, established trust.</p>
             </div>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex8">
                 <h4>Exercise 8 — Dialogue</h4>
                 <ul>
                     <li>Don Marcos: "Me llamo Marcos. <span class="ak-answer">Soy</span> de Veracruz." (B)</li>
@@ -1094,7 +1094,7 @@
                 <p class="ak-rule">Rule: the speaker uses SOY for themselves. TÚ uses ERES when asking about the other person.</p>
             </div>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex9">
                 <h4>Exercise 9 — Paragraph</h4>
                 <ul>
                     <li>Blank 1: <span class="ak-answer">son</span> — Don Marcos y doña Rosa = ellos → son.</li>
@@ -1104,7 +1104,7 @@
                 </ul>
             </div>
 
-            <div class="ak-item">
+            <div class="ak-item" data-ex="ex10">
                 <h4>Exercise 10 — Word bank</h4>
                 <ul>
                     <li>1. Yo <span class="ak-answer">soy</span> de California.</li>
@@ -1217,6 +1217,10 @@
         // Hide non-selected summary rows
         document.querySelectorAll('#summary-body tr[data-ex]').forEach(row => {
             if (!ACTIVE_EXERCISES.has(row.dataset.ex)) row.hidden = true;
+        });
+        // Keep the answer key aligned with the exercises in this assignment.
+        document.querySelectorAll('#answer-key .ak-item[data-ex]').forEach(item => {
+            if (!ACTIVE_EXERCISES.has(item.dataset.ex)) item.hidden = true;
         });
 
         const MAX_SCORE = [...ACTIVE_EXERCISES].reduce((s, k) => s + (EXERCISES[k]?.pts || 0), 0);
