@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instructor Dashboard · SLE</title>
+    <title>Instructor Dashboard � SLE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -32,7 +32,7 @@
         h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
         .container { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
-        /* ── Header ── */
+        /* �� Header �� */
         .page-header {
             background: var(--eucalyptus);
             border-radius: 14px;
@@ -46,7 +46,7 @@
         .page-header h1 { font-size: 1.55rem; margin-bottom: 6px; }
         .page-header p { font-size: .9rem; color: rgba(255,255,255,.85); }
 
-        /* ── Deep link notice ── */
+        /* �� Deep link notice �� */
         .deeplink-note {
             background: #fff8e1; border: 1px solid #f9c74f;
             border-radius: 10px; padding: 12px 16px;
@@ -54,7 +54,7 @@
         }
         .deeplink-note.show { display: block; }
 
-        /* ── Workbook card ── */
+        /* �� Workbook card �� */
         .wb-card {
             background: #fff;
             border: 1px solid var(--border);
@@ -91,7 +91,7 @@
         }
         .sa-btn:hover { background: var(--surface); border-color: var(--eucalyptus); }
 
-        /* ── Exercise rows ── */
+        /* �� Exercise rows �� */
         .ex-list { padding: 10px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
 
         .ex-row {
@@ -129,7 +129,7 @@
         }
         .preview-link:hover { text-decoration: underline; }
 
-        /* ── Summary bar ── */
+        /* �� Summary bar �� */
         .summary-card {
             background: #fff;
             border: 1px solid var(--border);
@@ -159,7 +159,42 @@
         .bd-row .bd-cat { color: var(--secondary); }
         .bd-row .bd-val { font-weight: 600; }
 
-        /* ── Assign button ── */
+        .assignment-policy {
+            display: none;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        .assignment-policy.show { display: grid; }
+        .policy-field { display: flex; flex-direction: column; gap: 6px; }
+        .policy-field label {
+            font-size: .78rem; font-weight: 700; color: var(--charcoal);
+        }
+        .policy-field select {
+            width: 100%;
+            border: 1px solid var(--eucalyptus-lt);
+            border-radius: 7px;
+            background: var(--ivory);
+            color: var(--charcoal);
+            padding: 9px 11px;
+            font: inherit;
+            font-size: .84rem;
+        }
+        .policy-field select:focus {
+            outline: 2px solid var(--eucalyptus-lt);
+            outline-offset: 1px;
+            border-color: var(--eucalyptus);
+        }
+        .policy-help {
+            grid-column: 1 / -1;
+            color: var(--secondary);
+            font-size: .76rem;
+            line-height: 1.45;
+        }
+
+        /* �� Assign button �� */
         .assign-wrap { margin-top: 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
         .btn-assign {
             background: var(--eucalyptus); color: #fff;
@@ -173,7 +208,7 @@
         .btn-assign:disabled { background: #b0bec5; cursor: not-allowed; }
         .assign-hint { font-size: .8rem; color: var(--secondary); }
 
-        /* ── Result panel ── */
+        /* �� Result panel �� */
         .result-panel {
             display: none;
             background: var(--ok-bg); border: 1px solid var(--ok-border);
@@ -205,6 +240,8 @@
         @media (max-width: 560px) {
             .summary-stats { gap: 20px; }
             .wb-card-head { flex-wrap: wrap; }
+            .assignment-policy { grid-template-columns: 1fr; }
+            .policy-help { grid-column: 1; }
         }
     </style>
 </head>
@@ -213,14 +250,14 @@
 
     <!-- Header -->
     <div class="page-header">
-        <div class="kicker">Spanish Learning Edge · Instructor</div>
+        <div class="kicker">Spanish Learning Edge � Instructor</div>
         <h1>Assignment Builder</h1>
-        <p>L01 — Mucho gusto (SPN 01) &nbsp;·&nbsp; Check the exercises you want to assign, then click <strong>Assign</strong>.</p>
+        <p>L01 - Mucho gusto (SPN 01) &nbsp;�&nbsp; Check the exercises you want to assign, then click <strong>Assign</strong>.</p>
     </div>
 
     <!-- Deep link notice -->
     <div class="deeplink-note" id="deeplink-notice">
-        ✅ Launched from your LMS — clicking <strong>Assign Selected Exercises</strong> will create the assignment automatically.
+        ? Launched from your LMS - clicking <strong>Assign Selected Exercises</strong> will create the assignment automatically.
     </div>
 
     <!-- Grammar card -->
@@ -228,7 +265,7 @@
         <div class="wb-card-head">
             <div class="wb-card-head-left">
                 <span class="cat-pill grammar">Grammar</span>
-                <h2>SER · Introductions &amp; Register</h2>
+                <h2>SER � Introductions &amp; Register</h2>
             </div>
             <button class="sa-btn" onclick="selectAll('grammar')">Select all</button>
         </div>
@@ -252,7 +289,7 @@
         <div class="wb-card-head">
             <div class="wb-card-head-left">
                 <span class="cat-pill listening">Listening</span>
-                <h2>L01 Listening — La feria de Oaxaca</h2>
+                <h2>L01 Listening - La feria de Oaxaca</h2>
             </div>
             <button class="sa-btn" onclick="selectAll('listening')">Select all</button>
         </div>
@@ -273,9 +310,30 @@
             </div>
         </div>
         <div class="breakdown">
-            <div class="bd-row"><span class="bd-cat">Grammar</span><span class="bd-val" id="bd-grammar">—</span></div>
-            <div class="bd-row"><span class="bd-cat">Vocabulary</span><span class="bd-val" id="bd-vocab">—</span></div>
-            <div class="bd-row"><span class="bd-cat">Listening</span><span class="bd-val" id="bd-listening">—</span></div>
+            <div class="bd-row"><span class="bd-cat">Grammar</span><span class="bd-val" id="bd-grammar">-</span></div>
+            <div class="bd-row"><span class="bd-cat">Vocabulary</span><span class="bd-val" id="bd-vocab">-</span></div>
+            <div class="bd-row"><span class="bd-cat">Listening</span><span class="bd-val" id="bd-listening">-</span></div>
+        </div>
+        <div class="assignment-policy" id="assignment-policy">
+            <div class="policy-field">
+                <label for="grading-rule">Grade recorded in the LMS</label>
+                <select id="grading-rule">
+                    <option value="best" selected>Best attempt</option>
+                    <option value="last">Last attempt</option>
+                </select>
+            </div>
+            <div class="policy-field">
+                <label for="max-attempts">Completed attempts allowed</label>
+                <select id="max-attempts">
+                    <option value="" selected>Unlimited</option>
+                    <option value="3">3 attempts</option>
+                    <option value="4">4 attempts</option>
+                    <option value="5">5 attempts</option>
+                </select>
+            </div>
+            <p class="policy-help">
+                Opening an activity does not use an attempt. An attempt counts only when the student submits a score.
+            </p>
         </div>
         <div class="assign-wrap">
             <button class="btn-assign" id="assign-btn" disabled onclick="handleAssign()">
@@ -286,15 +344,15 @@
 
         <!-- Result panel (standalone mode) -->
         <div class="result-panel" id="result-panel">
-            <h3>✅ Links ready — paste each into Canvas as an External Tool URL</h3>
+            <h3>? Links ready - paste each into Canvas as an External Tool URL</h3>
             <div id="result-links"></div>
             <div class="canvas-steps">
                 <strong>How to add to Canvas:</strong>
                 <ol>
-                    <li>Open Canvas → Course → <strong>Assignments → + Assignment</strong></li>
-                    <li>Set <strong>Submission Type → External Tool</strong></li>
+                    <li>Open Canvas  Course  <strong>Assignments  + Assignment</strong></li>
+                    <li>Set <strong>Submission Type  External Tool</strong></li>
                     <li>Click <strong>Find</strong> and select <em>Spanish Learning Edge</em>, or paste the URL manually</li>
-                    <li>Set points, due date, and attempts in Canvas → <strong>Save</strong></li>
+                    <li>Set points, due date, and attempts in Canvas  <strong>Save</strong></li>
                 </ol>
             </div>
         </div>
@@ -305,15 +363,16 @@
 const CATALOG = {
     grammar: {
         label: 'Grammar',
+        catalogVersionId: 'SP101-U01-L01-WB-GRAMMAR@1',
         workbookUrl: 'https://angelicagenel.github.io/AI-worksheets/Workbook%20SPN%2001/Grammar/l01-mucho-gusto-workbook.html',
         exercises: [
             { num: 1, title: 'Put the introduction in order', desc: 'Sequence 5 sentences from Don Marcos\'s self-introduction at the feria.', pts: 5 },
-            { num: 2, title: 'Match pronoun → SER form', desc: 'Full paradigm: yo / tú / él / nosotros / ellos matched to the correct SER conjugation.', pts: 5 },
-            { num: 3, title: 'Choose the correct form (yo)', desc: '"Buenos días, señora. _____ don Marcos." — applies SOY rule.', pts: 5 },
-            { num: 4, title: 'Choose the correct form (usted)', desc: '"¿De dónde _____ usted?" — distinguishes ES from ERES for formal register.', pts: 5 },
+            { num: 2, title: 'Match pronoun  SER form', desc: 'Full paradigm: yo / t� / �l / nosotros / ellos matched to the correct SER conjugation.', pts: 5 },
+            { num: 3, title: 'Choose the correct form (yo)', desc: '"Buenos d�as, se�ora. _____ don Marcos." - applies SOY rule.', pts: 5 },
+            { num: 4, title: 'Choose the correct form (usted)', desc: '"�De d�nde _____ usted?" - distinguishes ES from ERES for formal register.', pts: 5 },
             { num: 5, title: 'Which sentences are correct?', desc: 'Multiple-select: identify all sentences with the right SOMOS / SON form.', pts: 5 },
-            { num: 6, title: 'Question → function + register', desc: 'Match 6 questions (cómo te llamas / se llama, de dónde eres / es…) to communicative function and register.', pts: 5 },
-            { num: 7, title: 'Tú or usted — who got it right?', desc: 'Multiple-select: identify situationally appropriate register choices.', pts: 5 },
+            { num: 6, title: 'Question  function + register', desc: 'Match 6 questions (c�mo te llamas / se llama, de d�nde eres / es.) to communicative function and register.', pts: 5 },
+            { num: 7, title: 'T� or usted - who got it right?', desc: 'Multiple-select: identify situationally appropriate register choices.', pts: 5 },
             { num: 8, title: 'Dialogue at the puesto', desc: 'Select SOY vs. ERES in a two-line contextual exchange.', pts: 5 },
             { num: 9, title: 'Paragraph about the vendors', desc: 'Cloze paragraph: fill 4 blanks with the correct SER form.', pts: 5 },
             { num: 10, title: 'Word bank production', desc: 'Place soy / eres / es / somos / son into 5 sentences from a shared word bank.', pts: 5 },
@@ -321,22 +380,24 @@ const CATALOG = {
     },
     vocab: {
         label: 'Vocabulary',
+        catalogVersionId: 'SP101-U01-L01-WB-VOCABULARY@1',
         workbookUrl: 'https://angelicagenel.github.io/AI-worksheets/Workbook%20SPN%2001/Vocabulary/l01-vocabulario-workbook.html',
         exercises: [
-            { num: 1, title: 'Matching — Word → Meaning', desc: 'Match each feria word (la feria, el vendedor, artesanías…) to its English meaning.', pts: 5 },
-            { num: 2, title: 'Sorting — Formal or Informal?', desc: 'Classify expressions as formal (usted) or informal (tú) by the verb ending.', pts: 5 },
-            { num: 3, title: 'Contextual Production — Complete the Conversation', desc: 'Word-bank: complete a short conversation with don Felipe using the correct greeting and vocabulary.', pts: 5 },
+            { num: 1, title: 'Matching - Word  Meaning', desc: 'Match each feria word (la feria, el vendedor, artesan�as.) to its English meaning.', pts: 5 },
+            { num: 2, title: 'Sorting - Formal or Informal?', desc: 'Classify expressions as formal (usted) or informal (t�) by the verb ending.', pts: 5 },
+            { num: 3, title: 'Contextual Production - Complete the Conversation', desc: 'Word-bank: complete a short conversation with don Felipe using the correct greeting and vocabulary.', pts: 5 },
         ]
     },
     listening: {
         label: 'Listening',
+        catalogVersionId: 'SP101-U01-L01-WB-LISTENING@1',
         workbookUrl: 'https://angelicagenel.github.io/AI-worksheets/Workbook%20SPN%2001/Listening/l01-listening-workbook.html',
         exercises: [
-            { num: 1, title: 'Multiple Choice — Global Comprehension', desc: 'Listen for the main topic of the audio about la feria de Oaxaca.', pts: 5 },
-            { num: 2, title: 'Multiple Response — True Statements', desc: 'Select every statement supported by the audio (origin of characters, vendors, etc.).', pts: 5 },
-            { num: 3, title: 'Matching — Person / Place → Detail', desc: 'Match each name or place to what the audio says about it.', pts: 5 },
-            { num: 4, title: 'Multiple Choice — SER in Context (ellos)', desc: 'Listen for the correct SER form for los vendedores.', pts: 5 },
-            { num: 5, title: 'Multiple Choice — SER in Context (nosotros)', desc: 'Listen for what Santiago says about himself and Sofía at the feria.', pts: 5 },
+            { num: 1, title: 'Multiple Choice - Global Comprehension', desc: 'Listen for the main topic of the audio about la feria de Oaxaca.', pts: 5 },
+            { num: 2, title: 'Multiple Response - True Statements', desc: 'Select every statement supported by the audio (origin of characters, vendors, etc.).', pts: 5 },
+            { num: 3, title: 'Matching - Person / Place  Detail', desc: 'Match each name or place to what the audio says about it.', pts: 5 },
+            { num: 4, title: 'Multiple Choice - SER in Context (ellos)', desc: 'Listen for the correct SER form for los vendedores.', pts: 5 },
+            { num: 5, title: 'Multiple Choice - SER in Context (nosotros)', desc: 'Listen for what Santiago says about himself and Sof�a at the feria.', pts: 5 },
         ]
     }
 };
@@ -346,7 +407,7 @@ const selected = { grammar: new Set(), vocab: new Set(), listening: new Set() };
 // "Select all" state per category: 'none' | 'all'
 const saState = { grammar: 'none', vocab: 'none', listening: 'none' };
 
-// ── Render lists ──────────────────────────────────────────────────────────────
+// �� Render lists ��������������������������������������������������������������
 function renderList(catKey) {
     const cat = CATALOG[catKey];
     const container = document.getElementById('list-' + catKey);
@@ -361,10 +422,10 @@ function renderList(catKey) {
             <input type="checkbox" id="${id}"
                    onchange="toggleExercise('${catKey}', ${ex.num}, this.checked)">
             <div class="ex-body">
-                <div class="ex-title">Exercise ${ex.num} — ${ex.title}</div>
+                <div class="ex-title">Exercise ${ex.num} - ${ex.title}</div>
                 <div class="ex-desc">${ex.desc}</div>
                 <a class="preview-link" href="${previewUrl}" target="_blank"
-                   onclick="event.stopPropagation()">Preview ↗</a>
+                   onclick="event.stopPropagation()">Preview ?</a>
             </div>
             <span class="ex-pts">${ex.pts} pts</span>
         `;
@@ -373,7 +434,7 @@ function renderList(catKey) {
 }
 ['grammar', 'vocab', 'listening'].forEach(renderList);
 
-// ── Selection ─────────────────────────────────────────────────────────────────
+// �� Selection �����������������������������������������������������������������
 function toggleExercise(catKey, num, checked) {
     checked ? selected[catKey].add(num) : selected[catKey].delete(num);
     document.getElementById(`cb-${catKey}-${num}`).closest('.ex-row')
@@ -401,7 +462,7 @@ function selectAll(catKey) {
 
 function updateSaBtn(catKey) {
     const btns = document.querySelectorAll(`.wb-card .sa-btn`);
-    // find the right button by data or position — simpler: use dedicated ids
+    // find the right button by data or position - simpler: use dedicated ids
     const btn = document.getElementById('sa-' + catKey);
     if (btn) btn.textContent = saState[catKey] === 'all' ? 'Deselect all' : 'Select all';
 }
@@ -414,7 +475,7 @@ function updateSaBtn(catKey) {
     if (btn) btn.id = 'sa-' + k;
 });
 
-// ── Summary ───────────────────────────────────────────────────────────────────
+// �� Summary �������������������������������������������������������������������
 function updateSummary() {
     let totalEx = 0, totalPts = 0;
     ['grammar', 'vocab', 'listening'].forEach(catKey => {
@@ -426,7 +487,7 @@ function updateSummary() {
             return s + (ex ? ex.pts : 0);
         }, 0);
         document.getElementById('bd-' + catKey).textContent =
-            exCount ? `${exCount} ex · ${pts} pts` : '—';
+            exCount ? `${exCount} ex � ${pts} pts` : '-';
         totalEx += exCount;
         totalPts += pts;
     });
@@ -438,25 +499,28 @@ function updateSummary() {
     btn.disabled = totalEx === 0;
     document.getElementById('assign-hint').textContent = totalEx === 0
         ? 'Select at least one exercise to continue.'
-        : `${totalEx} exercise${totalEx !== 1 ? 's' : ''} selected · ${totalPts} pts max`;
+        : `${totalEx} exercise${totalEx !== 1 ? 's' : ''} selected � ${totalPts} pts max`;
 }
 
-// ── Deep Link detection ───────────────────────────────────────────────────────
+// �� Deep Link detection �������������������������������������������������������
 const urlParams = new URLSearchParams(window.location.search);
 const deeplinkLaunchId = urlParams.get('deeplink_launch_id');
 const deeplinkSubmitUrl = urlParams.get('deeplink_submit_url')
     || 'https://sle-lti-server-950105557003.us-central1.run.app/deeplink/submit';
 const isDeepLink = !!deeplinkLaunchId;
-if (isDeepLink) document.getElementById('deeplink-notice').classList.add('show');
+if (isDeepLink) {
+    document.getElementById('deeplink-notice').classList.add('show');
+    document.getElementById('assignment-policy').classList.add('show');
+}
 
-// ── Build URL ─────────────────────────────────────────────────────────────────
+// �� Build URL �����������������������������������������������������������������
 function buildWorkbookUrl(catKey) {
     const nums = [...selected[catKey]].sort((a, b) => a - b);
     if (!nums.length) return null;
     return `${CATALOG[catKey].workbookUrl}?exercises=${nums.join(',')}`;
 }
 
-// ── Assign ────────────────────────────────────────────────────────────────────
+// �� Assign ��������������������������������������������������������������������
 function handleAssign() {
     isDeepLink ? assignViaDeepLink() : showStandaloneResult();
 }
@@ -470,7 +534,7 @@ function showStandaloneResult() {
         const nums = [...selected[catKey]].sort((a, b) => a - b);
         linksDiv.innerHTML += `
             <p style="font-weight:700;font-size:.83rem;margin-bottom:4px;color:var(--eucalyptus-dk);">
-                ${CATALOG[catKey].label} — Exercise${nums.length > 1 ? 's' : ''} ${nums.join(', ')}
+                ${CATALOG[catKey].label} - Exercise${nums.length > 1 ? 's' : ''} ${nums.join(', ')}
             </p>
             <div class="url-box" id="url-${catKey}">${url}</div>
             <button class="copy-btn" id="copy-${catKey}" onclick="copyUrl('${catKey}')">Copy URL</button>
@@ -485,26 +549,30 @@ function showStandaloneResult() {
 function copyUrl(catKey) {
     navigator.clipboard.writeText(document.getElementById('url-' + catKey).textContent).then(() => {
         const btn = document.getElementById('copy-' + catKey);
-        btn.textContent = 'Copied ✓'; btn.classList.add('copied');
+        btn.textContent = 'Copied �'; btn.classList.add('copied');
         setTimeout(() => { btn.textContent = 'Copy URL'; btn.classList.remove('copied'); }, 2000);
     });
 }
 
 async function assignViaDeepLink() {
     const assignments = [];
+    const gradingRule = document.getElementById('grading-rule').value;
+    const maxAttempts = document.getElementById('max-attempts').value;
     ['grammar', 'vocab', 'listening'].forEach(catKey => {
         if (!selected[catKey].size) return;
         assignments.push({
             category: catKey,
             label: CATALOG[catKey].label,
             exercises: [...selected[catKey]].sort((a, b) => a - b),
-            workbook_url: buildWorkbookUrl(catKey)
+            catalog_version_id: CATALOG[catKey].catalogVersionId,
+            grading_rule: gradingRule,
+            max_attempts: maxAttempts ? Number(maxAttempts) : null
         });
     });
     const btn = document.getElementById('assign-btn');
     const hint = document.getElementById('assign-hint');
-    btn.textContent = 'Submitting to LMS…'; btn.disabled = true;
-    hint.textContent = 'Please wait — creating your assignment…';
+    btn.textContent = 'Submitting to LMS.'; btn.disabled = true;
+    hint.textContent = 'Please wait - creating your assignment.';
     try {
         const resp = await fetch(
             deeplinkSubmitUrl,
@@ -520,10 +588,11 @@ async function assignViaDeepLink() {
         else throw new Error('Unexpected response');
     } catch (e) {
         btn.textContent = 'Assign Selected Exercises'; btn.disabled = false;
-        hint.textContent = 'Error — please try again.';
+        hint.textContent = 'Error - please try again.';
         alert('Could not submit to LMS: ' + e.message);
     }
 }
 </script>
 </body>
 </html>
+
